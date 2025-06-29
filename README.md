@@ -51,29 +51,17 @@ Design and implement a **cybersecurity homelab** tailored for learning, testing,
 | Splunk Enterprise | Centralized Log Management & Monitoring |
 | Microsoft Visio   | Network Diagram Design                  |
 
-## 🏗️ What We'll Build
+## 🌐 Network Diagram
 
-Our cybersecurity homelab simulates a segmented enterprise environment designed for monitoring, attack simulation, and system hardening.
+I've created the following network diagram to have a better understanding of the structure and functionality.
 
-### 🔒 Core Components
+*Ref 1: Network Diagram*
 
-Virtualized pfSense Firewall
+![Network Diagram](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Network-Diagram-HomeLab.jpg)
 
-Acts as the central gateway for all subnets.
+## 🔒 Core Components
 
-Handles routing and enforces firewall policies.
-
-Subnets by Purpose
-
-WAN: Provides internet access and external routing.
-
-LAN (Kali Linux): Hosts a single Kali Linux VM for attack simulation and security testing.
-
-Monitoring: Includes tools like Splunk, Wireshark, and Sysmon for log ingestion and network monitoring.
-
-Active Directory: Hosts a virtualized Windows Server domain controller and clients.
-
-Vulnerable Machines: Includes Metasploitable 2 and optionally machines from VulnHub for offensive testing.
+abcd
 
 ## 🗂️ Lab Build Timeline
 
