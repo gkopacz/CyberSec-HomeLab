@@ -42,6 +42,16 @@ Design and implement a **cybersecurity homelab** tailored for learning, testing,
 * Created a detailed **network architecture diagram** using **Microsoft Visio**.
 * Documented the entire setup process to enable easy replication.
 
+## 📂 Project Structure 
+
+| Day | Title                                      | Link                                                                 |
+|-----|--------------------------------------------|----------------------------------------------------------------------|
+| 01  | Core Network & pfSense Setup               | [Go to Day 01](./Day01-Network-Infrastructure-and-pfSense-Setup/)   |
+| 02  | Kali Linux VM Setup                        | [Go to Day 02](./Day02-Kali-VM-Setup/)                              |
+| 03  | AD Setup + Domain Join                     | [Go to Day 03](./Day03-Active-Directory-Setup-and-Windows-Host-Domain-Join/) |
+| 04  | Splunk Logging & Monitoring                | [Go to Day 04](./Day04-Splunk-Monitoring-Setup/)                    |
+| 05  | Deploy Vulnerable Machines                 | [Go to Day 05](./Day05-Vulnerable-VMs-Deployment/)                  |
+
 ## 🧰 Tools Used
 
 | Tool              | Purpose                                 |
@@ -71,11 +81,11 @@ It’s built on a Hyper-V virtualization platform and features multiple virtual 
 
 ### 🧩 VM Roles
 
-* Kali Linux - Used for testing, scanning, and simulated attacks.
-* Monitoring VM - Runs tools like Splunk, Sysmon, Wireshark — core for blue team analysis.
-* Windows Server 2019 - Domain Controller with DNS and AD services.
-* Windows Clients (10/11) - Domain-joined endpoints to simulate a corporate environment.
-* Metasploitable / VulnHub Machines - Vulnerable-by-design VMs for testing detection and response.
+* Kali Linux — Used for testing, scanning, and simulated attacks.
+* Monitoring VM — Runs tools like Splunk, Sysmon, Wireshark — core for blue team analysis.
+* Windows Server 2019 — Domain Controller with DNS and AD services.
+* Windows Clients (10/11) — Domain-joined endpoints to simulate a corporate environment.
+* Metasploitable / VulnHub Machines — Vulnerable-by-design VMs for testing detection and response.
 
 ## 🌐 Network Diagram
 
@@ -85,17 +95,6 @@ I've created the following network diagram to have a better understanding of the
 
 ![Network Diagram](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Network-Diagram-HomeLab.jpg)
 
-## 📂 Project Structure 
+## ✅ Next Step
 
-| Day | Title                                                                 | Link                                                                 |
-|-----|-----------------------------------------------------------------------|----------------------------------------------------------------------|
-| 01  | Network Infrastructure and pfSense Setup                              | [Go to Day 01](./Day01-Network-Infrastructure-and-pfSense-Setup/)   |
-| 02  | Kali Linux VM Setup                                                   | [Go to Day 02](./Day02-Kali-VM-Setup/)                              |
-| 03  | Active Directory Setup and Windows Host Domain Join                   | [Go to Day 03](./Day03-Active-Directory-Setup-and-Windows-Host-Domain-Join/) |
-| 04  | Splunk Monitoring Setup                                               | [Go to Day 04](./Day04-Splunk-Monitoring-Setup/)                    |
-| 05  | Vulnerable VMs Deployment                                             | [Go to Day 05](./Day05-Vulnerable-VMs-Deployment/)                  |
-
-### ✅ Next Step
-
-Proceed to Day 01 to see how to set up *Virtual Switches* in *Hyper-V* and *pfSense* Setup.
-
+Begin with [Day 01](./Day01-Network-Infrastructure-and-pfSense-Setup/) — configure **Hyper-V switches** and set up the **pfSense firewall** as your core gateway.
