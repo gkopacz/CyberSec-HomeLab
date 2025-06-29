@@ -2,14 +2,13 @@
 
 ![Platform](https://img.shields.io/badge/platform-HyperV-blue?logo=windows)
 ![Firewall](https://img.shields.io/badge/firewall-pfSense-red?logo=pfsense)
-![Logs](https://img.shields.io/badge/monitoring-Splunk-black?logo=splunk)
-![Packet Capture](https://img.shields.io/badge/packet-Wireshark-blue)
+![Logs](https://img.shields.io/badge/logs-Splunk-black?logo=splunk)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ![Status](https://img.shields.io/badge/status-in--progress-yellow)
-![Last Commit](https://img.shields.io/github/last-commit/yourusername/CyberSec-HomeLab)
+![Last Commit](https://img.shields.io/github/last-commit/gkopacz/CyberSec-HomeLab)
 
 <div align="center">
-  <img src="https://visitor-badge.laobi.icu/badge?page_id=maurodesouza.maurodesouza&"  />
+  <img src="https://visitor-badge.laobi.icu/badge?page_id=gkopacz/CyberSec-HomeLab&"  />
 </div>
 
 ## 🎯 Objective
