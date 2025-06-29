@@ -51,7 +51,42 @@ Design and implement a **cybersecurity homelab** tailored for learning, testing,
 | Splunk Enterprise | Centralized Log Management & Monitoring |
 | Microsoft Visio   | Network Diagram Design                  |
 
-## Placeholder
+## 🏗️ What We'll Build
+
+This lab simulates a segmented, enterprise-style network designed for security operations, monitoring, and attack simulation. 
+
+It’s built on a Hyper-V virtualization platform and features multiple virtual machines (VMs), isolated virtual switches, and a virtualized pfSense firewall to manage traffic flow and enforce strict network segmentation.
+
+### 🔐 Core Infrastructure
+
+* pfSense Firewall (Virtualized)
+  * Central gateway and router controlling traffic between internal subnets and outbound internet.
+    
+* Hyper-V Virtual Switches
+  * Segmented into dedicated VLAN-like zones:
+    * WAN — Internet access from the host network
+    * LAN — Used by attacker VM (Kali)
+    * Monitoring — Hosts Splunk and other log collectors
+    * AD — Contains domain controller and domain-joined Windows hosts
+    * Vulnerable — Isolated subnet for intentionally exploitable VMs
+
+### 🧩 VM Roles
+Kali Linux
+Used for testing, scanning, and simulated attacks.
+
+Monitoring VM
+Runs tools like Splunk, Sysmon, Wireshark — core for blue team analysis.
+
+Windows Server 2019
+Domain Controller with DNS and AD services.
+
+Windows Clients (10/11)
+Domain-joined endpoints to simulate a corporate environment.
+
+Metasploitable / VulnHub Machines
+Vulnerable-by-design VMs for testing detection and response.
+
+
 
 ## 🌐 Network Diagram
 
@@ -61,7 +96,7 @@ I've created the following network diagram to have a better understanding of the
 
 ![Network Diagram](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Network-Diagram-HomeLab.jpg)
 
-## 🗂️ Lab Build Timeline
+## 📂 Project Structure (Build Phases)
 
 | Day | Title                                                                 | Link                                                                 |
 |-----|-----------------------------------------------------------------------|----------------------------------------------------------------------|
