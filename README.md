@@ -60,8 +60,7 @@ It’s built on a Hyper-V virtualization platform and features multiple virtual 
 ### 🔐 Core Infrastructure
 
 * pfSense Firewall (Virtualized)
-  * Central gateway and router controlling traffic between internal subnets and outbound internet.
-    
+  * Central gateway and router controlling traffic between internal subnets and outbound internet.    
 * Hyper-V Virtual Switches
   * Segmented into dedicated VLAN-like zones:
     * WAN — Internet access from the host network
@@ -71,22 +70,12 @@ It’s built on a Hyper-V virtualization platform and features multiple virtual 
     * Vulnerable — Isolated subnet for intentionally exploitable VMs
 
 ### 🧩 VM Roles
-Kali Linux
-Used for testing, scanning, and simulated attacks.
 
-Monitoring VM
-Runs tools like Splunk, Sysmon, Wireshark — core for blue team analysis.
-
-Windows Server 2019
-Domain Controller with DNS and AD services.
-
-Windows Clients (10/11)
-Domain-joined endpoints to simulate a corporate environment.
-
-Metasploitable / VulnHub Machines
-Vulnerable-by-design VMs for testing detection and response.
-
-
+* Kali Linux - Used for testing, scanning, and simulated attacks.
+* Monitoring VM - Runs tools like Splunk, Sysmon, Wireshark — core for blue team analysis.
+* Windows Server 2019 - Domain Controller with DNS and AD services.
+* Windows Clients (10/11) - Domain-joined endpoints to simulate a corporate environment.
+* Metasploitable / VulnHub Machines - Vulnerable-by-design VMs for testing detection and response.
 
 ## 🌐 Network Diagram
 
@@ -96,7 +85,11 @@ I've created the following network diagram to have a better understanding of the
 
 ![Network Diagram](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Network-Diagram-HomeLab.jpg)
 
-## 📂 Project Structure (Build Phases)
+✅ Next Step
+
+Proceed to Day 01 to see how to set up *Virtual Switches* in *Hyper-V* and *pfSense* Setup.
+
+## 📂 Project Structure 
 
 | Day | Title                                                                 | Link                                                                 |
 |-----|-----------------------------------------------------------------------|----------------------------------------------------------------------|
