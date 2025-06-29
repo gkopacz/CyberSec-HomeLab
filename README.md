@@ -9,6 +9,15 @@
 
 Design and implement a **cybersecurity homelab** tailored for learning, testing, and experimenting in cybersecurity, networking, and system administration, while ensuring a secure and isolated environment.
 
+## 🧰 Tools Used
+
+| Tool              | Purpose                                 |
+| ----------------- | --------------------------------------- |
+| Hyper-V Manager   | Virtualization and VM Management        |
+| pfSense           | Firewall & Network Routing              |
+| Splunk Enterprise | Centralized Log Management & Monitoring |
+| Microsoft Visio   | Network Diagram Design                  |
+
 ## 🧠 Skills Showcased
 
 ### 🖥️ Virtualization 
@@ -39,15 +48,6 @@ Design and implement a **cybersecurity homelab** tailored for learning, testing,
 ### 📝 Documentation and Design
 * Created a detailed **network architecture diagram** using **Microsoft Visio**.
 * Documented the entire setup process to enable easy replication.
-
-## 🧰 Tools Used
-
-| Tool              | Purpose                                 |
-| ----------------- | --------------------------------------- |
-| Hyper-V Manager   | Virtualization and VM Management        |
-| pfSense           | Firewall & Network Routing              |
-| Splunk Enterprise | Centralized Log Management & Monitoring |
-| Microsoft Visio   | Network Diagram Design                  |
 
 ## 🗂️ Lab Build Timeline
 
