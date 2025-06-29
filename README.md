@@ -52,15 +52,6 @@ Design and implement a **cybersecurity homelab** tailored for learning, testing,
 | 04  | Splunk Logging & Monitoring                | [Go to Day 04](./Day04-Splunk-Monitoring-Setup/)                    |
 | 05  | Deploy Vulnerable Machines                 | [Go to Day 05](./Day05-Vulnerable-VMs-Deployment/)                  |
 
-## 🧰 Tools Used
-
-| Tool              | Purpose                                 |
-| ----------------- | --------------------------------------- |
-| Hyper-V Manager   | Virtualization and VM Management        |
-| pfSense           | Firewall & Network Routing              |
-| Splunk Enterprise | Centralized Log Management & Monitoring |
-| Microsoft Visio   | Network Diagram Design                  |
-
 ## 🏗️ What We'll Build
 
 This lab simulates a segmented, enterprise-style network designed for security operations, monitoring, and attack simulation. 
@@ -87,6 +78,17 @@ It’s built on a Hyper-V virtualization platform and features multiple virtual 
 * Windows Clients (10/11) — Domain-joined endpoints to simulate a corporate environment.
 * Metasploitable / VulnHub Machines — Vulnerable-by-design VMs for testing detection and response.
 
+## 🧰 Tools Used
+
+| Tool              | Purpose                                           |
+|-------------------|---------------------------------------------------|
+| Hyper-V Manager   | Virtualization and VM Management                  |
+| pfSense           | Firewall & Network Routing                        |
+| Splunk Enterprise | Centralized Log Management & Alerting             |
+| Sysmon            | Endpoint Telemetry via Windows Event Logging      |
+| Wireshark         | Packet Capture & Traffic Analysis                 |
+| Microsoft Visio   | Network Diagram Design                            |
+
 ## 🌐 Network Diagram
 
 I've created the following network diagram to have a better understanding of the structure and functionality.
@@ -95,6 +97,6 @@ I've created the following network diagram to have a better understanding of the
 
 ![Network Diagram](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Network-Diagram-HomeLab.jpg)
 
-## ✅ Next Step
+### ✅ Next Step
 
 Begin with [Day 01](./Day01-Network-Infrastructure-and-pfSense-Setup/) — configure **Hyper-V switches** and set up the **pfSense firewall** as your core gateway.
