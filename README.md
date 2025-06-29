@@ -42,17 +42,18 @@ Design and implement a **cybersecurity homelab** tailored for learning, testing,
 * Created a detailed **network architecture diagram** using **Microsoft Visio**.
 * Documented the entire setup process to enable easy replication.
 
-## 📂 Project Structure 
+## 🧰 Tools Used
 
-| Day | Title                                      | Link                                                                 |
-|-----|--------------------------------------------|----------------------------------------------------------------------|
-| 01  | Core Network & pfSense Setup               | [Go to Day 01](./Day01-Network-Infrastructure-and-pfSense-Setup/)   |
-| 02  | Kali Linux VM Setup                        | [Go to Day 02](./Day02-Kali-VM-Setup/)                              |
-| 03  | AD Setup + Domain Join                     | [Go to Day 03](./Day03-Active-Directory-Setup-and-Windows-Host-Domain-Join/) |
-| 04  | Splunk Logging & Monitoring                | [Go to Day 04](./Day04-Splunk-Monitoring-Setup/)                    |
-| 05  | Deploy Vulnerable Machines                 | [Go to Day 05](./Day05-Vulnerable-VMs-Deployment/)                  |
+| Tool              | Purpose                                           |
+|-------------------|---------------------------------------------------|
+| Hyper-V Manager   | Virtualization and VM Management                  |
+| pfSense           | Firewall & Network Routing                        |
+| Splunk Enterprise | Centralized Log Management & Alerting             |
+| Sysmon            | Endpoint Telemetry via Windows Event Logging      |
+| Wireshark         | Packet Capture & Traffic Analysis                 |
+| Microsoft Visio   | Network Diagram Design                            |
 
-## 🏗️ What We'll Build
+## 🏗️ Project Overview
 
 This lab simulates a segmented, enterprise-style network designed for security operations, monitoring, and attack simulation. 
 
@@ -78,16 +79,15 @@ It’s built on a Hyper-V virtualization platform and features multiple virtual 
 * Windows Clients (10/11) — Domain-joined endpoints to simulate a corporate environment.
 * Metasploitable / VulnHub Machines — Vulnerable-by-design VMs for testing detection and response.
 
-## 🧰 Tools Used
+## 📂 Project Structure 
 
-| Tool              | Purpose                                           |
-|-------------------|---------------------------------------------------|
-| Hyper-V Manager   | Virtualization and VM Management                  |
-| pfSense           | Firewall & Network Routing                        |
-| Splunk Enterprise | Centralized Log Management & Alerting             |
-| Sysmon            | Endpoint Telemetry via Windows Event Logging      |
-| Wireshark         | Packet Capture & Traffic Analysis                 |
-| Microsoft Visio   | Network Diagram Design                            |
+| Day | Title                                      | Link                                                                 |
+|-----|--------------------------------------------|----------------------------------------------------------------------|
+| 01  | Core Network & pfSense Setup               | [Go to Day 01](./Day01-Network-Infrastructure-and-pfSense-Setup/)   |
+| 02  | Kali Linux VM Setup                        | [Go to Day 02](./Day02-Kali-VM-Setup/)                              |
+| 03  | AD Setup + Domain Join                     | [Go to Day 03](./Day03-Active-Directory-Setup-and-Windows-Host-Domain-Join/) |
+| 04  | Splunk Logging & Monitoring                | [Go to Day 04](./Day04-Splunk-Monitoring-Setup/)                    |
+| 05  | Deploy Vulnerable Machines                 | [Go to Day 05](./Day05-Vulnerable-VMs-Deployment/)                  |
 
 ## 🌐 Network Diagram
 
@@ -99,4 +99,4 @@ I've created the following network diagram to have a better understanding of the
 
 ### ✅ Next Step
 
-Begin with [Day 01](./Day01-Network-Infrastructure-and-pfSense-Setup/) — configure **Hyper-V switches** and set up the **pfSense firewall** as your core gateway.
+The lab begins with [Day 01](./Day01-Network-Infrastructure-and-pfSense-Setup/), where I configured the virtual switches and set up pfSense as the central firewall.
