@@ -6,7 +6,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT) <br>
 ![Status](https://img.shields.io/badge/status-in--progress-yellow)
 ![Last Commit](https://img.shields.io/github/last-commit/gkopacz/CyberSec-HomeLab)
-![Visitors](https://visitor-badge.laobi.icu/badge?page_id=gkopacz/CyberSec-HomeLab)
+![Visitors](https://visitor-badge.laobi.icu/badge?page_id=gkopacz2/CyberSec-HomeLab)
 
 ## 🎯 Objective
 
