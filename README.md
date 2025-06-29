@@ -7,17 +7,6 @@
 
 > 🗓️ This is the first major project in my 90-Day Cybersecurity Lab Challenge, focused on building hands-on, blue team skills from scratch.
 
-## 🗂️ Lab Build Timeline
-
-| Day | Title                                                                 | Link                                                                 |
-|-----|-----------------------------------------------------------------------|----------------------------------------------------------------------|
-| 01  | Network Infrastructure and pfSense Setup                              | [Go to Day 01](./Day01-Network-Infrastructure-and-pfSense-Setup/)   |
-| 02  | Kali Linux VM Setup                                                   | [Go to Day 02](./Day02-Kali-VM-Setup/)                              |
-| 03  | Active Directory Setup and Windows Host Domain Join                   | [Go to Day 03](./Day03-Active-Directory-Setup-and-Windows-Host-Domain-Join/) |
-| 04  | Splunk Monitoring Setup                                               | [Go to Day 04](./Day04-Splunk-Monitoring-Setup/)                    |
-| 05  | Vulnerable VMs Deployment                                             | [Go to Day 05](./Day05-Vulnerable-VMs-Deployment/)                  |
-
-
 ## 🎯 Objective
 
 Design and implement a **cybersecurity homelab** tailored for learning, testing, and experimenting in cybersecurity, networking, and system administration, while ensuring a secure and isolated environment.
