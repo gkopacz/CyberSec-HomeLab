@@ -60,7 +60,7 @@ Design and implement a **cybersecurity homelab** tailored for learning, testing,
 
 | Day | Title                                      | Link                                                                 |
 |-----|--------------------------------------------|----------------------------------------------------------------------|
-| 01  | Core Network & pfSense Setup               | [Go to Day 01](./Day01-Network-Infrastructure-and-pfSense-Setup/)   |
+| 01  | Core Network & pfSense Setup               | [Go to Day 01](https://github.com/gkopacz/CyberSec-HomeLab/tree/main/Day01-Core-Network-and-pfSense-Setup)   |
 | 02  | Kali Linux VM Setup                        | [Go to Day 02](./Day02-Kali-VM-Setup/)                              |
 | 03  | AD Setup + Domain Join                     | [Go to Day 03](./Day03-Active-Directory-Setup-and-Windows-Host-Domain-Join/) |
 | 04  | Splunk Logging & Monitoring                | [Go to Day 04](./Day04-Splunk-Monitoring-Setup/)                    |
@@ -102,4 +102,4 @@ I've created the following network diagram to have a better understanding of the
 
 ### ✅ Next Step
 
-The lab begins with [Day 01](./Day01-Network-Infrastructure-and-pfSense-Setup/), where I configured the virtual switches and set up pfSense as the central firewall.
+The lab begins with [Day 01](https://github.com/gkopacz/CyberSec-HomeLab/tree/main/Day01-Core-Network-and-pfSense-Setup), where I configured the virtual switches and set up pfSense as the central firewall.
