@@ -5,9 +5,9 @@
 ![Monitoring](https://img.shields.io/badge/monitoring-Splunk-black?logo=splunk)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-> 🗓️ This is the first major project in my 90-Day Cybersecurity Lab Challenge, focused on building hands-on, blue team skills from scratch.
-
 ## 🎯 Objective
+
+> 🗓️ This is the first major project in my 90-Day Cybersecurity Lab Challenge, focused on building hands-on, blue team skills from scratch.
 
 Design and implement a **cybersecurity homelab** tailored for learning, testing, and experimenting in cybersecurity, networking, and system administration, while ensuring a secure and isolated environment.
 
@@ -51,7 +51,29 @@ Design and implement a **cybersecurity homelab** tailored for learning, testing,
 | Splunk Enterprise | Centralized Log Management & Monitoring |
 | Microsoft Visio   | Network Diagram Design                  |
 
+## 🏗️ What We'll Build
 
+Our cybersecurity homelab simulates a segmented enterprise environment designed for monitoring, attack simulation, and system hardening.
+
+### 🔒 Core Components
+
+Virtualized pfSense Firewall
+
+Acts as the central gateway for all subnets.
+
+Handles routing and enforces firewall policies.
+
+Subnets by Purpose
+
+WAN: Provides internet access and external routing.
+
+LAN (Kali Linux): Hosts a single Kali Linux VM for attack simulation and security testing.
+
+Monitoring: Includes tools like Splunk, Wireshark, and Sysmon for log ingestion and network monitoring.
+
+Active Directory: Hosts a virtualized Windows Server domain controller and clients.
+
+Vulnerable Machines: Includes Metasploitable 2 and optionally machines from VulnHub for offensive testing.
 
 ## 🗂️ Lab Build Timeline
 
