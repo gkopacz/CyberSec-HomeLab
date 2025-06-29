@@ -85,10 +85,6 @@ I've created the following network diagram to have a better understanding of the
 
 ![Network Diagram](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Network-Diagram-HomeLab.jpg)
 
-✅ Next Step
-
-Proceed to Day 01 to see how to set up *Virtual Switches* in *Hyper-V* and *pfSense* Setup.
-
 ## 📂 Project Structure 
 
 | Day | Title                                                                 | Link                                                                 |
@@ -98,3 +94,8 @@ Proceed to Day 01 to see how to set up *Virtual Switches* in *Hyper-V* and *pfSe
 | 03  | Active Directory Setup and Windows Host Domain Join                   | [Go to Day 03](./Day03-Active-Directory-Setup-and-Windows-Host-Domain-Join/) |
 | 04  | Splunk Monitoring Setup                                               | [Go to Day 04](./Day04-Splunk-Monitoring-Setup/)                    |
 | 05  | Vulnerable VMs Deployment                                             | [Go to Day 05](./Day05-Vulnerable-VMs-Deployment/)                  |
+
+### ✅ Next Step
+
+Proceed to Day 01 to see how to set up *Virtual Switches* in *Hyper-V* and *pfSense* Setup.
+
