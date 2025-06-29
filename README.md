@@ -61,10 +61,10 @@ Design and implement a **cybersecurity homelab** tailored for learning, testing,
 | Day | Title                                      | Link                                                                 |
 |-----|--------------------------------------------|----------------------------------------------------------------------|
 | 01  | Core Network & pfSense Setup               | [Go to Day 01](https://github.com/gkopacz/CyberSec-HomeLab/tree/main/Day01-Core-Network-and-pfSense-Setup)   |
-| 02  | Kali Linux VM Setup                        | [Go to Day 02](./Day02-Kali-VM-Setup/)                              |
-| 03  | AD Setup + Domain Join                     | [Go to Day 03](./Day03-Active-Directory-Setup-and-Windows-Host-Domain-Join/) |
-| 04  | Splunk Logging & Monitoring                | [Go to Day 04](./Day04-Splunk-Monitoring-Setup/)                    |
-| 05  | Deploy Vulnerable Machines                 | [Go to Day 05](./Day05-Vulnerable-VMs-Deployment/)                  |
+| 02  | Kali Linux VM Setup                        | [Go to Day 02](https://github.com/gkopacz/CyberSec-HomeLab/tree/main/Day02-Kali-Linux-VM-Setup)                              |
+| 03  | AD Setup + Domain Join                     | [Go to Day 03](https://github.com/gkopacz/CyberSec-HomeLab/tree/main/Day03-AD-Setup-and-Domain-Join) |
+| 04  | Splunk Logging & Monitoring                | [Go to Day 04](https://github.com/gkopacz/CyberSec-HomeLab/tree/main/Day04-Splunk-Logging-and-Monitoring)                    |
+| 05  | Deploy Vulnerable Machines                 | [Go to Day 05](https://github.com/gkopacz/CyberSec-HomeLab/tree/main/Day05-Deploy-Vulnerable-Machines)                  |
 
 ## 🏗️ Project Overview
 
