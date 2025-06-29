@@ -51,6 +51,8 @@ Design and implement a **cybersecurity homelab** tailored for learning, testing,
 | Splunk Enterprise | Centralized Log Management & Monitoring |
 | Microsoft Visio   | Network Diagram Design                  |
 
+## Placeholder
+
 ## 🌐 Network Diagram
 
 I've created the following network diagram to have a better understanding of the structure and functionality.
@@ -58,10 +60,6 @@ I've created the following network diagram to have a better understanding of the
 *Ref 1: Network Diagram*
 
 ![Network Diagram](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Network-Diagram-HomeLab.jpg)
-
-## 🔒 Core Components
-
-abcd
 
 ## 🗂️ Lab Build Timeline
 
