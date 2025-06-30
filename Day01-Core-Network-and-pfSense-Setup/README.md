@@ -10,14 +10,6 @@
 
 Set up the virtual network infrastructure using **Hyper-V** and deploy **pfSense Community Edition 2.7.2** as the core firewall to control and segment traffic between lab environments. This network layer acts as the backbone for all connectivity and security enforcement in the HomeLab. (Note: pfSense CE 2.8.0 was released after this setup. An upgrade will follow after the lab foundation is complete.)
 
-## 🛠️ Tasks Completed
-
-- Created and configured 5 virtual switches in Hyper-V
-- Installed pfSense in a VM with 5 NICs 
-- Assigned interfaces and verified connectivity
-- Configured basic firewall rules and access from the host network
-- Documented the setup process with screenshots and architecture diagram
-
 ## 🏗️ Setup Walkthrough
 
 This lab runs on a **Hyper-V** virtualization platform and includes multiple **virtual machines (VMs)**, **isolated virtual switches**, and a virtualized **pfSense firewall/router** that controls traffic and enforces segmentation between networks.
@@ -151,8 +143,20 @@ Here’s what the final interface configuration looked like:
 
 ![pfSense_interfaces_final](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense-interfaces-final-check.png)
 
+## ✅ Recap
 
+Day 01 focused on building the network backbone for the Cybersecurity HomeLab:
 
+- Deployed **pfSense 2.7.2** as a virtual firewall/router on Hyper-V
+- Created 5 **isolated virtual switches** to simulate segmented subnets
+- Assigned and configured all interfaces manually via console
+- Set static IPs, enabled DHCP for select subnets, and validated base connectivity
 
+The environment is now fully segmented and ready for traffic inspection, firewall rule tuning, and blue team operations.
+
+## 🔜 Next Step
+
+Next, I’ll move on to [Day 02 — Kali Linux VM Setup & pfSense Firewall Rules](https://github.com/gkopacz/CyberSec-HomeLab/tree/main/Day02-Kali-Linux-VM-Setup-and-pfSense-Configuration),  
+where I’ll spin up the *Kali Linux* VM, access the pfSense web GUI from the internal network, and start building the initial firewall rulebase.
 
 
