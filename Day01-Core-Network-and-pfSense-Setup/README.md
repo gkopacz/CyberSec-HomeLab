@@ -106,11 +106,11 @@ After the installation and reboot, pfSense prompts for interface assignments.
 
 Next, I manually assigned the following interfaces:
 
-- `hn0` → WAN  
-- `hn1` → LAN  
-- `hn2` → OPT1 (Monitoring)  
-- `hn3` → OPT2 (AD)  
-- `hn4` → OPT3 (Vulnerable Machines)
+- WAN  → `hn0`  
+- LAN  → `hn1`  
+- OPT1 (Monitoring) → `hn2`  
+- OPT2 (AD)         → `hn3`  
+- OPT3 (Vulnerable Machines) → `hn4`
 
 ![pfSense_interfaces](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense-interface-config.png)
 
