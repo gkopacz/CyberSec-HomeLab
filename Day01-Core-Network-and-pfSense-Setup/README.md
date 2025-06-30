@@ -10,6 +10,13 @@
 
 Set up the virtual network infrastructure using **Hyper-V** and deploy **pfSense Community Edition 2.7.2** as the core firewall to control and segment traffic between lab environments. This network layer acts as the backbone for all connectivity and security enforcement in the HomeLab. (Note: pfSense CE 2.8.0 was released after this setup. An upgrade will follow after the lab foundation is complete.)
 
+## 🧠 Skills Demonstrated
+
+- Hyper-V virtualization and virtual networking
+- pfSense installation, interface mapping, and basic routing
+- Network segmentation and DHCP configuration
+- Infrastructure documentation with markdown and visuals
+
 ## 🏗️ Setup Walkthrough
 
 This lab runs on a **Hyper-V** virtualization platform and includes multiple **virtual machines (VMs)**, **isolated virtual switches**, and a virtualized **pfSense firewall/router** that controls traffic and enforces segmentation between networks.
