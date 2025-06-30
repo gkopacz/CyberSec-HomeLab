@@ -102,4 +102,4 @@ I've created the following network diagram to have a better understanding of the
 
 ### ✅ Next Step
 
-The lab begins with [Day 01](https://github.com/gkopacz/CyberSec-HomeLab/tree/main/Day01-Core-Network-and-pfSense-Setup), where I configured the virtual switches and set up pfSense as the central firewall.
+The lab begins with [Day 01](https://github.com/gkopacz/CyberSec-HomeLab/tree/main/Day01-Core-Network-and-pfSense-Setup), where I configured the virtual switches and set up pfSense as the core firewall.
