@@ -1,5 +1,12 @@
 # 🧱 Day 01 — Core Network & pfSense Setup
 
+![Platform](https://img.shields.io/badge/platform-HyperV-blue?logo=windows)
+![Firewall](https://img.shields.io/badge/firewall-pfSense-red?logo=pfsense) 
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT) <br>
+![Status](https://img.shields.io/badge/status-completed-green)
+![Last Commit](https://img.shields.io/github/last-commit/gkopacz/CyberSec-HomeLab/Day01-Core-Network-and-pfSense-Setup)
+![Visitors](https://visitor-badge.laobi.icu/badge?page_id=gkopacz/CyberSec-HomeLab/Day02-Core-Network-and-pfSense-Setup)
+
 ## 🎯 Objective
 
 Set up the virtual network infrastructure using **Hyper-V** and deploy **pfSense Community Edition 2.7.2** as the core firewall to control and segment traffic between lab environments. This network layer acts as the backbone for all connectivity and security enforcement in the HomeLab. (Note: pfSense CE 2.8.0 was released after this setup. An upgrade will follow after the lab foundation is complete.)
