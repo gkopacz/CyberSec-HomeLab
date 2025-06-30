@@ -58,7 +58,7 @@ This **external switch** connects pfSense to the home router, enabling internet 
 
 #### 🔒 Virtual Switch - LAN
 
-This **internal switch** connects the Kali Linux VM (10.0.1.47). I created the remaining subnets using internal switches in the same way, but didn’t include separate screenshots for each one to avoid repetition.
+This **internal switch** connects the Kali Linux VM (10.0.1.47). I created the remaining subnets using internal switches following the same process.
 
 ![LAN](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Virtual-Switch-LAN.png)
 
