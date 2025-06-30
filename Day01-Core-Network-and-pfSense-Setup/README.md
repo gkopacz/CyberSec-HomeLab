@@ -68,7 +68,9 @@ At the time of setup, the current release was pfSense CE 2.7.2, as shown in the 
 
 ![pfSense_ISO](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/download-pfSense-firewall-iso-image.png)
 
-I created the **pfSense** virtual machine inside Hyper-V using the following specifications:
+I created the **pfSense** virtual machine inside Hyper-V using the following specifications. <br>
+
+> 💡 I chose Generation 2 to support UEFI boot and modern compatibility. Secure Boot must be disabled for pfSense to boot properly.
 
 | Setting           | Value                          |
 |-------------------|--------------------------------|
@@ -80,8 +82,6 @@ I created the **pfSense** virtual machine inside Hyper-V using the following spe
 | **Boot Firmware** | UEFI (Secure Boot disabled)    |
 | **Network Adapters** | 1 (initially) — WAN         |
 
-> 💡 I chose Generation 2 to support UEFI boot and modern compatibility. Secure Boot must be disabled for pfSense to boot properly.
-
 After creating the VM:
 - I disabled **Secure Boot**
 - Set the **boot order** (as seen below)
@@ -89,86 +89,64 @@ After creating the VM:
 
 ![pfSense_Settings](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense-VM-Settings.png)
 
-Upon initial boot, pfSense prompts for instalation and partitioning the disk. I made sure to partition the disk with the following settings.
+Upon first boot, pfSense walks through installation and disk partitioning. I selected the following options:
 
-* AUTO (ZFS) - Guided Root-on-ZFS
-* Stripe - No Redundancy
+- `Auto (ZFS)` — Guided Root-on-ZFS
+- `Stripe` — No Redundancy (no mirroring or RAID)
 
-After reboot, pfSense prompts for interface assignments.
+After the installation and reboot, pfSense prompts for interface assignments.
 
-> 💡 When asked if VLANs need to be set up first, press n.
+> 💡 When prompted to set up VLANs, I selected `n` since I'm using separate virtual switches to isolate traffic instead of VLAN tagging.
 
-Next I manually setup the following interfaces.
+Next, I manually assigned the following interfaces:
 
-* WAN = hn0
-* LAN = hn1
-* OPT1 = hn2 (Monitoring)
-* OPT2 = hn3 (AD)
-* OPT3 = hn4 (Vulnerable Machines)
+- `hn0` → WAN  
+- `hn1` → LAN  
+- `hn2` → OPT1 (Monitoring)  
+- `hn3` → OPT2 (AD)  
+- `hn4` → OPT3 (Vulnerable Machines)
 
-*Ref 6: pfSense interfaces*
+![pfSense_interfaces](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense-interface-config.png)
 
-![pfSense_interfaces](https://github.com/gaman547/CyberSec-HomeLab/blob/main/images/pfSense-interface-config.png)
+Each interface was configured with a static IP address appropriate for its subnet.  
+The **WAN interface** received an IP address automatically from my home router (via DHCP).  
+The **LAN interface** was initially assigned the default IP: `192.168.1.1/24`, while the remaining interfaces were unconfigured at this stage.
 
-Each interface is configured with a static IP address appropriate for its subnet. The WAN interface got the IP address from my home router network.
-The Default LAN ip addres is 192.168.1.1/24 while the other interfaces are not configured yet.
+I selected option `2` from the pfSense menu to begin interface configuration:
 
-Next I selected option 2 as seen bellow.
+![pfSense_LAN_Setup](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense-LAN-setup.png)
 
-*Ref 7: pfSense LAN setup*
+I then selected the **LAN** interface and configured it as follows:
 
-![pfSense_LAN_Setup](https://github.com/gaman547/CyberSec-HomeLab/blob/main/images/pfSense-LAN-setup.png)
+- Configure IPv4 address for LAN via DHCP? → `n`
+- Enter the new LAN IPv4 address → `10.0.1.1`
+- Enter the new LAN IPv4 subnet bit count → `24`
 
-Afterwards I selected the LAN interface and configured it as follows.
+> 💡 I pressed Enter when prompted for an upstream gateway, since LAN traffic should stay isolated and routed through pfSense.
 
-* Configure IPv4 address LAN interface via DHCP? = n
-* Enter the new LAN IPv4 address = 10.0.1.1
-* Enter the new LAN IPv4 subnet bit count = 24
+![pfSense_LAN_interface](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense-LAN-interface.png)
 
-> 💡 Press Enter as we do not want any upstream gateway for LAN interface.
+I continued with the LAN configuration:
 
-*Ref 8: pfSense LAN interface configuration* 
+- Configure IPv6 address for LAN via DHCP6? → `n`
+- For the new LAN IPv6 address prompt → *press* `Enter`
+- Enable DHCP server on LAN? → `y`
+- Start of IPv4 client address range → `10.0.1.100`
+- End of IPv4 client address range → `10.0.1.200`
+- Revert to HTTP for webConfigurator? → `n`
 
-![pfSense_LAN_interface](https://github.com/gaman547/CyberSec-HomeLab/blob/main/images/pfSense-LAN-interface.png)
+![pfSense_LAN_interface_DHCP](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense-LAN-interface-dhcp.png)
 
-I continued with the following configuration.
+I followed the same process for the **Monitoring** and **Vulnerable Machines** interfaces.
 
-* Configure IPv6 address LAN interface via DHCP6 = n
-* For the new LAN IPv6 address question = press ENTER
-* Do you want to enable DHCP server on LAN? = y
-* Enter the start address of the IPv4 clint address range = 10.0.1.100
-* Enter the end address of the IPv4 client address range = 10.0.1.200
-* Do you want to revert to HTTP as the webConfigurator protocol = n
+> 💡 The only difference for the **AD** interface is that I did **not** enable DHCP. The **Active Directory Domain Controller** will handle IP assignments in that subnet.
 
-*Ref 9: pfSense LAN iterface DHCP configuration*
+Here’s what the final interface configuration looked like:
 
-![pfSense_LAN_interface_DHCP](https://github.com/gaman547/CyberSec-HomeLab/blob/main/images/pfSense-LAN-interface-dhcp.png)
-
-I followed the same patern for Monitoring and Vulnerable Machines interfaces. 
-
-> 💡 The only difference for the AD interface is that I did not enable DHCP service. The Active Directory Domain Controller will be responsible to assign IP addresses to the machines in the AD network. 
-
-Below would be the interface IP addresses look like.
-
-*Ref 10: pfSense final interface check*
-
-![pfSense_interfaces_final](https://github.com/gaman547/CyberSec-HomeLab/blob/main/images/pfSense-interfaces-final-check.png)
+![pfSense_interfaces_final](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense-interfaces-final-check.png)
 
 
 
 
 
-## 🔧 pfSense Configuration
 
-- **Version:** pfSense CE 2.8.0 :contentReference[oaicite:1]{index=1}  
-- **Interfaces:**
-  - **WAN** → External switch
-  - **LAN** → LAN switch
-- **Initial setup steps:**
-  - Set admin password and hostname
-  - Assigned interfaces and configured static IPs
-  - Enabled web GUI access on LAN
-- **Firewall Rules:**
-  - Allow ICMP from LAN to WAN
-  - Allow web GUI access (HTTPS) from LAN on 443
-  - Block all unauthorized inbound WAN traffic
