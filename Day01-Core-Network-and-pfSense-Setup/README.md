@@ -70,7 +70,7 @@ I started by downloading the latest pfSense ISO image from the [official website
 
 At the time of setup, the current release was pfSense CE 2.7.2, as shown in the screenshot below. Since then, version 2.8.0 has been released.
 
-> ⚠️ For new users following this guide, I recommend downloading the latest stable version available. I'll upgrade to 2.8.0 after completing the initial lab configuration.
+> ⚠️ For new users following this guide, I recommend downloading the latest stable version available. I'll upgrade to 2.8.0 after completing the initial setup.
 
 ![pfSense_ISO](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/download-pfSense-firewall-iso-image.png)
 
