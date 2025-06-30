@@ -4,7 +4,7 @@
 
 Set up the virtual network infrastructure using **Hyper-V** and deploy **pfSense Community Edition 2.8.0** as the core firewall to control and segment traffic between lab environments. This network layer acts as the backbone for all connectivity and security enforcement in the HomeLab.
 
-## 🏗️ Tasks Completed
+## 🛠️ Tasks Completed
 
 - Created and configured 5 virtual switches in Hyper-V
 - Installed pfSense in a VM with 5 NICs 
@@ -12,7 +12,7 @@ Set up the virtual network infrastructure using **Hyper-V** and deploy **pfSense
 - Configured basic firewall rules and access from the host network
 - Documented the setup process with screenshots and architecture diagram
 
-## 🛠️ Setup Walkthrough
+## 🏗️ Setup Walkthrough
 
 This lab runs on a **Hyper-V** virtualization platform and includes multiple **virtual machines (VMs)**, **isolated virtual switches**, and a virtualized **pfSense firewall/router** that controls traffic and enforces segmentation between networks.
 
@@ -34,9 +34,13 @@ The **home router** connects to the internet and provides outbound access. The *
 
 The network setup begins with creating **virtual switches** in Hyper-V, which form the segmented subnets of the lab. These provide isolation and simulate real-world network zones.
 
-*Ref 2: Virtual Switches in Hyper-V*
-
-![Virtual Switches](https://github.com/gaman547/CyberSec-HomeLab/blob/main/images/Virtual-Switches-inside-Hyper-V.png)
+| Name               | Type     | Purpose                              |
+|--------------------|----------|--------------------------------------|
+| WAN                | External | pfSense WAN (internet access)        |
+| LAN                | Internal | Kali Linux / attacker VM             |
+| Monitoring         | Internal | Splunk & logging VM network          |
+| AD                 | Internal | Hosts Active Directory & Windows VMs |
+| Vulnerable Machines| Internal | Vulnerable machine subnet            |
 
 #### 🌐 Virtual Switch - WAN
 
@@ -44,17 +48,13 @@ This **external switch** connects pfSense to the home router, enabling internet 
 
 > 💡 To create different switches for each subnet, open Hyper-V Manager on the Host PC, and then open the Virtual Switch Manager under the Actions tab.
 
-*Ref 3: WAN*
-
-![WAN](https://github.com/gaman547/CyberSec-HomeLab/blob/main/images/Virtual-Switch-WAN.png)
+![WAN](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Virtual-Switch-WAN.png)
 
 #### 🔒 Virtual Switch - LAN
 
 This **internal switch** connects the Kali Linux VM (10.0.1.47). Additional subnets are also created using internal switches to ensure complete segmentation.
 
-*Ref 4: LAN*
-
-![LAN](https://github.com/gaman547/CyberSec-HomeLab/blob/main/images/Virtual-Switch-LAN.png)
+![LAN](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Virtual-Switch-LAN.png)
 
 ## 3️⃣ pfSense Firewall and Router
 
@@ -64,7 +64,7 @@ I started by downloading the latest pfSense ISO image from the [official website
 
 *Ref 4: pfSense ISO*
 
-![pfSense_ISO](https://github.com/gaman547/CyberSec-HomeLab/blob/main/images/download-pfSense-firewall-iso-image.png)
+![pfSense_ISO](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/download-pfSense-firewall-iso-image.png)
 
 Next I've created the **pfSense** virtual machine with the following configuration.
 
@@ -153,15 +153,7 @@ Below would be the interface IP addresses look like.
 ![pfSense_interfaces_final](https://github.com/gaman547/CyberSec-HomeLab/blob/main/images/pfSense-interfaces-final-check.png)
 
 
-## 🖥️ Virtual Switches
 
-| Name         | Type       | Purpose                         |
-|--------------|------------|----------------------------------|
-| External     | External   | pfSense WAN (internet access)    |
-| LAN          | Internal   | Connected to AD zone and clients |
-| MonitorNet   | Internal   | Splunk & logging VM network      |
-| AttackNet    | Internal   | Kali Linux / attacker VM         |
-| VulnNet      | Internal   | Vulnerable machine subnet        |
 
 
 ## 🔧 pfSense Configuration
