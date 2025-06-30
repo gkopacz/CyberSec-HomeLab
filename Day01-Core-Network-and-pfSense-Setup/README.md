@@ -2,7 +2,7 @@
 
 ## 🎯 Objective
 
-Set up the virtual network infrastructure using **Hyper-V** and deploy **pfSense Community Edition 2.8.0** as the core firewall to control and segment traffic between lab environments. This network layer acts as the backbone for all connectivity and security enforcement in the HomeLab.
+Set up the virtual network infrastructure using **Hyper-V** and deploy **pfSense Community Edition 2.7.2** as the core firewall to control and segment traffic between lab environments. This network layer acts as the backbone for all connectivity and security enforcement in the HomeLab. (Note: pfSense CE 2.8.0 was released after this setup. An upgrade will follow after the lab foundation is complete.)
 
 ## 🛠️ Tasks Completed
 
@@ -28,7 +28,7 @@ Here’s a comprehensive breakdown of the lab components and a step‑by‑step 
 
 The **home router** connects to the internet and provides outbound access. The **Host PC** runs **Hyper-V**, serving as the base virtualization platform where all virtual machines and virtual switches reside.
 
-> 💡 Before using Hyper-V, ensure that **virtualization is enabled in BIOS**. Hyper-V is preferred here due to its seamless integration with Windows and efficient resource management.
+> 💡  I ensured virtualization was enabled in the BIOS before starting. I preferred Hyper-V over VMware or VirtualBox because of its seamless integration with Windows and better resource management on my setup.
 
 ## 2️⃣ Virtual Switches and Subnets
 
@@ -46,13 +46,13 @@ The network setup begins with creating **virtual switches** in Hyper-V, which fo
 
 This **external switch** connects pfSense to the home router, enabling internet access. It's configured in Hyper-V as an *External* type.
 
-> 💡 To create different switches for each subnet, open Hyper-V Manager on the Host PC, and then open the Virtual Switch Manager under the Actions tab.
+> 💡 I created separate virtual switches for each subnet by opening Hyper-V Manager on the host PC and using the Virtual Switch Manager under the Actions tab.
 
 ![WAN](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Virtual-Switch-WAN.png)
 
 #### 🔒 Virtual Switch - LAN
 
-This **internal switch** connects the Kali Linux VM (10.0.1.47). Additional subnets are also created using internal switches to ensure complete segmentation.
+This **internal switch** connects the Kali Linux VM (10.0.1.47). I created the remaining subnets using internal switches in the same way, but didn’t include separate screenshots for each one to avoid repetition.
 
 ![LAN](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Virtual-Switch-LAN.png)
 
@@ -60,32 +60,34 @@ This **internal switch** connects the Kali Linux VM (10.0.1.47). Additional subn
 
 The **pfSense firewall** serves as the central hub for routing and security within the homelab environment. Deployed as a virtual machine on **Hyper-V**, it manages traffic between the WAN and multiple internal subnets, ensuring network segmentation and control.
 
-I started by downloading the latest pfSense ISO image from the [official website](https://www.pfsense.org/download/), using the bellow specifications.
+I started by downloading the latest pfSense ISO image from the [official website](https://www.pfsense.org/download/). <br>
 
-*Ref 4: pfSense ISO*
+At the time of setup, the current release was pfSense CE 2.7.2, as shown in the screenshot below. Since then, version 2.8.0 has been released.
+
+> ⚠️ For new users following this guide, I recommend downloading the latest stable version available. I'll upgrade to 2.8.0 after completing the initial lab configuration.
 
 ![pfSense_ISO](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/download-pfSense-firewall-iso-image.png)
 
-Next I've created the **pfSense** virtual machine with the following configuration.
+I created the **pfSense** virtual machine inside Hyper-V using the following specifications:
 
-* Name: pfSense
-* Generation: Gen 2
-* CPU: 2 vCPU
-* Memory: 4 GB
-* Storage: 40 GB (dynamically allocated)
-* Network Adapter: WAN
+| Setting           | Value                          |
+|-------------------|--------------------------------|
+| **Name**          | pfSense                        |
+| **Generation**    | Generation 2                   |
+| **CPU**           | 2 vCPU                         |
+| **Memory**        | 4 GB (Dynamic)                 |
+| **Storage**       | 40 GB (Dynamically allocated)  |
+| **Boot Firmware** | UEFI (Secure Boot disabled)    |
+| **Network Adapters** | 1 (initially) — WAN         |
 
-> 💡  Using Generation 2 ensures compatibility with modern system requirements and allows UEFI boot support.
+> 💡 I chose Generation 2 to support UEFI boot and modern compatibility. Secure Boot must be disabled for pfSense to boot properly.
 
-Upon creation, I edited the virtual machine settings and made the following changes.
+After creating the VM:
+- I disabled **Secure Boot**
+- Set the **boot order** (as seen below)
+- Added the remaining **network adapters** for LAN and internal subnets
 
-* Disabled Secure Boot
-* Changed boot order
-* Added the remaining network adapters
-
-*Ref 5: pfSense VM Settings*
-
-![pfSense_Settings](https://github.com/gaman547/CyberSec-HomeLab/blob/main/images/pfSense-VM-Settings.png)
+![pfSense_Settings](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense-VM-Settings.png)
 
 Upon initial boot, pfSense prompts for instalation and partitioning the disk. I made sure to partition the disk with the following settings.
 
