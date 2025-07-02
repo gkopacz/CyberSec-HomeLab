@@ -1,8 +1,9 @@
-# 🧱 Day 02 — Kali Linux VM Setup & pfSense Firewall Rules
+# 🐉 Day 02 — Kali Linux VM Setup & pfSense Firewall Rules
 
 ![Platform](https://img.shields.io/badge/platform-HyperV-blue?logo=windows)
 ![OS](https://img.shields.io/badge/Kali%20Linux-2025.2-purple?logo=kali-linux)
 ![Firewall](https://img.shields.io/badge/firewall-pfSense-red?logo=pfsense)
+![OS](https://img.shields.io/badge/OS-Kali%20Linux-informational?logo=kalilinux)
 ![Status](https://img.shields.io/badge/status-in--progress-yellow)
 
 ## 🎯 Objective
