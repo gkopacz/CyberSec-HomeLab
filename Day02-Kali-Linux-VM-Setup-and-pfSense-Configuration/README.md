@@ -19,7 +19,7 @@ This step brings the *attacker zone* online and initiates security policy enforc
 - Access and authentication to pfSense web GUI  
 - Creation of initial firewall rules for segmentation and access control  
 
-# 🏗️ Setup Walkthrough
+# 🛠️ Setup Walkthrough
 
 I started by heading over to the [official Kali Linux download page](https://www.kali.org/get-kali/#kali-platforms) and selecting the **Installer Images** for the **x64** platform.
 
@@ -60,18 +60,19 @@ During the initial setup, I configured the following:
 - **Locale:** `en_US.UTF-8`
 - **Keyboard:** American English (US)
 
-When prompted for a hostname, I went with the default: `kali`. After setting the hostname, I skipped the domain name section since I’m not joining this VM to any domain — it’ll operate standalone within the LAN subnet.
+> 💡 The system clock was automatically synced using Kali’s default NTP server. Since I had already selected my region earlier, the installer correctly set the time zone without any manual input.
 
+When prompted for a hostname, I went with the default: `kali`. 
+
+After setting the hostname, I skipped the domain name section since I’m not joining this VM to any domain - it’ll operate standalone within LAN subnet.
 
 > 💡 No need to manually configure networking since pfSense’s DHCP server automatically assigned an IP address to the Kali VM via the internal LAN switch. This kept the installation smooth and hands-off at the network stage.
 
 Next, I created a **non-root user** to follow best practices and set a strong password.
 
-![User](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM-username.png)
-
 I named the account `g0bl1n` 🧟 — because every lab needs a little chaos in a hoodie.
 
-> 💡 The system clock was automatically synced using Kali’s default NTP server. Since I had already selected my region earlier, the installer correctly set the time zone without any manual input.
+![User](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM-username.png)
 
 ## 3️⃣ Partitioning the Disk
 
