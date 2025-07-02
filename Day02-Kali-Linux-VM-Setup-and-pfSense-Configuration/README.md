@@ -64,7 +64,7 @@ During the initial setup, I configured the following:
 
 When prompted for a hostname, I went with the default: `kali`. 
 
-After setting the hostname, I skipped the domain name section since I’m not joining this VM to any domain - it’ll operate standalone within LAN subnet.
+After setting the hostname, I skipped the domain name section since I’m not joining this VM to any domain — it will operate standalone within the LAN subnet.
 
 > 💡 No need to manually configure networking since pfSense’s DHCP server automatically assigned an IP address to the Kali VM via the internal LAN switch. This kept the installation smooth and hands-off at the network stage.
 
@@ -113,6 +113,53 @@ After selecting the packages, the system proceeded with the installation and fin
 
 ![Desktop Selection](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM-install-software.png)
 
+## 5️⃣ Post-Install System Prep
+
+Before diving into firewall configuration, I made sure the system was updated and tweaked for virtualization performance.
+
+#### 🔄 System Update
+
+I started by refreshing Kali’s package list and installing updates. This ensures all tools, dependencies, and security patches are fresh out of the oven.
+
+```bash
+sudo apt update && sudo apt full-upgrade -y
+```
+
+#### ⚙️ Kali Tweaks & Enhanced Session
+
+Kali provides a built-in command-line tool called `kali-tweaks` that simplifies customization for various use cases, especially when running in virtualized environments.
+
+```bash
+sudo kali-tweaks
+```
+
+I selected the following:
+- **Virtualization** → Hyper-V tools and guest enhancements
+
+#### 🖥️ Enable Enhanced Session Mode (Windows Host)
+
+After tweaking inside the VM, I enabled Enhanced Session Mode from the **Windows host** for better usability:
+
+1. I shut down the Kali VM.
+2. Opened PowerShell **as Administrator**.
+3. Ran this command:
+
+```powershell
+Set-VMHost -EnableEnhancedSessionMode $true
+Set-VM "Kali Linux" -EnhancedSessionTransportType HVSocket
+```
+
+> 💡 This allows features like dynamic display scaling, better mouse handling, and clipboard between host and Kali guest.
+
+#### 🌐 Network Check
+
+Once the system was up and running, I logged into the Kali desktop and ran ifconfig.
+
+The Kali VM received a dynamic IP address from the pfSense DHCP server (10.0.1.101) — exactly as expected for the LAN subnet (10.0.1.0/24).
+
+
+
+> 📌 To align with my original network diagram and keep things tidy, I’ll create a DHCP reservation in pfSense for the Kali VM so it always gets the IP address 10.0.1.47.
 
 
 
