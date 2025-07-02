@@ -150,7 +150,7 @@ Here’s what the final interface configuration looked like:
 
 ![pfSense_interfaces_final](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense-interfaces-final-check.png)
 
-## ✅ Recap
+# ✅ Recap
 
 Day 01 focused on building the network backbone for the Cybersecurity HomeLab:
 
