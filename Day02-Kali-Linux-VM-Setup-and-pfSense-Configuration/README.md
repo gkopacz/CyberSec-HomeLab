@@ -50,7 +50,7 @@ Once the VM was created, I attached the **Kali Linux 2025.2 ISO** to the virtual
 
 ## 2️⃣ Booting Kali & Initial Configuration
 
-After attaching the **kali-linux-2025.2-installer-amd64.iso** to the virtual DVD drive, I booted the VM and selected the **Graphical install** option from the menu:
+After attaching the **kali-linux-2025.2-installer-amd64.iso** to the virtual DVD drive, I booted the VM and selected the **Graphical install** option.
 
 ![Graphical Install](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM-Install.png)
 
@@ -60,15 +60,17 @@ During the initial setup, I configured the following:
 - **Locale:** `en_US.UTF-8`
 - **Keyboard:** American English (US)
 
-When prompted for a hostname, I went with the default: `kali`. After setting the hostname, I skipped the domain name section since I’m not joining this VM to any domain — it’ll operate standalone within the LAN subnet.
+When prompted for a hostname, I went with the default: `kali`. 
+
+After setting the hostname, I skipped the domain name section since I’m not joining this VM to any domain — it’ll operate standalone within the LAN subnet.
 
 > 💡 No need to manually configure networking since pfSense’s DHCP server automatically assigned an IP address to the Kali VM via the internal LAN switch. This kept the installation smooth and hands-off at the network stage.
 
 Next, I created a **non-root user** to follow best practices and set a strong password.
 
-I named the account `g0bl1n` 🧟 — because every lab needs a little chaos in a hoodie.
-
 ![User](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM-username.png)
+
+I named the account `g0bl1n` 🧟 — because every lab needs a little chaos in a hoodie.
 
 > 💡 The system clock was automatically synced using Kali’s default NTP server. Since I had already selected my region earlier, the installer correctly set the time zone without any manual input.
 
