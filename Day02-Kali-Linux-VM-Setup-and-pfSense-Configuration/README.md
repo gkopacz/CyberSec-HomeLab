@@ -60,11 +60,10 @@ During the initial setup, I configured the following:
 - **Locale:** `en_US.UTF-8`
 - **Keyboard:** American English (US)
 
-When prompted for a hostname, I went with the default: `kali`. 
+When prompted for a hostname, I went with the default: `kali`. After setting the hostname, I skipped the domain name section since I’m not joining this VM to any domain — it’ll operate standalone within the LAN subnet.
+
 
 > 💡 No need to manually configure networking since pfSense’s DHCP server automatically assigned an IP address to the Kali VM via the internal LAN switch. This kept the installation smooth and hands-off at the network stage.
-
-After setting the hostname, I skipped the domain name section since I’m not joining this VM to any domain — it’ll operate standalone within the LAN subnet.
 
 Next, I created a **non-root user** to follow best practices and set a strong password.
 
