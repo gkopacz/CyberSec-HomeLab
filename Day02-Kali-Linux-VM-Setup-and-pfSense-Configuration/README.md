@@ -21,7 +21,7 @@ This step brings the *attacker zone* online and initiates security policy enforc
 
 ## 🏗️ Setup Walkthrough
 
-I started by heading over to the [official Kali Linux download page](https://www.kali.org/get-kali/#kali-platforms) and selecting the **Installer Images** for the **x64 (Installer)** platform.
+I started by heading over to the [official Kali Linux download page](https://www.kali.org/get-kali/#kali-platforms) and selecting the **Installer Images** for the **x64** platform.
 
 I chose to perform a **manual installation** using the full ISO. This method works both on bare metal and inside a guest virtual machine. It offers more control over system configuration and is great for showcasing OS installation and hardening skills.
 
