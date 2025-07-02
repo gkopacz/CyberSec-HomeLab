@@ -29,7 +29,7 @@ I chose to perform a **manual installation** using the full ISO. This method wor
 
 Here’s a comprehensive breakdown of the Day 02 setup, with a step‑by‑step walkthrough of the entire Kali VM installation process.
 
-# 1️⃣ Creating the Virtual Machine in Hyper‑V
+### 1️⃣ Creating the Virtual Machine in Hyper‑V
 
 I created a new virtual machine in **Hyper‑V Manager** using the following configuration:
 
@@ -48,7 +48,7 @@ Once the VM was created, I attached the **Kali Linux 2025.2 ISO** to the virtual
 
 > 💡 I chose **Generation 2** for UEFI support, modern hardware emulation, and better compatibility with virtualization features like dynamic memory allocation. Make sure to disable **Secure Boot**, as Kali doesn’t support the default Microsoft boot keys.
 
-# 2️⃣ Booting Kali & Initial Configuration
+### 2️⃣ Booting Kali & Initial Configuration
 
 After attaching the **kali-linux-2025.2-installer-amd64.iso** to the virtual DVD drive, I booted the VM and selected the **Graphical install** option.
 
@@ -74,7 +74,7 @@ I named the account `g0bl1n` 🧟 — because every lab needs a little chaos in 
 
 > 💡 The system clock was automatically synced using Kali’s default NTP server. Since I had already selected my region earlier, the installer correctly set the time zone without any manual input.
 
-# 3️⃣ Partitioning the Disk
+### 3️⃣ Partitioning the Disk
 
 For the partitioning scheme, I went with **Guided - use entire disk**.
 
@@ -98,7 +98,7 @@ I confirmed the changes and wrote them to disk.
 
 ![Confirm Disk Write](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM-partition-format.png)
 
-# 4️⃣ Software Selection & Package Install
+### 4️⃣ Software Selection & Package Install
 
 During the package selection step, I kept things minimal but functional.
 
