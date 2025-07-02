@@ -48,23 +48,51 @@ Once the VM was created, I attached the **Kali Linux 2025.2 ISO** to the virtual
 
 ![Kali VM Settings](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM-Settings.png)
 
+## 2️⃣ Booting Kali & Initial Configuration
 
-
-
-
-
-## 📥 ISO Boot & Graphical Install
-
-I mounted the **kali-linux-2025.2-installer-amd64.iso** and launched into the **Graphical install** mode:
+After attaching the **kali-linux-2025.2-installer-amd64.iso** to the virtual DVD drive, I booted the VM and selected the **Graphical install** option from the menu:
 
 ![Graphical Install](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM-Install.png)
 
----
+During the initial setup, I configured the following:
+- **Language:** English
+- **Location:** Other -> Europe -> Romania
+- **Locale:** `en_US.UTF-8`
+- **Keyboard:** American English (US)
 
-## 🌐 Locale & Keyboard Setup
+When prompted for a hostname, I went with the default: `kali`. After setting the hostname, I skipped the domain name section since I’m not joining this VM to any domain — it’ll operate standalone within the LAN subnet.
 
-- Language: English
-- Country: United States
-- Locale: `en_US.UTF-8`
+> 💡 No need to manually configure networking — pfSense’s DHCP server automatically assigned an IP address to the Kali VM via the internal LAN switch. This kept the installation smooth and hands-off at the network stage.
 
-![Locale](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM-Locale.png)
+Next, I created a **non-root user** to follow best practices and set a strong password. I named the account `g0bl1n` 🧟 — because every lab needs a little chaos in a hoodie.
+
+The system clock was automatically synced using Kali’s default NTP server. Since I had already selected my region earlier, the installer correctly set the time zone without any manual input.
+
+## 3️⃣ Partitioning the Disk
+
+For the partitioning scheme, I went with **Guided - use entire disk** and selected the default virtual disk provided during the install process:
+
+![Disk Select](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM-partition-disk.png)
+
+When asked about the partition layout, I chose:
+
+![Partition Method](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM-partition-guided.png)
+
+Then, for simplicity and easier management inside the VM, I went with:
+
+![All-in-one Partition](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM-partition-disk-full.png)
+
+Here’s the partition summary before writing changes to disk:
+
+![Partition Overview](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM-partition-overview.png)
+
+I confirmed the changes and wrote them to disk:
+
+![Confirm Disk Write](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM-partition-format.png)
+
+> 💡 The one-partition layout is ideal for this lab — it’s fast to deploy, easy to snapshot, and perfect for a single-user attacker VM.
+
+
+
+
+
