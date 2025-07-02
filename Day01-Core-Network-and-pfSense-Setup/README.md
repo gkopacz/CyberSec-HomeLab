@@ -17,7 +17,7 @@ Set up the virtual network infrastructure using **Hyper-V** and deploy **pfSense
 - Network segmentation and DHCP configuration
 - Infrastructure documentation with markdown and visuals
 
-## 🏗️ Setup Walkthrough
+# 🏗️ Setup Walkthrough
 
 This lab runs on a **Hyper-V** virtualization platform and includes multiple **virtual machines (VMs)**, **isolated virtual switches**, and a virtualized **pfSense firewall/router** that controls traffic and enforces segmentation between networks.
 
