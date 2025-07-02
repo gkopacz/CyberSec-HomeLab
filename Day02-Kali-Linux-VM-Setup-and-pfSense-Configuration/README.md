@@ -86,8 +86,6 @@ When asked about the partition disk, I chose the default virtual disk provided d
 
 Then, for simplicity and easier management inside the VM, I went with **All files in one partition**.
 
-> 💡 The one-partition layout is ideal for this lab — it’s fast to deploy, easy to snapshot, and perfect for a single-user VM.
-
 ![All-in-one Partition](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM-partition-disk-full.png)
 
 Here’s the partition summary before writing changes to disk.
@@ -107,13 +105,14 @@ I chose:
 - **Top 10 Tools:** Predefined list of essential Kali tools
 - **Default tools:** Recommended packages for general use
 
-> 💡 I went with XFCE because it runs smoothly inside a VM with modest resources. It’s snappy, stable, and gets the job done without bloat.
-
 ![Desktop Selection](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM-default-desktop.png)
+
+> 💡 I went with XFCE because it runs smoothly inside a VM with modest resources. It’s snappy, stable, and gets the job done without bloat.
 
 After selecting the packages, the system proceeded with the installation and finished with GRUB setup and final config.
 
 ![Desktop Selection](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM-install-software.png)
+
 
 
 
