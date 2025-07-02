@@ -46,7 +46,7 @@ Once the VM was created, I attached the **Kali Linux 2025.2 ISO** to the virtual
 
 ![Kali VM Settings](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM-Settings.png)
 
-> 💡 I chose **Generation 2** for UEFI support and modern hardware emulation. Make sure to disable **Secure Boot**, as Kali doesn’t support the default Microsoft boot keys.
+> 💡 I chose **Generation 2** for UEFI support, modern hardware emulation, and better compatibility with virtualization features like dynamic memory allocation. Make sure to disable **Secure Boot**, as Kali doesn’t support the default Microsoft boot keys.
 
 ## 2️⃣ Booting Kali & Initial Configuration
 
@@ -84,9 +84,11 @@ When asked about the partition disk, I chose the default virtual disk provided d
 
 ![Disk Select](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM-partition-disk.png)
 
-Then, for simplicity and easier management inside the VM, I went with **All files in one partition**
+Then, for simplicity and easier management inside the VM, I went with **All files in one partition**.
 
 ![All-in-one Partition](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM-partition-disk-full.png)
+
+> 💡 The one-partition layout is ideal for this lab — it’s fast to deploy, easy to snapshot, and perfect for a single-user VM.
 
 Here’s the partition summary before writing changes to disk.
 
@@ -96,7 +98,7 @@ I confirmed the changes and wrote them to disk.
 
 ![Confirm Disk Write](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM-partition-format.png)
 
-> 💡 The one-partition layout is ideal for this lab — it’s fast to deploy, easy to snapshot, and perfect for a single-user attacker VM.
+
 
 
 
