@@ -5,6 +5,8 @@
 ![Firewall](https://img.shields.io/badge/firewall-pfSense-red?logo=pfsense)
 ![OS](https://img.shields.io/badge/OS-Kali%20Linux-informational?logo=kalilinux)
 ![Status](https://img.shields.io/badge/status-in--progress-yellow)
+![Kali Linux](https://img.shields.io/badge/Kali-Linux-blue?logo=kali-linux)
+
 
 ## 🎯 Objective
 
