@@ -42,11 +42,11 @@ I created a new virtual machine in **Hyper‑V Manager** using the following con
 | **Disk**   | 50 GB (Dynamically Expanding)   |
 | **Network**| Internal switch (LAN subnet)    |
 
-> 💡 I chose **Generation 2** for UEFI support and modern hardware emulation. Make sure to disable **Secure Boot**, as Kali doesn’t support the default Microsoft boot keys.
-
 Once the VM was created, I attached the **Kali Linux 2025.2 ISO** to the virtual DVD drive and adjusted the boot order so the system would boot directly into the installer.
 
 ![Kali VM Settings](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM-Settings.png)
+
+> 💡 I chose **Generation 2** for UEFI support and modern hardware emulation. Make sure to disable **Secure Boot**, as Kali doesn’t support the default Microsoft boot keys.
 
 ## 2️⃣ Booting Kali & Initial Configuration
 
@@ -62,31 +62,35 @@ During the initial setup, I configured the following:
 
 When prompted for a hostname, I went with the default: `kali`. After setting the hostname, I skipped the domain name section since I’m not joining this VM to any domain — it’ll operate standalone within the LAN subnet.
 
-> 💡 No need to manually configure networking — pfSense’s DHCP server automatically assigned an IP address to the Kali VM via the internal LAN switch. This kept the installation smooth and hands-off at the network stage.
+> 💡 No need to manually configure networking since pfSense’s DHCP server automatically assigned an IP address to the Kali VM via the internal LAN switch. This kept the installation smooth and hands-off at the network stage.
 
-Next, I created a **non-root user** to follow best practices and set a strong password. I named the account `g0bl1n` 🧟 — because every lab needs a little chaos in a hoodie.
+Next, I created a **non-root user** to follow best practices and set a strong password.
 
-The system clock was automatically synced using Kali’s default NTP server. Since I had already selected my region earlier, the installer correctly set the time zone without any manual input.
+I named the account `g0bl1n` 🧟 — because every lab needs a little chaos in a hoodie.
+
+![User](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM-username.png)
+
+> 💡 The system clock was automatically synced using Kali’s default NTP server. Since I had already selected my region earlier, the installer correctly set the time zone without any manual input.
 
 ## 3️⃣ Partitioning the Disk
 
-For the partitioning scheme, I went with **Guided - use entire disk** and selected the default virtual disk provided during the install process:
-
-![Disk Select](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM-partition-disk.png)
-
-When asked about the partition layout, I chose:
+For the partitioning scheme, I went with **Guided - use entire disk**.
 
 ![Partition Method](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM-partition-guided.png)
 
-Then, for simplicity and easier management inside the VM, I went with:
+When asked about the partition disk, I chose the default virtual disk provided during the install process.
+
+![Disk Select](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM-partition-disk.png)
+
+Then, for simplicity and easier management inside the VM, I went with **All files in one partition**
 
 ![All-in-one Partition](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM-partition-disk-full.png)
 
-Here’s the partition summary before writing changes to disk:
+Here’s the partition summary before writing changes to disk.
 
 ![Partition Overview](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM-partition-overview.png)
 
-I confirmed the changes and wrote them to disk:
+I confirmed the changes and wrote them to disk.
 
 ![Confirm Disk Write](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM-partition-format.png)
 
