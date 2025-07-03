@@ -157,7 +157,7 @@ Once the system was up and running, I logged into the Kali desktop and ran ifcon
 
 The Kali VM received a dynamic IP address from the pfSense DHCP server (10.0.1.101) — exactly as expected for the LAN subnet (10.0.1.0/24).
 
-![Desktop Selection](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM-network.png)
+![Desktop and ping](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM-network.png)
 
 > 📌 To align with my original network diagram and keep things tidy, I’ll create a DHCP reservation in pfSense for the Kali VM so it always gets the IP address 10.0.1.47.
 
@@ -165,11 +165,47 @@ The Kali VM received a dynamic IP address from the pfSense DHCP server (10.0.1.1
 
 Now that Kali is up and running on the LAN subnet, it’s time to start enforcing traffic control using pfSense.
 
-I logged into the pfSense web GUI from the Kali browser at https://192.168.100.30. Since pfSense uses a self-signed SSL certificate, Firefox threw a warning — which I bypassed.
+I logged into the pfSense web GUI from the Kali browser at https://192.168.100.30. 
+
+Since pfSense uses a self-signed SSL certificate, Firefox threw a warning — which I bypassed.
+
+![pfSense Init](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense-init.png)
 
 After accepting the risk, I authenticated using the default admin credentials and launched the setup wizard.
 
-![Desktop Selection](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense-init.png)
+![pfSense Login](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense-Login.png)
+
+> 💡 The default username is *admin* and password is *pfsense*
+
+#### 🧱 General Settings
+
+I gave my firewall a hostname: `pfSenseFW`  
+Domain: `home.arpa`
+
+![pfSense hostname](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense-hostname.png)
+
+> 💡 I left “Override DNS” **unchecked** so I could control DNS via resolver settings later.
+
+#### ⏰ Time and Region
+
+Set the **time server** to the default and aligned timezone to `Europe/Bucharest` for consistent log timestamps.
+
+![pfSense time](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense-timezone.png)
+
+#### 🔐 WAN Security Settings
+
+Disabled **RFC1918 blocking** since my WAN IP is on a private range (from home DHCP). Blocking this would’ve cut off my connectivity.
+
+![WAN RFC1918 setting](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense-rfc1918.png)
+
+#### 🌐 LAN Network
+
+Confirmed that the **LAN interface** was set to `10.0.1.1/24` — matching the diagram and providing the subnet for my lab internal network.
+
+
+
+
+
 
 
 
