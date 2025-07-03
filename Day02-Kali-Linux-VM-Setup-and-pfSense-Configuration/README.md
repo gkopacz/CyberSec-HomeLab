@@ -206,7 +206,7 @@ Confirmed that the **LAN interface** was set to `10.0.1.1/24` — matching the d
 
 Changed the **default admin password** to a strong passphrase.
 
-### ✅ Finalizing Setup
+#### ✅ Finalizing Setup
 
 Once complete, pfSense prompted to check for updates. I went ahead and upgraded the system to the latest stable version: **pfSense CE 2.8.0**
 
