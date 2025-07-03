@@ -161,6 +161,16 @@ The Kali VM received a dynamic IP address from the pfSense DHCP server (10.0.1.1
 
 > 📌 To align with my original network diagram and keep things tidy, I’ll create a DHCP reservation in pfSense for the Kali VM so it always gets the IP address 10.0.1.47.
 
+## 6️⃣ pfSense Initial Configuration Wizard
+
+Now that Kali is up and running on the LAN subnet, it’s time to start enforcing traffic control using pfSense.
+
+I logged into the pfSense web GUI from the Kali browser at https://192.168.100.30. Since pfSense uses a self-signed SSL certificate, Firefox threw a warning — which I bypassed.
+
+After accepting the risk, I authenticated using the default admin credentials and launched the setup wizard.
+
+![Desktop Selection](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense-init.png)
+
 
 
 
