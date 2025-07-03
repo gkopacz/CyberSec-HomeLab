@@ -202,6 +202,26 @@ Disabled **RFC1918 blocking** since my WAN IP is on a private range (from home D
 
 Confirmed that the **LAN interface** was set to `10.0.1.1/24` — matching the diagram and providing the subnet for my lab internal network.
 
+#### 🔑 Securing the Firewall
+
+Changed the **default admin password** to a strong passphrase.
+
+### ✅ Finalizing Setup
+
+Once complete, pfSense prompted to check for updates. I went ahead and upgraded the system to the latest stable version: **pfSense CE 2.8.0**
+
+## 7️⃣ pfSense Firewall Rules 
+
+With the interfaces and static mappings in place, I started building out access control policies between zones.
+
+#### 🔧 Interface Mapping & Naming
+
+First, I renamed the default OPT interfaces for clarity:
+
+- `OPT1` → `MONITORING`
+- `OPT2` → `AD`
+- `OPT3` → `VULNERABLEMACHINES`
+
 
 
 
