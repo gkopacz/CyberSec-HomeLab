@@ -220,7 +220,13 @@ First, I renamed the default OPT interfaces for clarity:
 
 - `OPT1` → `MONITORING`
 - `OPT2` → `AD`
-- `OPT3` → `VULNERABLEMACHINES`
+- `OPT3` → `VULNERABLE MACHINES`
+
+![Interface Mapping](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfsense-interfaces.png)
+
+> 💡 Naming interfaces based on function simplifies rule management and helps avoid costly mistakes in production environments.
+
+
 
 
 
