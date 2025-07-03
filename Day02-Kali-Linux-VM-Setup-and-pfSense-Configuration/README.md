@@ -226,6 +226,78 @@ First, I renamed the default OPT interfaces for clarity:
 
 > 💡 Naming interfaces based on function simplifies rule management and helps avoid costly mistakes in production environments.
 
+#### 🔍 Configure DNS Resolver
+
+I navigated to Services → DNS Resolver, scrolled down, and made sure both DHCP Registration and Static DHCP were enabled (checked).
+
+![DNS Resolver](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense-dns-resolver.png)
+
+Then, under Advanced Settings, I confirmed that Prefetch Support and Prefetch DNS Key Support were also enabled.
+
+#### 📍 Static DHCP Reservation
+
+To keep the Kali VM's IP consistent, I created a static DHCP mapping:
+
+- IP: `10.0.1.47`
+- Hostname: `kali`
+
+![Static Mapping](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense-static-kali.png)
+
+#### 🧠 Aliases for Private IP Ranges
+
+To simplify blocking traffic to internal networks, I created an alias named `Private_IP_Address_List` containing:
+
+- `10.0.0.0/8`
+- `172.16.0.0/12`
+- `192.168.0.0/16`
+- `169.254.0.0/16`
+- `127.0.0.0/8`
+
+![Alias Definition](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense-alias-private-ip.png)
+
+###$ 🔒 LAN Rules (Kali Subnet)
+
+Set of rules to control outbound flow from Kali (LAN):
+
+- ✅ Allow HTTPS to pfSense for GUI
+- ❌ Block all access to WAN network (home-LAN)
+- ✅ Allow general internet access
+- ❌ Block all IPv6 traffic (optional but preferred in labs)
+
+![LAN Rules](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense-lan-rules.png)
+
+#### 🧪 Monitoring Interface Rules
+
+I configured the `MONITORING` interface with a minimal rule set to allow inbound traffic from monitored systems.
+
+- ✅ Allow connections from all internal lab zones to the Monitoring VM (open inbound)
+- ❌ Deny everything else by default (implicit block via pfSense rule logic)
+
+> 📌 This permissive setup is intentional for early lab phases. I’ll tighten these rules later once monitoring pipelines are confirmed stable.
+
+#### 🛡️ AD Subnet Rules
+
+Rules for controlling AD VM's communication:
+
+- ✅ Allow data to MONITORING subnet
+- ✅ Allow AD to connect to pfSense gateway
+- ✅ Allow connection to Kali
+- ❌ Block outbound to other internal IPs via alias
+- ❌ Drop everything else (default deny)
+
+![AD Rules](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense-ad-rules.png)
+
+#### 🎯 Vulnerable Machines Interface Rules
+
+Locked down the vulnerable segment to only allow interaction with Kali:
+
+- ✅ Allow vulnerable VMs to connect to Kali
+- ❌ Deny everything else
+
+![Vulnerable Rules](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense-vuln-rules.png)
+
+
+
 
 
 
