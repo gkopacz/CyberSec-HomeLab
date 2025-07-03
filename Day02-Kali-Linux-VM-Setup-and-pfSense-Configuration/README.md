@@ -304,7 +304,7 @@ With the Kali VM installed, the pfSense firewall configured, and segmented firew
 
 Each zone (LAN, AD, Monitoring, Vulnerable) is logically isolated, with communication explicitly allowed only where required.
 
-These initial controls lay the foundation for more advanced testing in future phases — including:
+🚀 These initial controls lay the foundation for more advanced testing in future phases — including:
 
 - Active Directory deployment
 - Attacker-victim simulations
