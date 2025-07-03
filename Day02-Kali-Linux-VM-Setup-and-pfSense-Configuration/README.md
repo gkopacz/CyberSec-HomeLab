@@ -7,17 +7,19 @@
 
 ## 🎯 Objective
 
-Install **Kali Linux 2025.2** manually on Hyper-V, connect it to the lab’s LAN subnet, and access the **pfSense web GUI** to configure the initial firewall rules.  
-This step brings the *attacker zone* online and initiates security policy enforcement within the lab environment.
+Manually install and configure Kali Linux 2025.2 on Hyper-V, integrate it into a segmented lab network, and deploy a pfSense firewall as the lab’s perimeter gateway. Complete initial configuration of pfSense and implement access control rules to enforce traffic segmentation between internal lab zones (Kali, AD, Monitoring, Vulnerable Machines). This marks the beginning of structured traffic enforcement and internal network isolation.
 
 ## 🧠 Skills Demonstrated
 
-- Manual installation of **Kali Linux 2025.2** using ISO on Hyper-V  
+- Manual installation of **Kali Linux 2025.2** using ISO on Hyper-V Gen 2 VM
 - Hyper-V virtual hardware configuration (Gen2, UEFI, NIC assignment)  
 - Integration of Kali VM with isolated lab subnet via internal switch  
-- DHCP IP assignment validation via pfSense  
-- Access and authentication to pfSense web GUI  
-- Creation of initial firewall rules for segmentation and access control  
+- Static IP and DHCP reservation strategy for predictable host identity
+- Configuration of pfSense via web GUI and setup wizard
+- Assignment and segmentation of internal virtual NICs across 5 custom Hyper-V virtual switches
+- Creation and application of firewall rules for LAN, AD, Monitoring, and Vulnerable segments
+- Use of pfSense Aliases for scalable rule control over internal network ranges
+- DNS Resolver configuration and prefetch optimizations for internal DNS handling
 
 # 🛠️ Setup Walkthrough
 
@@ -255,7 +257,7 @@ To simplify blocking traffic to internal networks, I created an alias named `Pri
 
 ![Alias Definition](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense-alias-private-ip.png)
 
-###$ 🔒 LAN Rules (Kali Subnet)
+#### 🔒 LAN Rules 
 
 Set of rules to control outbound flow from Kali (LAN):
 
@@ -266,7 +268,7 @@ Set of rules to control outbound flow from Kali (LAN):
 
 ![LAN Rules](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense-lan-rules.png)
 
-#### 🧪 Monitoring Interface Rules
+#### 🧪 Monitoring Rules
 
 I configured the `MONITORING` interface with a minimal rule set to allow inbound traffic from monitored systems.
 
@@ -275,7 +277,7 @@ I configured the `MONITORING` interface with a minimal rule set to allow inbound
 
 > 📌 This permissive setup is intentional for early lab phases. I’ll tighten these rules later once monitoring pipelines are confirmed stable.
 
-#### 🛡️ AD Subnet Rules
+#### 🛡️ AD Rules
 
 Rules for controlling AD VM's communication:
 
@@ -287,7 +289,7 @@ Rules for controlling AD VM's communication:
 
 ![AD Rules](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense-ad-rules.png)
 
-#### 🎯 Vulnerable Machines Interface Rules
+#### 🎯 Vulnerable Machines Rules
 
 Locked down the vulnerable segment to only allow interaction with Kali:
 
@@ -295,6 +297,33 @@ Locked down the vulnerable segment to only allow interaction with Kali:
 - ❌ Deny everything else
 
 ![Vulnerable Rules](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense-vuln-rules.png)
+
+> 🔒 Security starts with segmentation. The firewall isn’t just a gate — it’s the gatekeeper, logger, and enforcer for everything that follows.
+
+With the Kali VM installed, the pfSense firewall configured, and segmented firewall rules in place, the lab now has a solid perimeter and internal access control structure.
+
+Each zone (LAN, AD, Monitoring, Vulnerable) is logically isolated, with communication explicitly allowed only where required.
+
+These initial controls lay the foundation for more advanced testing in future phases — including:
+
+- Active Directory deployment
+- Attacker-victim simulations
+- Centralized logging and alerting
+- Vulnerability scanning and detection
+
+## 🔜 Next Step
+
+[Day 03](https://github.com/gkopacz/CyberSec-HomeLab/tree/main/Day03-AD-Setup-and-Domain-Join) I will focus on provisioning the Active Directory (AD) zone:
+
+- Deploying a Windows Server VM on the AD virtual switch
+- Promoting it to a domain controller
+- Implementing domain-based authentication
+- Beginning security hardening and group policy setup
+
+
+
+
+
 
 
 
