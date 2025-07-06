@@ -34,7 +34,20 @@ This step marks the start of structured access control within the lab — enforc
 
 ## 📢 Lab Design Note: WAN IP vs Diagram
 
-In my original network diagram, I had planned to assign '10.0.0.1' as the static IP for pfSense's WAN interface.
+In my original network diagram, I had planned to assign `10.0.0.1` as the static IP for pfSense's WAN interface.
+
+However, during setup I realized this design wouldn't work — since the lab still relies on my physical home router for internet access.
+
+Instead, I configured the WAN interface to get its IP via DHCP from my home router (`192.168.x.x`). 
+
+This allows:
+* Internet access for pfSense itself
+* NAT for all internal lab subnets
+* Smooth integration without manual routing
+
+This was a valuable lesson: even in a virtualized environment my lab's internet connection still comes from my real-world setup and pfSense needs a working gateway to get online.
+
+> 💡 Alternative fix: I could’ve kept the original `10.0.0.1` WAN IP by setting up NAT on the Windows host and routing internet traffic through it but that adds complexity and wasn’t worth it at this stage.
 
 # 🛠️ Setup Walkthrough
 
