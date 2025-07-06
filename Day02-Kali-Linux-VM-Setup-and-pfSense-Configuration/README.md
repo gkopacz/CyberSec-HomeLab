@@ -182,11 +182,11 @@ I logged into the pfSense web GUI from the Kali browser at https://192.168.100.3
 
 Since pfSense uses a self-signed SSL certificate, Firefox threw a warning — which I bypassed.
 
-![pfSense Init](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense-init.png)
+![pfSense Init](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense/pfSense-init.png)
 
 After accepting the risk, I authenticated using the default admin credentials and launched the setup wizard.
 
-![pfSense Login](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense-Login.png)
+![pfSense Login](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense/pfSense-Login.png)
 
 > 💡 The default username is *admin* and password is *pfsense*
 
@@ -195,7 +195,7 @@ After accepting the risk, I authenticated using the default admin credentials an
 I gave my firewall a hostname: `pfSenseFW`  
 Domain: `home.arpa`
 
-![pfSense hostname](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense-hostname.png)
+![pfSense hostname](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense/pfSense-hostname.png)
 
 > 💡 I left “Override DNS” **unchecked** so I could control DNS via resolver settings later.
 
@@ -203,13 +203,13 @@ Domain: `home.arpa`
 
 Set the **time server** to the default and aligned timezone to `Europe/Bucharest` for consistent log timestamps.
 
-![pfSense time](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense-timezone.png)
+![pfSense time](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense/pfSense-timezone.png)
 
 ### 🔐 WAN Security Settings
 
 Disabled **RFC1918 blocking** since my WAN IP is on a private range (from home DHCP). Blocking this would’ve cut off my connectivity.
 
-![WAN RFC1918 setting](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense-rfc1918.png)
+![WAN RFC1918 setting](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense/pfSense-rfc1918.png)
 
 ### 🌐 LAN Network
 
@@ -235,7 +235,7 @@ First, I renamed the default OPT interfaces for clarity:
 - `OPT2` → `AD`
 - `OPT3` → `VULNERABLE MACHINES`
 
-![Interface Mapping](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense-interfaces.png)
+![Interface Mapping](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense/pfSense-interfaces.png)
 
 > 💡 Naming interfaces based on function simplifies rule management and helps avoid costly mistakes in production environments.
 
@@ -243,7 +243,7 @@ First, I renamed the default OPT interfaces for clarity:
 
 I navigated to Services → DNS Resolver, scrolled down, and made sure both DHCP Registration and Static DHCP were enabled (checked).
 
-![DNS Resolver](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense-dns-resolver.png)
+![DNS Resolver](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense/pfSense-dns-resolver.png)
 
 Then, under Advanced Settings, I confirmed that Prefetch Support and Prefetch DNS Key Support were also enabled.
 
@@ -254,7 +254,7 @@ To keep the Kali VM's IP consistent, I created a static DHCP mapping:
 - IP: `10.0.1.47`
 - Hostname: `kali`
 
-![Static Mapping](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense-static-kali.png)
+![Static Mapping](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense/pfSense-static-kali.png)
 
 ### 🧠 Aliases for Private IP Ranges
 
@@ -266,7 +266,7 @@ To simplify blocking traffic to internal networks, I created an alias named `Pri
 - `169.254.0.0/16`
 - `127.0.0.0/8`
 
-![Alias Definition](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense-alias-private-ip.png)
+![Alias Definition](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense/pfSense-alias-private-ip.png)
 
 ### 🔒 LAN Rules 
 
@@ -277,7 +277,7 @@ Set of rules to control outbound flow from Kali (LAN):
 - ❌ Block all access to the host (WAN subnet)
 - ❌ Block all IPv6 traffic (lab-wide policy)
 
-![LAN Rules](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense-lan-rules.png)
+![LAN Rules](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense/pfSense-lan-rules.png)
 
 ### 🧪 Monitoring Rules
 
@@ -298,7 +298,7 @@ This subnet contains **domain controller + Windows clients**. I allowed:
 - ❌ Block outbound to other internal IPs via alias
 - ❌ Drop everything else (default deny)
 
-![AD Rules](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense-ad-rules.png)
+![AD Rules](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense/pfSense-ad-rules.png)
 
 ### 🎯 Vulnerable Machines Rules
 
@@ -307,7 +307,7 @@ Locked down the vulnerable segment to only allow interaction with Kali:
 - ✅ Allow vulnerable VMs to connect to Kali
 - ❌ Deny everything else
 
-![Vulnerable Rules](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense-vuln-rules.png)
+![Vulnerable Rules](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense/pfSense-vuln-rules.png)
 
 > 🔒 Security starts with segmentation. The firewall isn’t just a gate — it’s the gatekeeper, logger, and enforcer for everything that follows.
 
