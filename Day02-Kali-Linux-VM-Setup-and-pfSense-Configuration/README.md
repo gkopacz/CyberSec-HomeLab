@@ -197,7 +197,7 @@ Now that Kali is up and running on the LAN subnet, it’s time to start enforcin
 
 I logged into the pfSense web GUI from the Kali browser at https://192.168.100.30. 
 
-> 🧠 Wondering why the WAN IP is `192.168.x.x` instead of the `10.0.0.1` in the diagram? Check the **Lab Design Note** at the top — there’s a lesson behind it.
+> 🧠 Wondering why the WAN IP is `192.168.x.x` instead of the `10.0.0.1` from the initial diagram? Check the **Lab Design Note** at the top — there’s a lesson behind it.
 
 Since pfSense uses a self-signed SSL certificate, Firefox threw a warning — which I bypassed.
 
