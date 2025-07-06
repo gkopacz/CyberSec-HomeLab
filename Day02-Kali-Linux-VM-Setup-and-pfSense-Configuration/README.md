@@ -211,13 +211,19 @@ Disabled **RFC1918 blocking** since my WAN IP is on a private range (from home D
 
 ![WAN RFC1918 setting](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense/pfSense-rfc1918.png)
 
+---
+
 ### 🌐 LAN Network
 
 Confirmed that the **LAN interface** was set to `10.0.1.1/24` — matching the diagram and providing the subnet for my lab internal network.
 
+---
+
 ### 🔑 Securing the Firewall
 
 Changed the **default admin password** to a strong passphrase.
+
+---
 
 ### ✅ Finalizing Setup
 
@@ -226,6 +232,8 @@ Once complete, pfSense prompted to check for updates. I went ahead and upgraded 
 ## 7️⃣ pfSense Firewall Rules 
 
 With the interfaces and static mappings in place, I started building out access control policies for each network zones.
+
+---
 
 ### 🔧 Interface Mapping & Naming
 
@@ -238,6 +246,8 @@ First, I renamed the default OPT interfaces for clarity:
 ![Interface Mapping](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense/pfSense-interfaces.png)
 
 > 💡 Naming interfaces based on function simplifies rule management and helps avoid costly mistakes in production environments.
+
+---
 
 ### 🔍 Configure DNS Resolver
 
