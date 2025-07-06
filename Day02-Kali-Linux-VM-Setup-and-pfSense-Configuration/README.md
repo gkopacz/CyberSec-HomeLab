@@ -32,6 +32,10 @@ This step marks the start of structured access control within the lab — enforc
 * Use of **Aliases** to manage private IP ranges efficiently
 * IPv6 traffic block rules and outbound filtering based on lab intent
 
+## 📢 Lab Design Note: WAN IP vs Diagram
+
+In my original network diagram, I had planned to assign '10.0.0.1' as the static IP for pfSense's WAN interface.
+
 # 🛠️ Setup Walkthrough
 
 I started by heading over to the [official Kali Linux download page](https://www.kali.org/get-kali/#kali-platforms) and selecting the **Installer Images** for the **x64** platform.
@@ -180,6 +184,8 @@ Now that Kali is up and running on the LAN subnet, it’s time to start enforcin
 
 I logged into the pfSense web GUI from the Kali browser at https://192.168.100.30. 
 
+> 🧠 Wondering why the WAN IP is `192.168.x.x` instead of the `10.0.0.1` in the diagram? Check the **Lab Design Note** at the top — there’s a lesson behind it.
+
 Since pfSense uses a self-signed SSL certificate, Firefox threw a warning — which I bypassed.
 
 ![pfSense Init](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense/pfSense-init.png)
@@ -211,19 +217,13 @@ Disabled **RFC1918 blocking** since my WAN IP is on a private range (from home D
 
 ![WAN RFC1918 setting](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense/pfSense-rfc1918.png)
 
----
-
 ### 🌐 LAN Network
 
 Confirmed that the **LAN interface** was set to `10.0.1.1/24` — matching the diagram and providing the subnet for my lab internal network.
 
----
-
 ### 🔑 Securing the Firewall
 
 Changed the **default admin password** to a strong passphrase.
-
----
 
 ### ✅ Finalizing Setup
 
@@ -232,8 +232,6 @@ Once complete, pfSense prompted to check for updates. I went ahead and upgraded 
 ## 7️⃣ pfSense Firewall Rules 
 
 With the interfaces and static mappings in place, I started building out access control policies for each network zones.
-
----
 
 ### 🔧 Interface Mapping & Naming
 
@@ -246,8 +244,6 @@ First, I renamed the default OPT interfaces for clarity:
 ![Interface Mapping](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense/pfSense-interfaces.png)
 
 > 💡 Naming interfaces based on function simplifies rule management and helps avoid costly mistakes in production environments.
-
----
 
 ### 🔍 Configure DNS Resolver
 
@@ -289,7 +285,7 @@ Set of rules to control outbound flow from Kali (LAN):
 
 ![LAN Rules](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense/pfSense-lan-rules.png)
 
-### 🧪 Monitoring Rules
+### 📡 Monitoring Rules
 
 I configured the `MONITORING` interface with a minimal rule set to allow inbound traffic from monitored systems.
 
@@ -325,22 +321,13 @@ With the Kali VM installed, the pfSense firewall configured, and segmented firew
 
 Each zone (LAN, AD, Monitoring, Vulnerable) is logically isolated, with communication explicitly allowed only where required.
 
-## 🧾 Lab Recap
+## ✅ Lab Recap
 
 After Day 02:
-- ✅ Attacker zone (Kali) is installed, hardened, and connected
-- ✅ pfSense is fully configured and mapped across five isolated subnets
-- ✅ Firewall rules actively enforce segmentation
-- ✅ DNS and DHCP services are optimized and verified
-
-## 🚀 What's ahead 
-
-These initial controls lay the foundation for more advanced testing in future phases — including:
-
-- Active Directory deployment
-- Attacker-victim simulations
-- Centralized logging and alerting
-- Vulnerability scanning and detection
+- Attacker zone (Kali) is installed, hardened, and connected
+- pfSense is fully configured and mapped across five isolated subnets
+- Firewall rules actively enforce segmentation
+- DNS and DHCP services are optimized and verified
 
 ## 🔜 Next Step
 
