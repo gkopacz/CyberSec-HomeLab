@@ -130,7 +130,7 @@ After selecting the packages, the system proceeded with the installation and fin
 
 Before diving into firewall configuration, I made sure the system was updated and tweaked for virtualization performance.
 
-#### 🔄 System Update
+### 🔄 System Update
 
 I started by refreshing Kali’s package list and installing updates. This ensures all tools, dependencies, and security patches are fresh out of the oven.
 
@@ -138,7 +138,7 @@ I started by refreshing Kali’s package list and installing updates. This ensur
 sudo apt update && sudo apt full-upgrade -y
 ```
 
-#### ⚙️ Kali Tweaks & Enhanced Session
+### ⚙️ Kali Tweaks & Enhanced Session
 
 Kali provides a built-in command-line tool called `kali-tweaks` that simplifies customization for various use cases, especially when running in virtualized environments.
 
@@ -149,7 +149,7 @@ sudo kali-tweaks
 I selected the following:
 - **Virtualization** → Hyper-V tools and guest enhancements
 
-#### 🖥️ Enable Enhanced Session Mode (Windows Host)
+### 🖥️ Enable Enhanced Session Mode (Windows Host)
 
 After tweaking inside the VM, I enabled Enhanced Session Mode from the **Windows host** for better usability:
 
@@ -164,7 +164,7 @@ Set-VM "Kali Linux" -EnhancedSessionTransportType HVSocket
 
 > 💡 This allows features like dynamic display scaling, better mouse handling, and clipboard between host and Kali guest.
 
-#### 🌐 Network Check
+### 🌐 Network Check
 
 Once the system was up and running, I logged into the Kali desktop and ran ifconfig.
 
@@ -190,7 +190,7 @@ After accepting the risk, I authenticated using the default admin credentials an
 
 > 💡 The default username is *admin* and password is *pfsense*
 
-#### 🧱 General Settings
+### 🧱 General Settings
 
 I gave my firewall a hostname: `pfSenseFW`  
 Domain: `home.arpa`
@@ -199,27 +199,27 @@ Domain: `home.arpa`
 
 > 💡 I left “Override DNS” **unchecked** so I could control DNS via resolver settings later.
 
-#### ⏰ Time and Region
+### ⏰ Time and Region
 
 Set the **time server** to the default and aligned timezone to `Europe/Bucharest` for consistent log timestamps.
 
 ![pfSense time](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense-timezone.png)
 
-#### 🔐 WAN Security Settings
+### 🔐 WAN Security Settings
 
 Disabled **RFC1918 blocking** since my WAN IP is on a private range (from home DHCP). Blocking this would’ve cut off my connectivity.
 
 ![WAN RFC1918 setting](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense-rfc1918.png)
 
-#### 🌐 LAN Network
+### 🌐 LAN Network
 
 Confirmed that the **LAN interface** was set to `10.0.1.1/24` — matching the diagram and providing the subnet for my lab internal network.
 
-#### 🔑 Securing the Firewall
+### 🔑 Securing the Firewall
 
 Changed the **default admin password** to a strong passphrase.
 
-#### ✅ Finalizing Setup
+### ✅ Finalizing Setup
 
 Once complete, pfSense prompted to check for updates. I went ahead and upgraded the system to the latest stable version: **pfSense CE 2.8.0**
 
@@ -247,7 +247,7 @@ I navigated to Services → DNS Resolver, scrolled down, and made sure both DHCP
 
 Then, under Advanced Settings, I confirmed that Prefetch Support and Prefetch DNS Key Support were also enabled.
 
-#### 📍 Static DHCP Reservation
+### 📍 Static DHCP Reservation
 
 To keep the Kali VM's IP consistent, I created a static DHCP mapping:
 
@@ -256,7 +256,7 @@ To keep the Kali VM's IP consistent, I created a static DHCP mapping:
 
 ![Static Mapping](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense-static-kali.png)
 
-#### 🧠 Aliases for Private IP Ranges
+### 🧠 Aliases for Private IP Ranges
 
 To simplify blocking traffic to internal networks, I created an alias named `Private_IP_Address_List` containing:
 
@@ -268,7 +268,7 @@ To simplify blocking traffic to internal networks, I created an alias named `Pri
 
 ![Alias Definition](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense-alias-private-ip.png)
 
-#### 🔒 LAN Rules 
+### 🔒 LAN Rules 
 
 Set of rules to control outbound flow from Kali (LAN):
 
@@ -279,7 +279,7 @@ Set of rules to control outbound flow from Kali (LAN):
 
 ![LAN Rules](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense-lan-rules.png)
 
-#### 🧪 Monitoring Rules
+### 🧪 Monitoring Rules
 
 I configured the `MONITORING` interface with a minimal rule set to allow inbound traffic from monitored systems.
 
@@ -288,7 +288,7 @@ I configured the `MONITORING` interface with a minimal rule set to allow inbound
 
 > 📌 This allows monitored systems to send logs and telemetry but prevents the monitoring host from initiating outbound traffic unnecessarily.
 
-#### 🛡️ AD Rules
+### 🛡️ AD Rules
 
 This subnet contains **domain controller + Windows clients**. I allowed:
 
@@ -300,7 +300,7 @@ This subnet contains **domain controller + Windows clients**. I allowed:
 
 ![AD Rules](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense-ad-rules.png)
 
-#### 🎯 Vulnerable Machines Rules
+### 🎯 Vulnerable Machines Rules
 
 Locked down the vulnerable segment to only allow interaction with Kali:
 
