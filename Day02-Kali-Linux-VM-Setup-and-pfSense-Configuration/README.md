@@ -14,23 +14,23 @@ This step marks the start of structured access control within the lab — enforc
 
 ## 🧠 Skills Demonstrated
 
-###$ 💻 OS Installation & VM Configuration
-- Manual installation of **Kali Linux 2025.2** using ISO on Hyper-V (Gen 2)
-- Hyper-V virtual hardware tuning: UEFI, Secure Boot disabled, dynamic memory
-- Enhanced Session Mode setup for improved VM usability
-- Integration with **internal virtual switch** and correct network mapping
+#### 💻 OS Installation & VM Configuration
+* Manual installation of **Kali Linux 2025.2** using ISO on Hyper-V (Gen 2)
+* Hyper-V virtual hardware tuning: UEFI, Secure Boot disabled, dynamic memory
+* Enhanced Session Mode setup for improved VM usability
+* Integration with **internal virtual switch** and correct network mapping
 
 #### 🌐 Networking & Integration
-- DHCP lease validation and **static IP reservation** in pfSense
-- DNS Resolver configuration with **prefetch optimizations**
-- Mapped internal virtual NICs across 5 custom Hyper-V switches
-- Interface renaming for clarity (OPT1 → MONITORING, etc.)
+* DHCP lease validation and **static IP reservation** in pfSense
+* DNS Resolver configuration with **prefetch optimizations**
+* Mapped internal virtual NICs across 5 custom Hyper-V switches
+* Interface renaming for clarity (OPT1 → MONITORING, etc.)
 
 #### 🔐 Firewall Engineering
-- pfSense configuration via setup wizard and web GUI
-- Creation and enforcement of firewall rules for LAN, AD, Monitoring, and Vulnerable zones
-- Use of **Aliases** to manage private IP ranges efficiently
-- IPv6 traffic block rules and outbound filtering based on lab intent
+* pfSense configuration via setup wizard and web GUI
+* Creation and enforcement of firewall rules for LAN, AD, Monitoring, and Vulnerable zones
+* Use of **Aliases** to manage private IP ranges efficiently
+* IPv6 traffic block rules and outbound filtering based on lab intent
 
 # 🛠️ Setup Walkthrough
 
