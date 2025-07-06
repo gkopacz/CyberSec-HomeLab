@@ -7,19 +7,30 @@
 
 ## 🎯 Objective
 
-Manually install and configure Kali Linux 2025.2 on Hyper-V, integrate it into a segmented lab network, and deploy a pfSense firewall as the lab’s perimeter gateway. Complete initial configuration of pfSense and implement access control rules to enforce traffic segmentation between internal lab zones (Kali, AD, Monitoring, Vulnerable Machines). This marks the beginning of structured traffic enforcement and internal network isolation.
+Install and configure **Kali Linux 2025.2** on Hyper-V and connect it to the lab’s segmented LAN subnet.  
+Access the **pfSense firewall** from the Kali VM, complete its initial setup, and begin implementing firewall rules to control traffic between internal zones.
+
+This step marks the start of structured access control within the lab — enforcing segmentation between attacker, AD, monitoring, and vulnerable environments.
 
 ## 🧠 Skills Demonstrated
 
-- Manual installation of **Kali Linux 2025.2** using ISO on Hyper-V Gen 2 VM
-- Hyper-V virtual hardware configuration (Gen2, UEFI, NIC assignment)  
-- Integration of Kali VM with isolated lab subnet via internal switch  
-- Static IP and DHCP reservation strategy for predictable host identity
-- Configuration of pfSense via web GUI and setup wizard
-- Assignment and segmentation of internal virtual NICs across 5 custom Hyper-V virtual switches
-- Creation and application of firewall rules for LAN, AD, Monitoring, and Vulnerable segments
-- Use of pfSense Aliases for scalable rule control over internal network ranges
-- DNS Resolver configuration and prefetch optimizations for internal DNS handling
+###$ 💻 OS Installation & VM Configuration
+- Manual installation of **Kali Linux 2025.2** using ISO on Hyper-V (Gen 2)
+- Hyper-V virtual hardware tuning: UEFI, Secure Boot disabled, dynamic memory
+- Enhanced Session Mode setup for improved VM usability
+- Integration with **internal virtual switch** and correct network mapping
+
+#### 🌐 Networking & Integration
+- DHCP lease validation and **static IP reservation** in pfSense
+- DNS Resolver configuration with **prefetch optimizations**
+- Mapped internal virtual NICs across 5 custom Hyper-V switches
+- Interface renaming for clarity (OPT1 → MONITORING, etc.)
+
+#### 🔐 Firewall Engineering
+- pfSense configuration via setup wizard and web GUI
+- Creation and enforcement of firewall rules for LAN, AD, Monitoring, and Vulnerable zones
+- Use of **Aliases** to manage private IP ranges efficiently
+- IPv6 traffic block rules and outbound filtering based on lab intent
 
 # 🛠️ Setup Walkthrough
 
@@ -214,7 +225,7 @@ Once complete, pfSense prompted to check for updates. I went ahead and upgraded 
 
 ## 7️⃣ pfSense Firewall Rules 
 
-With the interfaces and static mappings in place, I started building out access control policies between zones.
+With the interfaces and static mappings in place, I started building out access control policies for each network zones.
 
 #### 🔧 Interface Mapping & Naming
 
@@ -261,10 +272,10 @@ To simplify blocking traffic to internal networks, I created an alias named `Pri
 
 Set of rules to control outbound flow from Kali (LAN):
 
-- ✅ Allow HTTPS to pfSense for GUI
-- ❌ Block all access to WAN network (home-LAN)
-- ✅ Allow general internet access
-- ❌ Block all IPv6 traffic (optional but preferred in labs)
+- ✅ Allow HTTPS (443) to pfSense GUI
+- ✅ Allow general internet access (web, updates)
+- ❌ Block all access to the host (WAN subnet)
+- ❌ Block all IPv6 traffic (lab-wide policy)
 
 ![LAN Rules](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/pfSense-lan-rules.png)
 
@@ -275,11 +286,11 @@ I configured the `MONITORING` interface with a minimal rule set to allow inbound
 - ✅ Allow connections from all internal lab zones to the Monitoring VM (open inbound)
 - ❌ Deny everything else by default (implicit block via pfSense rule logic)
 
-> 📌 This permissive setup is intentional for early lab phases. I’ll tighten these rules later once monitoring pipelines are confirmed stable.
+> 📌 This allows monitored systems to send logs and telemetry but prevents the monitoring host from initiating outbound traffic unnecessarily.
 
 #### 🛡️ AD Rules
 
-Rules for controlling AD VM's communication:
+This subnet contains **domain controller + Windows clients**. I allowed:
 
 - ✅ Allow data to MONITORING subnet
 - ✅ Allow AD to connect to pfSense gateway
@@ -304,7 +315,17 @@ With the Kali VM installed, the pfSense firewall configured, and segmented firew
 
 Each zone (LAN, AD, Monitoring, Vulnerable) is logically isolated, with communication explicitly allowed only where required.
 
-🚀 These initial controls lay the foundation for more advanced testing in future phases — including:
+## 🧾 Lab Recap
+
+After Day 02:
+- ✅ Attacker zone (Kali) is installed, hardened, and connected
+- ✅ pfSense is fully configured and mapped across five isolated subnets
+- ✅ Firewall rules actively enforce segmentation
+- ✅ DNS and DHCP services are optimized and verified
+
+## 🚀 What's ahead 
+
+These initial controls lay the foundation for more advanced testing in future phases — including:
 
 - Active Directory deployment
 - Attacker-victim simulations
