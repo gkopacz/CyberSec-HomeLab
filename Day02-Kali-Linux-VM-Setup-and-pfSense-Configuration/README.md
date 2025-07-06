@@ -57,7 +57,7 @@ I created a new virtual machine in **Hyper‑V Manager** using the following con
 
 Once the VM was created, I attached the **Kali Linux 2025.2 ISO** to the virtual DVD drive and adjusted the boot order so the system would boot directly into the installer.
 
-![Kali VM Settings](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM-Settings.png)
+![Kali VM Settings](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM/Kali-VM-Settings.png)
 
 > 💡 I chose **Generation 2** for UEFI support, modern hardware emulation, and better compatibility with virtualization features like dynamic memory allocation. Make sure to disable **Secure Boot**, as Kali doesn’t support the default Microsoft boot keys.
 
@@ -65,7 +65,7 @@ Once the VM was created, I attached the **Kali Linux 2025.2 ISO** to the virtual
 
 After attaching the **kali-linux-2025.2-installer-amd64.iso** to the virtual DVD drive, I booted the VM and selected the **Graphical install** option.
 
-![Graphical Install](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM-Install.png)
+![Graphical Install](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM/Kali-VM-Install.png)
 
 During the initial setup, I configured the following:
 - **Language:** English
@@ -85,29 +85,29 @@ Next, I created a **non-root user** to follow best practices and set a strong pa
 
 I named the account `g0bl1n` 🧟 — because every lab needs a little chaos in a hoodie.
 
-![User](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM-username.png)
+![User](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM/Kali-VM-username.png)
 
 ## 3️⃣ Partitioning the Disk
 
 For the partitioning scheme, I went with **Guided - use entire disk**.
 
-![Partition Method](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM-partition-guided.png)
+![Partition Method](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM/Kali-VM-partition-guided.png)
 
 When asked about the partition disk, I chose the default virtual disk provided during the install process.
 
-![Disk Select](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM-partition-disk.png)
+![Disk Select](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM/Kali-VM-partition-disk.png)
 
 Then, for simplicity and easier management inside the VM, I went with **All files in one partition**.
 
-![All-in-one Partition](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM-partition-disk-full.png)
+![All-in-one Partition](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM/Kali-VM-partition-disk-full.png)
 
 Here’s the partition summary before writing changes to disk.
 
-![Partition Overview](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM-partition-overview.png)
+![Partition Overview](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM/Kali-VM-partition-overview.png)
 
 I confirmed the changes and wrote them to disk.
 
-![Confirm Disk Write](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM-partition-format.png)
+![Confirm Disk Write](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM/Kali-VM-partition-format.png)
 
 ## 4️⃣ Software Selection & Package Install
 
@@ -118,13 +118,13 @@ I chose:
 - **Top 10 Tools:** Predefined list of essential Kali tools
 - **Default tools:** Recommended packages for general use
 
-![Desktop Selection](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM-default-desktop.png)
+![Desktop Selection](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM/Kali-VM-default-desktop.png)
 
 > 💡 I went with XFCE because it runs smoothly inside a VM with modest resources. It’s snappy, stable, and gets the job done without bloat.
 
 After selecting the packages, the system proceeded with the installation and finished with GRUB setup and final config.
 
-![Desktop Selection](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM-install-software.png)
+![Desktop Selection](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM/Kali-VM-install-software.png)
 
 ## 5️⃣ Post-Install System Prep
 
@@ -170,7 +170,7 @@ Once the system was up and running, I logged into the Kali desktop and ran ifcon
 
 The Kali VM received a dynamic IP address from the pfSense DHCP server (10.0.1.101) — exactly as expected for the LAN subnet (10.0.1.0/24).
 
-![Desktop and ping](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM-network.png)
+![Desktop and ping](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Kali-VM/Kali-VM-network.png)
 
 > 📌 To align with my original network diagram and keep things tidy, I’ll create a DHCP reservation in pfSense for the Kali VM so it always gets the IP address 10.0.1.47.
 
