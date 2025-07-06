@@ -32,7 +32,7 @@ This step marks the start of structured access control within the lab — enforc
 * Use of **Aliases** to manage private IP ranges efficiently
 * IPv6 traffic block rules and outbound filtering based on lab intent
 
-## 📢 Lab Design Note: WAN IP vs Diagram
+## 📢 Lab Design Note: WAN IP vs Diagram (lesson learned)
 
 In my original network diagram, I had planned to assign `10.0.0.1` as the static IP for pfSense's WAN interface.
 
