@@ -227,7 +227,7 @@ Once complete, pfSense prompted to check for updates. I went ahead and upgraded 
 
 With the interfaces and static mappings in place, I started building out access control policies for each network zones.
 
-#### 🔧 Interface Mapping & Naming
+### 🔧 Interface Mapping & Naming
 
 First, I renamed the default OPT interfaces for clarity:
 
@@ -239,7 +239,7 @@ First, I renamed the default OPT interfaces for clarity:
 
 > 💡 Naming interfaces based on function simplifies rule management and helps avoid costly mistakes in production environments.
 
-#### 🔍 Configure DNS Resolver
+### 🔍 Configure DNS Resolver
 
 I navigated to Services → DNS Resolver, scrolled down, and made sure both DHCP Registration and Static DHCP were enabled (checked).
 
