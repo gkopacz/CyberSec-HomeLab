@@ -1,7 +1,7 @@
 # 🗄️ Day 03 — Active Directory Deployment & Domain Join
 
 ![Platform](https://img.shields.io/badge/platform-HyperV-blue?logo=windows)
-![OS](https://img.shields.io/badge/Windows%20Server-2022-lightgrey?logo=windows)
+![OS](https://img.shields.io/badge/Windows%20Server-2019-lightgrey?logo=windows)
 ![Status](https://img.shields.io/badge/status-in--progress-yellow)
 
 ## 🎯 Objective
@@ -10,7 +10,7 @@ Deploy a **Windows Server 2019** VM on the `AD` subnet and promote it to a **Dom
 
 ## 🧠 Skills Demonstrated
 
-- Windows Server 2022 installation and Hyper-V VM config
+- Windows Server 2019 installation and Hyper-V VM config
 - Promoting a standalone server to an AD DS domain controller
 - Installing and configuring DNS and optionally DHCP
 - Creating a new AD forest and domain (e.g., `lab.local`)
@@ -32,7 +32,7 @@ In **Hyper-V Manager**, I created a new Gen 2 virtual machine:
 | **Disk**      | 60 GB (Dynamically Expanding)   |
 | **NIC**       | Internal switch (AD subnet)     |
 
-I mounted the Windows Server 2022 ISO and booted into setup. After completing the OS installation, I renamed the server and applied updates.
+I mounted the Windows Server 2019 ISO and booted into setup. After completing the OS installation, I renamed the server and applied updates.
 
 > 💡 Make sure the VM gets an IP from the AD subnet (via pfSense or DHCP on DC later).
 
