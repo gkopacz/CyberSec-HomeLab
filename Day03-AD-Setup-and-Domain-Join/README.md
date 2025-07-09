@@ -2,6 +2,8 @@
 
 ![Platform](https://img.shields.io/badge/platform-HyperV-blue?logo=windows)
 ![OS](https://img.shields.io/badge/Windows%20Server-2019-lightgrey?logo=windows)
+![Client1](https://img.shields.io/badge/Windows%2010-blue?logo=windows)
+![Client2](https://img.shields.io/badge/Windows%2011-blueviolet?logo=windows)
 ![Status](https://img.shields.io/badge/status-in--progress-yellow)
 
 ## 🎯 Objective
@@ -23,7 +25,7 @@ Deploy a **Windows Server 2019** VM in the `AD` subnet and promote it to a **Dom
 
 The Windows Server 2019 machine will serve as the backbone of the Active Directory (AD) zone in my lab. Deployed as a virtual machine on Hyper-V, it will be promoted to a Domain Controller, provide DNS and DHCP (for the AD subnet), and eventually manage user/group policies and domain authentication for Windows clients.
 
-I started by downloading the Windows Server 2019 ISO from the official Microsoft Evaluation Center: 🔗 Download Windows Server 2019
+I started by downloading the Windows Server 2019 ISO from the official Microsoft Evaluation Center: 🔗 [Download Windows Server 2019](https://www.microsoft.com/en-in/evalcenter/evaluate-windows-server-2019)
 
 ### 1️⃣ Create the Windows Server VM
 
