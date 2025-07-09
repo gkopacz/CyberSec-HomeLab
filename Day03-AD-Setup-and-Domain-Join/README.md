@@ -6,18 +6,24 @@
 
 ## 🎯 Objective
 
-Deploy a **Windows Server 2019** VM on the `AD` subnet and promote it to a **Domain Controller**. Configure DNS and optionally DHCP services. Join a Windows 10/11 client to the domain. This establishes centralized identity management and paves the way for future GPO testing, authentication logging, and privilege escalation simulation.
+Deploy a **Windows Server 2019** VM in the `AD` subnet and promote it to a **Domain Controller**. Set up **Active Directory**, configure **DNS**, and enable **DHCP** for the subnet. Join Windows clients to the new domain to validate identity management and directory-based authentication. This lays the foundation for centralized access control, Group Policy testing, and future detection engineering scenarios.
+
 
 ## 🧠 Skills Demonstrated
 
-- Windows Server 2019 installation and Hyper-V VM config
-- Promoting a standalone server to an AD DS domain controller
-- Installing and configuring DNS and optionally DHCP
-- Creating a new AD forest and domain (e.g., `lab.local`)
-- Joining a Windows client to Active Directory
-- Validating domain services (DNS resolution, authentication, tools)
+- Deployment of **Windows Server 2019** on Hyper-V with Gen 2 settings  
+- Promotion of standalone server to **Active Directory Domain Services (AD DS)**  
+- Configuration of **DNS Server** for internal name resolution  
+- (Optional) Setup of **DHCP Server** for automated IP assignment in the AD zone  
+- Creation of an **Active Directory forest and domain** (e.g., `lab.local`)  
+- Domain join of Windows 10 and 11 clients and login validation  
+- Basic troubleshooting of domain-related connectivity and authentication issues
 
 ## 🛠️ Setup Walkthrough
+
+The Windows Server 2019 machine will serve as the backbone of the Active Directory (AD) zone in my lab. Deployed as a virtual machine on Hyper-V, it will be promoted to a Domain Controller, provide DNS and DHCP (for the AD subnet), and eventually manage user/group policies and domain authentication for Windows clients.
+
+I started by downloading the Windows Server 2019 ISO from the official Microsoft Evaluation Center: 🔗 Download Windows Server 2019
 
 ### 1️⃣ Create the Windows Server VM
 
