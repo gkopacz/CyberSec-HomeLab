@@ -31,18 +31,26 @@ I started by downloading the Windows Server 2019 ISO from the official Microsoft
 
 In **Hyper-V Manager**, I created a new Gen 2 virtual machine:
 
-| Setting       | Value                          |
+| Setting       | Value                           |
 |---------------|---------------------------------|
-| **Name**      | DC-WinServer                   |
+| **Name**      | DC01-WinServer2019              |
 | **Generation**| Gen 2 (UEFI, Secure Boot off)   |
 | **CPU**       | 2 vCPU                          |
 | **Memory**    | 4 GB (Dynamic)                  |
 | **Disk**      | 60 GB (Dynamically Expanding)   |
 | **NIC**       | Internal switch (AD subnet)     |
 
-I mounted the Windows Server 2019 ISO and booted into setup. After completing the OS installation, I renamed the server and applied updates.
+I mounted the **Windows Server 2019 ISO** in the virtual DVD drive of the Hyper‑V VM and powered it on.  
 
-> 💡 Make sure the VM gets an IP from the AD subnet (via pfSense or DHCP on DC later).
+To ensure a smooth install, I reviewed and adjusted the **boot order** in the VM settings:
+
+1. **DVD Drive** (for ISO boot)
+2. **Hard Drive** (for post-install boots)
+3. **Network Adapter** (PXE boot — left last)
+
+> 💡 Setting the correct boot sequence avoids boot loops and ensures the OS installer launches on first boot.
+
+Once installation is complete, I’ll remove the **DVD drive** from the VM to prevent accidental reboots into the installer.
 
 ### 2️⃣ Promote to Domain Controller
 
