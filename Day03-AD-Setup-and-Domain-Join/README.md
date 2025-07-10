@@ -40,6 +40,8 @@ In **Hyper-V Manager**, I created a new Gen 2 virtual machine:
 | **Disk**      | 60 GB (Dynamically Expanding)   |
 | **NIC**       | Internal switch (AD subnet)     |
 
+### 2️⃣ Installing Windows Server 2019
+
 I mounted the **Windows Server 2019 ISO** in the virtual DVD drive of the Hyper‑V VM and powered it on.  
 
 To ensure a smooth install, I reviewed and adjusted the **boot order** in the VM settings:
@@ -52,34 +54,123 @@ To ensure a smooth install, I reviewed and adjusted the **boot order** in the VM
 
 Once installation is complete, I’ll remove the **DVD drive** from the VM to prevent accidental reboots into the installer.
 
-### 2️⃣ Promote to Domain Controller
+#### 🗣️ Language & Keyboard
 
-#### a. Add AD DS Role:
-- Launch **Server Manager** → `Add Roles and Features`
-- Enable: 
-  - Active Directory Domain Services
-  - DNS Server
-  - (Optional) DHCP Server
+Selected the default options:
 
-#### b. Promote the Server:
-- Click `Promote this server to a domain controller`
-- Create a new forest: `lab.local`
-- Set DSRM password (Directory Services Restore Mode)
-- Accept default paths and install
+  * Language: English (United States)
+  * Time and currency: English (United States)
+  * Keyboard: US
 
-> 💡 The system will reboot after promotion. Once done, your server is now a DC!
+#### 📦 Choose Edition
 
-### 3️⃣ Optional: Configure DHCP on DC
+During setup, I was prompted to select the Windows Server edition. I went with:
 
-If you want the DC to manage DHCP for the `AD` subnet:
+> **Windows Server 2019 Datacenter Evaluation (Desktop Experience)**
+
+![Choose Edition](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/2.%20WinSrv-OS-version.png)
+
+Why Datacenter?
+
+- It's better optimized for **Hyper-V environments**.
+- It includes advanced features like **Shielded VMs**, **Storage Spaces Direct**, and **Software-Defined Networking**, which may come in handy in future lab phases.
+
+> 📚 Microsoft provides a full breakdown of **Standard vs Datacenter** features [here](https://learn.microsoft.com/en-us/windows-server/get-started/editions-comparison?pivots=windows-server-2019&tabs=full-comparison).
+
+For a homelab, either edition works — but Datacenter ensures maximum compatibility with virtualization tasks and gives you flexibility down the line.
+
+#### 🔧 Install Type
+
+I selected **Custom: Install Windows only (Advanced)** to perform a clean, manual installation.
+
+This option allowed me to partition the virtual disk from scratch and ensured no pre-installed roles or features were added — ideal for a domain controller build where I want full control over each configuration step.
+
+#### 💽 Disk Partition
+
+During setup, I clicked **New** and allocated the entire **60 GB** of virtual disk space to a single **primary partition**, then hit **Apply**.
+
+![Disk_Partition_size](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/2.%20WinSrv-OS-version.png)
+
+Once the partition table was created, I selected the primary partition and continued with installation.
+
+![Disk_Partition](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/2.%20WinSrv-OS-version.png)
+
+#### 🔑 Administrator Password Setup
+
+After installation completed, I was prompted to set a password for the **built-in Administrator** account.
+
+I chose a strong, complex password that meets Active Directory best practices.
+
+### 3️⃣ Initial Network Configuration
+
+After logging in to the newly installed **Windows Server 2019** VM, I launched **Server Manager** to perform initial configuration steps.
+
+#### 🖥️ Rename the Host
+
+By default, Windows assigns a random hostname. I renamed it to something meaningful:
+
+- **Old Name:** WIN-XXXXXXXXXX  
+- **New Name:** `DC01`
+
+To rename the server, I opened Server Manager, clicked on Local Server, and selected the Computer Name field. From there, I hit Change, entered `DC01` as the new name, and rebooted when prompted.
+
+![Hostname](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/2.%20WinSrv-OS-version.png)
+
+#### 🌐 Configure Static IP Address
+
+Since I planned to handle DHCP at the Windows Server level, I didn’t configure DHCP on pfSense for the AD subnet. Instead, I manually assigned a static IP address to the domain controller during initial setup to ensure stability for DNS and future domain operations.
+
+Steps:
+1. Go to **Control Panel** → **Network and Sharing Center**
+2. Click **Change adapter settings**
+3. Right-click **Ethernet adapter** → **Properties**
+4. Select **Internet Protocol Version 4 (TCP/IPv4)** → **Properties**
+5. Configure:
+   - IP Address: `10.0.3.9`
+   - Subnet Mask: `255.255.255.0`
+   - Default Gateway: `10.0.3.1` 
+   - Preferred DNS: `10.0.3.9` (this server will run DNS after domain promotion)
+
+> 💡 Assigning a static IP ensures domain services remain accessible and clients can reliably resolve and contact the domain controller.
+
+![IP_Address](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/2.%20WinSrv-OS-version.png)
+
+### 4️⃣ Install AD DS, DNS & DHCP Roles
+
+I launched **Server Manager** and selected **Add Roles and Features**, then enabled the following:
+
+- **Active Directory Domain Services (AD DS)**
+- **DNS Server**
+- **DHCP Server**
+
+This prepares the server to become a fully functional domain controller.
+
+#### 🏰 Promote the Server to Domain Controller
+
+After installation, a yellow warning icon appeared in Server Manager — I clicked **"Promote this server to a domain controller"**.
+
+I selected:
+
+- **Add a new forest**
+- Root domain name: `lab.local`
+- Set a strong **DSRM password** (used for Directory Services recovery)
+- Kept default paths for database, logs, and SYSVOL
+
+> 💡 After completing the wizard, the system automatically rebooted. Once it came back online, the server was now an official **Domain Controller**.
+
+### 5️⃣ Configure Static IP & DNS on the Domain Controller
+
+
+### 6️⃣ Configure DHCP on DC
 
 - Create a new IPv4 scope in **DHCP Manager**
 - Define IP range (e.g., `10.0.2.100 - 10.0.2.200`)
 - Set DNS server to `10.0.2.1` (DC IP)
 - Activate scope
-- On pfSense: Disable DHCP for the AD interface to avoid conflict
 
-### 4️⃣ Windows Client Setup & Domain Join
+> 💡 On pfSense: make sure DHCP is disabled for the AD interface to avoid conflict
+
+### 7️⃣ Windows Client Setup & Domain Join
 
 I spun up a **Windows 10 Pro** VM in Hyper-V:
 
