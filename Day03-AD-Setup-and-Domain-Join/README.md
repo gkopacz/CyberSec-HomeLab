@@ -27,7 +27,7 @@ The Windows Server 2019 machine will serve as the backbone of the Active Directo
 
 I started by downloading the Windows Server 2019 ISO from the official Microsoft Evaluation Center: 🔗 [Download Windows Server 2019](https://www.microsoft.com/en-in/evalcenter/evaluate-windows-server-2019)
 
-### 1️⃣ Create the Windows Server VM
+## 1️⃣ Create the Windows Server VM
 
 In **Hyper-V Manager**, I created a new Gen 2 virtual machine:
 
@@ -40,7 +40,7 @@ In **Hyper-V Manager**, I created a new Gen 2 virtual machine:
 | **Disk**      | 60 GB (Dynamically Expanding)   |
 | **NIC**       | Internal switch (AD subnet)     |
 
-### 2️⃣ Installing Windows Server 2019
+## 2️⃣ Installing Windows Server 2019
 
 I mounted the **Windows Server 2019 ISO** in the virtual DVD drive of the Hyper‑V VM and powered it on.  
 
@@ -54,7 +54,7 @@ To ensure a smooth install, I reviewed and adjusted the **boot order** in the VM
 
 Once installation is complete, I’ll remove the **DVD drive** from the VM to prevent accidental reboots into the installer.
 
-#### 🗣️ Language & Keyboard
+### 🗣️ Language & Keyboard
 
 Selected the default options:
 
@@ -62,7 +62,7 @@ Selected the default options:
   * Time and currency: English (United States)
   * Keyboard: US
 
-#### 📦 Choose Edition
+### 📦 Choose Edition
 
 During setup, I was prompted to select the Windows Server edition. I went with:
 
@@ -79,13 +79,13 @@ Why Datacenter?
 
 For a homelab, either edition works — but Datacenter ensures maximum compatibility with virtualization tasks and gives you flexibility down the line.
 
-#### 🔧 Install Type
+### 🔧 Install Type
 
 I selected **Custom: Install Windows only (Advanced)** to perform a clean, manual installation.
 
 This option allowed me to partition the virtual disk from scratch and ensured no pre-installed roles or features were added — ideal for a domain controller build where I want full control over each configuration step.
 
-#### 💽 Disk Partition
+### 💽 Disk Partition
 
 During setup, I clicked **New** and allocated the entire **60 GB** of virtual disk space to a single **primary partition**, then hit **Apply**.
 
@@ -95,17 +95,17 @@ Once the partition table was created, I selected the primary partition and conti
 
 ![Disk_Partition](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-Disk-Partition-done.png)
 
-#### 🔑 Administrator Password Setup
+### 🔑 Administrator Password Setup
 
 After installation completed, I was prompted to set a password for the **built-in Administrator** account.
 
 I chose a strong, complex password that meets Active Directory best practices.
 
-### 3️⃣ Initial Network Configuration
+## 3️⃣ Initial Network Configuration
 
 After logging in to the newly installed **Windows Server 2019** VM, I launched **Server Manager** to perform initial configuration steps.
 
-#### 🖥️ Rename the Host
+### 🖥️ Rename the Host
 
 By default, Windows assigns a random hostname. I renamed it to something meaningful:
 
@@ -116,7 +116,7 @@ To rename the server, I opened Server Manager, clicked on Local Server, and sele
 
 ![Hostname](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-hostname.png)
 
-#### 🌐 Configure Static IP Address
+### 🌐 Configure Static IP Address
 
 Since I planned to handle DHCP at the Windows Server level, I didn’t configure DHCP on pfSense for the AD subnet. Instead, I manually assigned a static IP address to the domain controller during initial setup to ensure stability for DNS and future domain operations.
 
@@ -135,7 +135,7 @@ Steps:
 
 > 💡 Assigning a static IP ensures domain services remain accessible and clients can reliably resolve and contact the domain controller.
 
-### 4️⃣ Install AD DS, DNS & DHCP Roles
+## 4️⃣ Install AD DS, DNS & DHCP Roles
 
 I launched **Server Manager**, then navigated to:
 
@@ -154,7 +154,7 @@ From there, I followed these steps:
 
 > 💡 This preps the server with the necessary components to become a fully functional **Domain Controller**.
 
-#### 🏰 Promote the Server to Domain Controller
+### 🏰 Promote the Server to Domain Controller
 
 Once the roles were installed, I went back to **Server Manager** and clicked the **flag icon** in the top-right corner. From there, I selected **Promote this server to a domain controller**.
 
@@ -189,10 +189,10 @@ Here’s how I handled the wizard:
 
 > 💡 After completing the wizard, the system automatically rebooted. Once it came back online, the server was now an official **Domain Controller** for `adlab.local`.
 
-### 5️⃣ Configure DNS on the Domain Controller
+## 5️⃣ Configure DNS on the Domain Controller
 
 
-### 6️⃣ Configure DHCP on DC
+## 6️⃣ Configure DHCP on DC
 
 - Create a new IPv4 scope in **DHCP Manager**
 - Define IP range (e.g., `10.0.2.100 - 10.0.2.200`)
@@ -201,7 +201,7 @@ Here’s how I handled the wizard:
 
 > 💡 On pfSense: make sure DHCP is disabled for the AD interface to avoid conflict
 
-### 7️⃣ Windows Client Setup & Domain Join
+## 7️⃣ Windows Client Setup & Domain Join
 
 I spun up a **Windows 10 Pro** VM in Hyper-V:
 
@@ -211,7 +211,7 @@ I spun up a **Windows 10 Pro** VM in Hyper-V:
 - Joined `lab.local` using AD credentials
 - Rebooted and logged in as domain user
 
-### ✅ Validation
+## ✅ Validation
 
 - `ipconfig /all` shows DNS = DC IP
 - `ping dc.lab.local` resolves successfully
