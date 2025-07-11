@@ -17,7 +17,7 @@ Deploy a **Windows Server 2019** VM in the `AD` subnet and promote it to a **Dom
 - Promotion of standalone server to **Active Directory Domain Services (AD DS)**  
 - Configuration of **DNS Server** for internal name resolution  
 - (Optional) Setup of **DHCP Server** for automated IP assignment in the AD zone  
-- Creation of an **Active Directory forest and domain** (e.g., `lab.local`)  
+- Creation of an **Active Directory forest and domain** (e.g., `adlab.local`)  
 - Domain join of Windows 10 and 11 clients and login validation  
 - Basic troubleshooting of domain-related connectivity and authentication issues
 
@@ -137,28 +137,59 @@ Steps:
 
 ### 4️⃣ Install AD DS, DNS & DHCP Roles
 
-I launched **Server Manager** and selected **Add Roles and Features**, then enabled the following:
+I launched **Server Manager**, then navigated to:
 
-- **Active Directory Domain Services (AD DS)**
-- **DNS Server**
-- **DHCP Server**
+**Start Menu** → **Server Manager** → **Manage** → **Add Roles and Features**
 
-This prepares the server to become a fully functional domain controller.
+From there, I followed these steps:
+
+1. **Installation Type:** Chose `Role-based or feature-based installation` and clicked **Next**
+2. **Server Selection:** Confirmed `Select a server from the server pool` was selected — my server (`DC01`) was auto-selected
+3. **Server Roles:** Enabled the following:
+   - **Active Directory Domain Services (AD DS)**
+   - **DNS Server**
+   - **DHCP Server**
+  
+![Server_Roles](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-server-roles.png)
+
+> 💡 This preps the server with the necessary components to become a fully functional **Domain Controller**.
 
 #### 🏰 Promote the Server to Domain Controller
 
-After installation, a yellow warning icon appeared in Server Manager — I clicked **"Promote this server to a domain controller"**.
+Once the roles were installed, I went back to **Server Manager** and clicked the **flag icon** in the top-right corner. From there, I selected **Promote this server to a domain controller**.
 
-I selected:
+Here’s how I handled the wizard:
 
-- **Add a new forest**
-- Root domain name: `lab.local`
-- Set a strong **DSRM password** (used for Directory Services recovery)
-- Kept default paths for database, logs, and SYSVOL
+1. **Deployment Configuration:**  
 
-> 💡 After completing the wizard, the system automatically rebooted. Once it came back online, the server was now an official **Domain Controller**.
+   Selected `Add a new forest` and set the **root domain name** to `adlab.local`
 
-### 5️⃣ Configure Static IP & DNS on the Domain Controller
+![Server_Roles](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-promote-dc.png)
+
+2. **Domain Controller Options:**  
+
+   Kept the default selections (Domain Name System (DNS) server, Global Catalog, etc.)  
+   Set a strong **DSRM (Directory Services Restore Mode)** password
+
+![Server_Roles](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-dsrm-pwd.png)
+
+3. **DNS Options:**  
+
+   Left everything as default and hit **Next**
+
+4. **Additional Pages:**  
+
+   Accepted the default **NetBIOS name**, **paths**, and skipped any extra configuration
+
+5. **Prerequisites Check:**  
+
+   Waited for the check to complete successfully, then clicked **Install**
+
+![Server_Roles](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-pre-check.png)
+
+> 💡 After completing the wizard, the system automatically rebooted. Once it came back online, the server was now an official **Domain Controller** for `adlab.local`.
+
+### 5️⃣ Configure DNS on the Domain Controller
 
 
 ### 6️⃣ Configure DHCP on DC
