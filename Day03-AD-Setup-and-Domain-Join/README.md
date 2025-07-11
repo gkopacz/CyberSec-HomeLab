@@ -227,13 +227,13 @@ I spun up a **Windows 10 Pro** VM in Hyper-V:
 - Assigned NIC to the AD internal switch
 - Installed updates & renamed machine
 - Opened `System Properties` → `Domain Join`
-- Joined `lab.local` using AD credentials
+- Joined `adlab.local` using AD credentials
 - Rebooted and logged in as domain user
 
 ## ✅ Validation
 
 - `ipconfig /all` shows DNS = DC IP
-- `ping dc.lab.local` resolves successfully
+- `ping dc.adlab.local` resolves successfully
 - Logged in with domain credentials
 - Accessed `Active Directory Users & Computers`
 - Created test user & OU structure
