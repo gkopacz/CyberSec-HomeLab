@@ -114,7 +114,7 @@ By default, Windows assigns a random hostname. I renamed it to something meaning
 
 To rename the server, I opened Server Manager, clicked on Local Server, and selected the Computer Name field. From there, I hit Change, entered `DC01` as the new name, and rebooted when prompted.
 
-![Hostname](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/2.%20WinSrv-OS-version.png)
+![Hostname](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-hostname.png)
 
 #### 🌐 Configure Static IP Address
 
@@ -133,7 +133,7 @@ Steps:
 
 > 💡 Assigning a static IP ensures domain services remain accessible and clients can reliably resolve and contact the domain controller.
 
-![IP_Address](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/2.%20WinSrv-OS-version.png)
+![IP_Address](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-static-ip.png)
 
 ### 4️⃣ Install AD DS, DNS & DHCP Roles
 
