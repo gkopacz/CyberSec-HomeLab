@@ -21,7 +21,7 @@ Deploy a **Windows Server 2019** VM in the `AD` subnet and promote it to a **Dom
 - Domain join of Windows 10 and 11 clients and login validation  
 - Basic troubleshooting of domain-related connectivity and authentication issues
 
-## 🛠️ Setup Walkthrough
+# 🛠️ Setup Walkthrough
 
 The Windows Server 2019 machine will serve as the backbone of the Active Directory (AD) zone in my lab. Deployed as a virtual machine on Hyper-V, it will be promoted to a Domain Controller, provide DNS and DHCP (for the AD subnet), and eventually manage user/group policies and domain authentication for Windows clients.
 
