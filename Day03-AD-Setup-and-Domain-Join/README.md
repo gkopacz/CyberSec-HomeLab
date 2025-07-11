@@ -131,9 +131,9 @@ Steps:
    - Default Gateway: `10.0.3.1` 
    - Preferred DNS: `10.0.3.9` (this server will run DNS after domain promotion)
 
-> 💡 Assigning a static IP ensures domain services remain accessible and clients can reliably resolve and contact the domain controller.
-
 ![IP_Address](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-static-ip.png)
+
+> 💡 Assigning a static IP ensures domain services remain accessible and clients can reliably resolve and contact the domain controller.
 
 ### 4️⃣ Install AD DS, DNS & DHCP Roles
 
