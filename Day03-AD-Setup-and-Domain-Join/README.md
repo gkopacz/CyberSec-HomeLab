@@ -75,9 +75,9 @@ Why Datacenter?
 - It's better optimized for **Hyper-V environments**.
 - It includes advanced features like **Shielded VMs**, **Storage Spaces Direct**, and **Software-Defined Networking**, which may come in handy in future lab phases.
 
-> 📚 Microsoft provides a full breakdown of **Standard vs Datacenter** features [here](https://learn.microsoft.com/en-us/windows-server/get-started/editions-comparison?pivots=windows-server-2019&tabs=full-comparison).
-
 For a homelab, either edition works — but Datacenter ensures maximum compatibility with virtualization tasks and gives you flexibility down the line.
+
+> 📚 Microsoft provides a full breakdown of **Standard vs Datacenter** features [here](https://learn.microsoft.com/en-us/windows-server/get-started/editions-comparison?pivots=windows-server-2019&tabs=full-comparison).
 
 ### 🔧 Install Type
 
@@ -160,28 +160,28 @@ Once the roles were installed, I went back to **Server Manager** and clicked the
 
 Here’s how I handled the wizard:
 
-1. **Deployment Configuration:**  
+### 🧱 **Deployment Configuration:**  
 
    Selected `Add a new forest` and set the **root domain name** to `adlab.local`
 
 ![Server_Roles](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-promote-dc.png)
 
-2. **Domain Controller Options:**  
+### 🔐 **Domain Controller Options:**  
 
    Kept the default selections (Domain Name System (DNS) server, Global Catalog, etc.)  
    Set a strong **DSRM (Directory Services Restore Mode)** password
 
 ![Server_Roles](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-dsrm-pwd.png)
 
-3. **DNS Options:**  
+### 🧭 **DNS Options:**  
 
    Left everything as default and hit **Next**
 
-4. **Additional Pages:**  
+### 📂 **Additional Pages:**  
 
    Accepted the default **NetBIOS name**, **paths**, and skipped any extra configuration
 
-5. **Prerequisites Check:**  
+### ✅ **Prerequisites Check:**  
 
    Waited for the check to complete successfully, then clicked **Install**
 
@@ -191,6 +191,25 @@ Here’s how I handled the wizard:
 
 ## 5️⃣ Configure DNS on the Domain Controller
 
+After the domain controller promotion, the DNS Server role was already installed and active.
+
+To make sure DNS name resolution works beyond the domain (e.g., internet access), I configured DNS Forwarders to point upstream to the pfSense gateway.
+
+I launched **Server Manager**, clicked **Tools** → **DNS** to open the DNS Manager console.
+
+Inside **DNS Manager**:
+- I expanded the tree and right-clicked my domain controller (`DC01`)
+- Selected **Properties**
+- Navigated to the **Forwarders** tab
+
+There, I:
+- Clicked **Edit**
+- Added my pfSense LAN IP: `10.0.3.1`
+- Clicked **OK** to save the configuration
+
+> 📡 This ensures any domain-joined machine that uses the DC for DNS (like clients on the AD subnet) can still resolve external names — by forwarding unresolved queries to pfSense, which in turn forwards to real internet DNS servers.
+
+> 💡 Without this, internal clients could resolve only domain names (e.g., adlab.local) but wouldn’t be able to browse the web or resolve public domains like microsoft.com.
 
 ## 6️⃣ Configure DHCP on DC
 
