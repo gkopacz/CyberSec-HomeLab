@@ -68,7 +68,7 @@ During setup, I was prompted to select the Windows Server edition. I went with:
 
 > **Windows Server 2019 Datacenter Evaluation (Desktop Experience)**
 
-![Choose Edition](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/2.%20WinSrv-OS-version.png)
+![Choose Edition](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-OS-version.png)
 
 Why Datacenter?
 
@@ -89,11 +89,11 @@ This option allowed me to partition the virtual disk from scratch and ensured no
 
 During setup, I clicked **New** and allocated the entire **60 GB** of virtual disk space to a single **primary partition**, then hit **Apply**.
 
-![Disk_Partition_size](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/2.%20WinSrv-OS-version.png)
+![Disk_Partition_size](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-Disk-Partition.png)
 
 Once the partition table was created, I selected the primary partition and continued with installation.
 
-![Disk_Partition](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/2.%20WinSrv-OS-version.png)
+![Disk_Partition](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-Disk-Partition-done.png)
 
 #### 🔑 Administrator Password Setup
 
