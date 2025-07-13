@@ -62,7 +62,7 @@ Selected the default options:
 
 ### 📦 Choose Edition
 
-During setup, I was prompted to select the Windows Server edition. I went with: > **Windows Server 2019 Datacenter Evaluation (Desktop Experience)**
+During setup, I was prompted to select the Windows Server edition. I went with: `Windows Server 2019 Datacenter Evaluation (Desktop Experience)`
 
 ![Choose Edition](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-OS-version.png)
 
