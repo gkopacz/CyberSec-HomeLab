@@ -207,6 +207,8 @@ There, I:
 - Added my pfSense LAN IP: `10.0.3.1`
 - Clicked **OK** to save the configuration
 
+![DNS](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-dns.png)
+
 > 📡 This ensures any domain-joined machine that uses the DC for DNS (like clients on the AD subnet) can still resolve external names — by forwarding unresolved queries to pfSense, which in turn forwards to real internet DNS servers.
 
 > 💡 Without this, internal clients could resolve only domain names (e.g., adlab.local) but wouldn’t be able to browse the web or resolve public domains like microsoft.com.
