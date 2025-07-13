@@ -203,13 +203,13 @@ However, it can’t resolve **external DNS queries** (like `github.com` or `kali
 
 That’s why I used the **Forwarders tab** — to point the DC’s DNS to pfSense (`10.0.3.1`) as its upstream resolver. From there, pfSense can resolve external domains on behalf of the internal network.
 
-> 🧠 Think of **Forwarders** as a “fallback route” for DNS — when your DC doesn’t know an answer, it asks pfSense.
-
 | Feature              | **Forwarders**                                                                                       | **Forward Lookup Zones**                                                                 |
 |----------------------|------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------|
 | **Purpose**          | Forwards queries your DNS server can't resolve locally to another DNS server (like `10.0.3.1`).      | Stores domain-to-IP mappings your DNS server manages directly.                           |
 | **Use Case**         | When you want your DC to forward unresolved DNS queries (e.g., external domains) to an upstream DNS. | When you want your DC to host and manage records for internal domains (e.g., `adlab.local`). |
 | **Example**          | `google.com` not found locally → forward to pfSense → pfSense resolves it.                           | You create records for `labvm01.adlab.local`, etc.                                        |
+
+> 🧠 Think of **Forwarders** as a “fallback route” for DNS — when your DC doesn’t know an answer, it asks pfSense.
 
 ### 🧭 Configuration Steps
 
