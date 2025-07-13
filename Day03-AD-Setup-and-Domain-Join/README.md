@@ -193,7 +193,25 @@ Here’s how I handled the wizard:
 
 After the domain controller promotion, the DNS Server role was already installed and active.
 
-To make sure DNS name resolution works beyond the domain (e.g., internet access), I configured DNS Forwarders to point upstream to the pfSense gateway.
+To make sure DNS name resolution works beyond the domain (e.g. internet access), I configured DNS Forwarders to point upstream to the pfSense gateway.
+
+### 📡 Why Use Forwarders Instead of Forward Lookup Zones
+
+In this setup, my Domain Controller already hosts the `adlab.local` **Forward Lookup Zone**, which handles internal name resolution (e.g. `dc01.adlab.local`).
+
+However, it can’t resolve **external DNS queries** (like `github.com` or `kali.org`) unless I configure it to forward those requests.
+
+That’s why I used the **Forwarders tab** — to point the DC’s DNS to pfSense (`10.0.3.1`) as its upstream resolver. From there, pfSense can resolve external domains on behalf of the internal network.
+
+> 🧠 Think of **Forwarders** as a “fallback route” for DNS — when your DC doesn’t know an answer, it asks pfSense.
+
+| Feature              | **Forwarders**                                                                                       | **Forward Lookup Zones**                                                                 |
+|----------------------|------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------|
+| **Purpose**          | Forwards queries your DNS server can't resolve locally to another DNS server (like `10.0.3.1`).      | Stores domain-to-IP mappings your DNS server manages directly.                           |
+| **Use Case**         | When you want your DC to forward unresolved DNS queries (e.g., external domains) to an upstream DNS. | When you want your DC to host and manage records for internal domains (e.g., `adlab.local`). |
+| **Example**          | `google.com` not found locally → forward to pfSense → pfSense resolves it.                           | You create records for `labvm01.adlab.local`, etc.                                        |
+
+### 🧭 Configuration Steps
 
 I launched **Server Manager**, clicked **Tools** → **DNS** to open the DNS Manager console.
 
@@ -209,9 +227,7 @@ There, I:
 
 ![DNS](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-dns.png)
 
-> 📡 This ensures any domain-joined machine that uses the DC for DNS (like clients on the AD subnet) can still resolve external names — by forwarding unresolved queries to pfSense, which in turn forwards to real internet DNS servers.
-
-> 💡 Without this, internal clients could resolve only domain names (e.g., adlab.local) but wouldn’t be able to browse the web or resolve public domains like microsoft.com.
+> 💡 Without this, internal clients could resolve only domain names (e.g., adlab.local) but wouldn’t be able to browse the web or resolve public domains like microsoft.com, which is critical for things like Windows Updates and pulling packages.
 
 ## 6️⃣ Configure DHCP on DC
 
