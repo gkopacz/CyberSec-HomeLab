@@ -287,11 +287,22 @@ I selected: **Yes, I want to configure these options now**
 
 > 📡 **With the DHCP scope live**, any Windows clients on the AD subnet will now automatically receive an IP address, gateway, and DNS settings — all necessary for smooth domain joins and centralized management.
 
+## 7️⃣ Active Directory Certificate Services (AD CS) Configuration
 
+> To simulate a more production-aligned environment and lay the groundwork for secure authentication and encryption (like smartcard logon, HTTPS with internal CAs, or signed RDP connections), I deployed Active Directory Certificate Services (AD CS) on my domain controller.
 
+This step is optional for basic AD environments but adds realism for future scenarios like:
+ * Deploying enterprise certificates
+ * Testing certificate-based authentication
+ * Signing internal services with trusted certificates
 
+## 8️⃣ Populate Active Directory: Create Dummy Users & Organizational Units
 
-## 7️⃣ Windows Client Setup & Domain Join
+> This sets up the logical structure for directory services, user management, GPO testing, and access control simulations.
+
+## 9️⃣ Windows Client Setup & Domain Join
+
+> Bringing Windows 10 and 11 machines into the AD domain to simulate real-world user environments, policy propagation, and security enforcement.
 
 I spun up a **Windows 10 Pro** VM in Hyper-V:
 
