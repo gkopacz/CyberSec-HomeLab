@@ -16,7 +16,7 @@ Deploy a **Windows Server 2019** VM in the `AD` subnet and promote it to a **Dom
 - Deployment of **Windows Server 2019** on Hyper-V with Gen 2 settings  
 - Promotion of standalone server to **Active Directory Domain Services (AD DS)**  
 - Configuration of **DNS Server** for internal name resolution  
-- (Optional) Setup of **DHCP Server** for automated IP assignment in the AD zone  
+- Setup of **DHCP Server** for automated IP assignment in the AD zone  
 - Creation of an **Active Directory forest and domain** (e.g., `adlab.local`)  
 - Domain join of Windows 10 and 11 clients and login validation  
 - Basic troubleshooting of domain-related connectivity and authentication issues
