@@ -50,9 +50,7 @@ To ensure a smooth install, I reviewed and adjusted the **boot order** in the VM
 2. **Hard Drive** (for post-install boots)
 3. **Network Adapter** (PXE boot — left last)
 
-> 💡 Setting the correct boot sequence avoids boot loops and ensures the OS installer launches on first boot.
-
-Once installation is complete, I’ll remove the **DVD drive** from the VM to prevent accidental reboots into the installer.
+> 💡 Setting the correct boot sequence avoids boot loops and ensures the OS installer launches on first boot. Once installation is complete, I’ll remove the **DVD drive** from the VM to prevent accidental reboots into the installer.
 
 ### 🗣️ Language & Keyboard
 
