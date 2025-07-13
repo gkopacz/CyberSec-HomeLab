@@ -155,7 +155,7 @@ Once the roles were installed, I went back to **Server Manager** and clicked the
 
 Here’s how I handled the wizard:
 
-### 🧱 **Deployment Configuration:**  
+### 🌲 **Deployment Configuration:**  
 
    Selected `Add a new forest` and set the **root domain name** to `adlab.local`
 
@@ -224,14 +224,72 @@ There, I:
 
 > 💡 Without this, internal clients could resolve only domain names (e.g., adlab.local) but wouldn’t be able to browse the web or resolve public domains like microsoft.com, which is critical for things like Windows Updates and pulling packages.
 
-## 6️⃣ Configure DHCP on DC
+## 6️⃣ Configure DHCP on the Domain Controller
 
-- Create a new IPv4 scope in **DHCP Manager**
-- Define IP range (e.g., `10.0.2.100 - 10.0.2.200`)
-- Set DNS server to `10.0.2.1` (DC IP)
-- Activate scope
+With the Domain Controller promoted and DNS forwarders configured, I proceeded to configure the **DHCP Server** to manage dynamic IP assignment for the AD subnet (`10.0.3.0/24`).
 
 > 💡 On pfSense: make sure DHCP is disabled for the AD interface to avoid conflict
+
+### ⚙️ DHCP Post-Deployment Configuration
+
+Since the **DHCP Server role** was already installed, I clicked the **flag icon** in **Server Manager** to launch the **post-deployment configuration** wizard.
+
+In the Authorization step, I selected:
+
+✅ **Use the following user’s credentials:** `ADLAB\Administrator`
+
+Then I clicked **Commit**, followed by **Close**.
+
+> 💡 DHCP must be authorized in Active Directory so it can lease IP addresses on behalf of the domain.
+
+> 🔐 In production environments, this step is often completed using a **service account** — a special low-privilege account dedicated to running background services. It’s a best practice that improves auditability and limits exposure if credentials are compromised. For simplicity, I used the built-in Administrator account.
+
+### 📦 Create DHCP Scope for AD Subnet
+
+I opened **Server Manager** → **Tools** → **DHCP**, expanded the server tree (`DC01.adlab.local`), right-clicked **IPv4**, and selected **New Scope** to launch the wizard:
+
+- **Scope Name:** `AD_LAB_SCOPE`  
+- **Description:** DHCP scope for AD subnet
+
+#### IP Address Range:
+
+- **Start IP:** `10.0.3.100`  
+- **End IP:** `10.0.3.200`  
+- **Length:** `24` → This auto-set the **Subnet Mask** to `255.255.255.0`
+
+#### Exclusions & Delay:
+
+- Skipped — no exclusions needed between `.100` and `.200`
+
+#### Lease Duration:
+
+- Left the default at **8 days**
+
+> 💡 In production environments, DHCP lease time is often set to **24 hours** for better IP reuse and tighter control. In this lab setup, 8 days is totally fine, fewer clients, more stability.
+
+### 🛠️ Configure DHCP Options
+
+I selected: **Yes, I want to configure these options now**
+
+- **Router (Default Gateway):**
+  - IP: `10.0.3.1`
+  - Clicked **Add**
+
+- **Domain Name and DNS Servers:**
+  - Confirmed domain: `adlab.local`
+  - Confirmed DNS Server: `10.0.3.9` (the DC itself)
+
+> 🧠 This is crucial — domain clients must resolve DNS through the **Domain Controller** in order to join the domain and access network services.
+
+- **WINS Server:** Skipped (not required in modern Windows networks)
+
+- **Activate Scope:** Selected **Yes, I want to activate this scope now**
+
+> 📡 **With the DHCP scope live**, any Windows clients on the AD subnet will now automatically receive an IP address, gateway, and DNS settings — all necessary for smooth domain joins and centralized management.
+
+
+
+
 
 ## 7️⃣ Windows Client Setup & Domain Join
 
