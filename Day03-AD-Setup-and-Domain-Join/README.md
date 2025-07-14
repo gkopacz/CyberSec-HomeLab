@@ -285,9 +285,13 @@ I selected: **Yes, I want to configure these options now**
   - IP: `10.0.3.1`
   - Clicked **Add**
 
+![DHCP_dgw](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-dhcp-defaultgw.png)
+
 - **Domain Name and DNS Servers:**
   - Confirmed domain: `adlab.local`
   - Confirmed DNS Server: `10.0.3.9` (the DC itself)
+ 
+![DHCP_DNS](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-dhcp-dns.png)
 
 > 🧠 This is crucial — domain clients must resolve DNS through the **Domain Controller** in order to join the domain and access network services.
 
