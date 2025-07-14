@@ -366,7 +366,13 @@ I proceeded through the remaining pages using the default settings:
 
 ## 8️⃣ Populate Active Directory: Create Dummy Users & Organizational Units
 
-> This sets up the logical structure for directory services, user management, GPO testing, and access control simulations.
+With the domain controller and DNS configured, I moved on to creating a few test users to simulate a real-world Active Directory environment.
+
+These accounts will later help me validate **domain joins**, **authentication flows**, **GPO enforcement**, and even simulate attacks or detection rules.
+
+### 👥 Why Create Dummy Users?
+
+> 🧠 In enterprise environments, user accounts form the core of identity-based security. Even in a lab, having realistic users allows me to test authentication logging, group policies, privilege escalation paths, and more.
 
 ## 9️⃣ Windows Client Setup & Domain Join
 
