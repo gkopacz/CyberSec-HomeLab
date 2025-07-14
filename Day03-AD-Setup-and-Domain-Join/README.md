@@ -236,13 +236,9 @@ Since the **DHCP Server role** was already installed, I clicked the **flag icon*
 
 ![DHCP](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-complete-dhcp.png)
 
-In the Authorization step, I selected:
-
-**Use the following user’s credentials:** `ADLAB\Administrator`
+In the Authorization step, I selected: **Use the following user’s credentials:** `ADLAB\Administrator`. Then I clicked **Commit**, followed by **Close**.
 
 > 🔐 In production environments, this step is often completed using a **service account** — a special low-privilege account dedicated to running background services. It’s a best practice that improves auditability and limits exposure if credentials are compromised. For simplicity, I used the built-in Administrator account.
-
-Then I clicked **Commit**, followed by **Close**.
 
 ![DHCP_cred](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-dhcp-cred.png)
 
