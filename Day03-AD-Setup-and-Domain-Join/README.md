@@ -299,12 +299,71 @@ I selected: **Yes, I want to configure these options now**
 
 ## 7️⃣ Active Directory Certificate Services (AD CS) Configuration
 
-> To simulate a more production-aligned environment and lay the groundwork for secure authentication and encryption (like smartcard logon, HTTPS with internal CAs, or signed RDP connections), I deployed Active Directory Certificate Services (AD CS) on my domain controller.
+With the core AD infrastructure online, I proceeded to install and configure **Active Directory Certificate Services (AD CS)** to enable future features like secure authentication, encrypted communications, and domain certificate auto-enrollment. This adds a local Certification Authority (CA), which can issue certificates for domain-joined machines and services.
 
 This step is optional for basic AD environments but adds realism for future scenarios like:
  * Deploying enterprise certificates
  * Testing certificate-based authentication
  * Signing internal services with trusted certificates
+ * Certificate auto-enrollment via GPO
+ * HTTPS with internal certs
+ * encrypted RDP connections
+ 
+### 🛠️ Installing the AD CS Role
+
+From **Server Manager**, I launched the **Add Roles and Features Wizard**:
+
+1. Pressed **Start Menu** → **Server Manager** → **Manage** → **Add Roles and Features**
+2. Selected **Role-based or feature-based installation**
+3. Confirmed **DC01** as the target server from the pool
+4. In **Server Roles**, I selected: `Active Directory Certificate Services`
+5. In **AD CS Role Services**, I selected: `Certification Authority`
+6. Then I continued through the wizard and hit **Install**.   
+
+![Cert_Serv](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-cert-serv.png)
+
+### ⚙️ AD CS Post-Install Configuration
+
+After installation, I clicked the **flag icon** in Server Manager and selected **"Configure Active Directory Certificate Services on the destination server."**
+
+On the Credentials screen, I verified that I was using the domain admin account: `ADLAB\Administrator` 
+
+![Cert_Cred](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-cert-cred.png)
+
+### 🏢 Role Service Configuration
+
+I selected **Certification Authority** as the only role service. This ensures we’re just standing up a simple Certificate Authority for now.
+
+### 🏛️ Setup Type → Enterprise CA
+
+I selected **Enterprise CA** as seen in the screenshot below.
+
+![Enterprisa_CA](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-cert-enterprise-ca.png)
+
+> 🧠 An Enterprise CA is integrated with Active Directory, meaning it can automatically issue certificates to authenticated domain members based on Group Policy or request templates. This is ideal for lab environments simulating corporate networks.
+
+### 🧬 CA Type → Root CA
+
+Next, I chose: **Root CA* as seen below.
+
+![Enterprisa_CA](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-cert-enterprise-ca.png)
+
+> 🔐 A Root CA is the top of the certificate chain — trusted by all domain clients. Since this is the first CA in the lab, making it a root authority is necessary to establish internal trust.
+
+### 📦 Finish Configuration
+
+I proceeded through the remaining pages using the default settings:
+- Created a **new private key** (since this is the first CA)
+- Left default cryptographic settings (RSA 2048, SHA256)
+- Set a **common name** for the CA: `ADLAB-CA`
+- Accepted the default validity period (5 years)
+- Confirmed default storage paths for the certificate database and logs
+- Completed the wizard and let the system configure the CA
+
+> 📜 With the internal Certification Authority now in place, I’ll later be able to issue certificates for internal services, RDP encryption, web consoles, or even to simulate PKI-based authentication.
+
+
+
 
 ## 8️⃣ Populate Active Directory: Create Dummy Users & Organizational Units
 
