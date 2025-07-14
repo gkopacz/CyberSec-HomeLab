@@ -232,17 +232,17 @@ With the Domain Controller promoted and DNS forwarders configured, I proceeded t
 
 ### ⚙️ DHCP Post-Deployment Configuration
 
-Since the **DHCP Server role** was already installed, I clicked the **flag icon** in **Server Manager** to launch the **post-deployment configuration** wizard.
+Since the **DHCP Server role** was already installed, I clicked the **flag icon** in **Server Manager** to launch the **post-deployment configuration**.
 
 ![DHCP](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-complete-dhcp.png)
 
 In the Authorization step, I selected: **Use the following user’s credentials:** `ADLAB\Administrator`. Then I clicked **Commit**, followed by **Close**.
 
-> 🔐 In production environments, this step is often completed using a **service account** — a special low-privilege account dedicated to running background services. It’s a best practice that improves auditability and limits exposure if credentials are compromised. For simplicity, I used the built-in Administrator account.
+> 💡 DHCP must be authorized in Active Directory so it can lease IP addresses on behalf of the domain.
 
 ![DHCP_cred](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-dhcp-cred.png)
 
-> 💡 DHCP must be authorized in Active Directory so it can lease IP addresses on behalf of the domain.
+> 🔐 In production environments, this step is often completed using a **service account** — a special low-privilege account dedicated to running background services. It’s a best practice that improves auditability and limits exposure if credentials are compromised. For simplicity, I used the built-in Administrator account.
 
 ### 📦 Create DHCP Scope for AD Subnet
 
