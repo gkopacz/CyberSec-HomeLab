@@ -159,14 +159,14 @@ Here’s how I handled the wizard:
 
    Selected `Add a new forest` and set the **root domain name** to `adlab.local`
 
-![Server_Roles](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-promote-dc.png)
+![Promoe_DC](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-promote-dc.png)
 
 ### 🔐 **Domain Controller Options:**  
 
    Kept the default selections (Domain Name System (DNS) server, Global Catalog, etc.)  
    Set a strong **DSRM (Directory Services Restore Mode)** password
 
-![Server_Roles](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-dsrm-pwd.png)
+![DSRM_PWD](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-dsrm-pwd.png)
 
 ### 🧭 **DNS Options:**  
 
@@ -180,7 +180,7 @@ Here’s how I handled the wizard:
 
    Waited for the check to complete successfully, then clicked **Install**
 
-![Server_Roles](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-pre-check.png)
+![PRE_CHECK](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-pre-check.png)
 
 > 💡 After completing the wizard, the system automatically rebooted. Once it came back online, the server was now an official **Domain Controller** for `adlab.local`.
 
@@ -234,11 +234,15 @@ With the Domain Controller promoted and DNS forwarders configured, I proceeded t
 
 Since the **DHCP Server role** was already installed, I clicked the **flag icon** in **Server Manager** to launch the **post-deployment configuration** wizard.
 
+![DHCP](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-complete-dhcp.png)
+
 In the Authorization step, I selected:
 
 ✅ **Use the following user’s credentials:** `ADLAB\Administrator`
 
 Then I clicked **Commit**, followed by **Close**.
+
+![DHCP_cred](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-dhcp-cred.png)
 
 > 💡 DHCP must be authorized in Active Directory so it can lease IP addresses on behalf of the domain.
 
