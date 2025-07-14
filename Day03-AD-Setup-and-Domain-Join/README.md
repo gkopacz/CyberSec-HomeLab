@@ -238,15 +238,15 @@ Since the **DHCP Server role** was already installed, I clicked the **flag icon*
 
 In the Authorization step, I selected:
 
-✅ **Use the following user’s credentials:** `ADLAB\Administrator`
+**Use the following user’s credentials:** `ADLAB\Administrator`
+
+> 🔐 In production environments, this step is often completed using a **service account** — a special low-privilege account dedicated to running background services. It’s a best practice that improves auditability and limits exposure if credentials are compromised. For simplicity, I used the built-in Administrator account.
 
 Then I clicked **Commit**, followed by **Close**.
 
 ![DHCP_cred](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-dhcp-cred.png)
 
 > 💡 DHCP must be authorized in Active Directory so it can lease IP addresses on behalf of the domain.
-
-> 🔐 In production environments, this step is often completed using a **service account** — a special low-privilege account dedicated to running background services. It’s a best practice that improves auditability and limits exposure if credentials are compromised. For simplicity, I used the built-in Administrator account.
 
 ### 📦 Create DHCP Scope for AD Subnet
 
@@ -255,11 +255,15 @@ I opened **Server Manager** → **Tools** → **DHCP**, expanded the server tree
 - **Scope Name:** `AD_LAB_SCOPE`  
 - **Description:** DHCP scope for AD subnet
 
+![DHCP_scope](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-dhcp-scope-name.png)
+
 #### IP Address Range:
 
 - **Start IP:** `10.0.3.100`  
 - **End IP:** `10.0.3.200`  
 - **Length:** `24` → This auto-set the **Subnet Mask** to `255.255.255.0`
+
+![DHCP_range](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-dhcp-range.png)
 
 #### Exclusions & Delay:
 
@@ -268,6 +272,8 @@ I opened **Server Manager** → **Tools** → **DHCP**, expanded the server tree
 #### Lease Duration:
 
 - Left the default at **8 days**
+
+![DHCP_lease](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-dhcp-lease.png)
 
 > 💡 In production environments, DHCP lease time is often set to **24 hours** for better IP reuse and tighter control. In this lab setup, 8 days is totally fine, fewer clients, more stability.
 
