@@ -340,7 +340,7 @@ I selected `Certification Authority` as the only role service. This ensures we�
 
 I selected `Enterprise CA` as seen in the screenshot below.
 
-![Enterprisa_CA](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-cert-enterprise-ca.png)
+![Enterprise_CA](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-cert-enterprisa-ca.png)
 
 > 🧠 An Enterprise CA is integrated with Active Directory, meaning it can automatically issue certificates to authenticated domain members based on Group Policy or request templates. This is ideal for lab environments simulating corporate networks.
 
@@ -348,11 +348,11 @@ I selected `Enterprise CA` as seen in the screenshot below.
 
 Next, I chose: `Root CA` as seen below.
 
-![Enterprisa_CA](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-cert-root-ca.png)
+![Root_CA](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-cert-root-ca.png)
 
 > 🔐 A Root CA is the top of the certificate chain — trusted by all domain clients. Since this is the first CA in the lab, making it a root authority is necessary to establish internal trust.
 
-### 📦 Finish Configuration
+### 📜 Finish Configuration
 
 I proceeded through the remaining pages using the default settings:
 - Created a **new private key** (since this is the first CA)
@@ -362,9 +362,7 @@ I proceeded through the remaining pages using the default settings:
 - Confirmed default storage paths for the certificate database and logs
 - Completed the wizard and let the system configure the CA
 
-![Enterprisa_Conf](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-cert-config.png)
-
-> 📜 With the internal Certification Authority now in place, I’ll later be able to issue certificates for internal services, RDP encryption, web consoles, or even to simulate PKI-based authentication.
+![Cert_conf](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-cert-config.png)
 
 ## 8️⃣ Populate Active Directory: Create Dummy Users & Organizational Units
 
