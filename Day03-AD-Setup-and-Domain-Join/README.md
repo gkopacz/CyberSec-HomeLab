@@ -419,15 +419,35 @@ You can either move them manually after creation, or create them directly inside
 
 ## 9️⃣ Windows Client Setup & Domain Join
 
-> Bringing Windows 10 and 11 machines into the AD domain to simulate real-world user environments, policy propagation, and security enforcement.
+With the domain controller, DNS, and DHCP services now fully configured, I moved on to provisioning two Windows client machines, one **Windows 10** and one **Windows 11** — and joining them to the `adlab.local` domain.
 
-I spun up a **Windows 10 Pro** VM in Hyper-V:
+These endpoints simulate real-world users in a corporate network and allow testing of:
 
-- Assigned NIC to the AD internal switch
-- Installed updates & renamed machine
-- Opened `System Properties` → `Domain Join`
-- Joined `adlab.local` using AD credentials
-- Rebooted and logged in as domain user
+- 🛂 **Domain authentication**
+- 🧠 **DNS functionality**
+- 🔁 **DHCP scope delivery**
+- 🔐 **Account & policy enforcement**
+
+### 📥 Download Windows 10 Enterprise ISO
+
+To begin, I downloaded the Windows 10 Enterprise ISO directly from Microsoft’s official Evaluation Center: 🔗 [Download Windows 10 Enterprise](https://www.microsoft.com/en-us/evalcenter/)
+
+From the main page, I selected **Windows 10 Enterprise** from dropdown. After filling out the required information form, I chose the **64-bit version** and selected my preferred **language** which is **English**. 
+
+### 💻 VM Configuration
+
+I spun up two Hyper-V virtual machines with the following settings:
+
+| **Setting**  | **Value**                      |
+|--------------|--------------------------------|
+| Name         | Win10-Client, Win11-Client     |
+| Generation   | Gen 2                          |
+| CPU          | 2 vCPU                         |
+| Memory       | 4 GB (Dynamic)                 |
+| Disk         | 50 GB                          |
+| Network      | Internal Switch (AD subnet)    |
+
+
 
 ## ✅ Validation
 
