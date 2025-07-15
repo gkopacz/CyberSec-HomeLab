@@ -357,7 +357,7 @@ Next, I chose: `Root CA` as seen below.
 I proceeded through the remaining pages using the default settings:
 - Created a **new private key** (since this is the first CA)
 - Left default cryptographic settings (RSA 2048, SHA256)
-- Set a **common name** for the CA: `ADLAB-CA`
+- Set a **common name** for the CA: `adlab-DC01-CA`
 - Accepted the default validity period (5 years)
 - Confirmed default storage paths for the certificate database and logs
 - Completed the wizard and let the system configure the CA
