@@ -27,7 +27,7 @@ Design and implement a **cybersecurity homelab** tailored for learning, testing,
 * **Network Isolation**: Achieved secure communication using isolated virtual switches.
 
 ### 🧑‍💻 System Administration 
-* Installed and managed **Windows Server 2019**, Windows 10 clients, and **Linux** machines.
+* Installed and managed **Windows Server 2019**, Windows 10 and 11 clients, and **Linux** machines.
 * Configured **Active Directory Domain Services (AD DS)**:
   * Set up a Domain Controller.
   * Managed users, groups, and permissions.
