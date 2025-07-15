@@ -366,13 +366,7 @@ I proceeded through the remaining pages using the default settings:
 
 ## 8️⃣ Populate Active Directory: Create Dummy Users & Organizational Units
 
-With the domain controller, DNS and DHCP configured, I moved on to creating a few test users to simulate a real-world Active Directory environment.
-
-These accounts will later help me validate **domain joins**, **authentication flows**, **GPO enforcement**, and even simulate attacks or detection rules.
-
-Why Create Dummy Users❓
-
-In enterprise environments, user accounts form the core of identity-based security. Even in a lab, having realistic users allows me to test authentication logging, group policies, privilege escalation paths, and more.
+With the domain controller, DNS and DHCP configured, I moved on to creating a few Organisational Units and test users to simulate a real-world Active Directory environment.
 
 Why Not Use Default Containers❓
 
@@ -395,6 +389,18 @@ This structure gives me control and flexibility as the lab grows.
 
 ![AD_OU](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-ad-ou.png)
 
+Why Create Dummy Users❓
+
+In enterprise environments, user accounts form the core of identity-based security. Even in a lab, having realistic users allows me to test authentication logging, group policies, privilege escalation paths, and more.
+
+### 🧪 Sample Accounts
+
+| Name         | Username       | OU          | Role             | Notes                   |
+|--------------|----------------|-------------|------------------|-------------------------|
+| Alice Smith  | `alice.smith`  | LabUsers    | Standard User    | Password never expires  |
+| Bob Johnson  | `bob.johnson`  | LabUsers    | Standard User    | Password never expires  |
+| Admin Test   | `admin.test`   | LabAdmins   | Privileged User  | For GPO & escalation    |
+
 ### 👤 Creating Test Accounts
 
 By default, any new user account is placed in the `Users` container (`CN=Users`), which is a **container object**, *not* an Organizational Unit (OU).
@@ -410,14 +416,6 @@ You can either move them manually after creation, or create them directly inside
 ![AD_User](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-ad-newuser.png)
 
 > 🔐 I may enforce password complexity and expiration later using Group Policy. For now, I'm disabling expiration to keep testing consistent and simple.
-
-### 🧪 Sample Accounts
-
-| Name         | Username       | OU          | Role             | Notes                   |
-|--------------|----------------|-------------|------------------|-------------------------|
-| Alice Smith  | `alice.smith`  | LabUsers    | Standard User    | Password never expires  |
-| Bob Johnson  | `bob.johnson`  | LabUsers    | Standard User    | Password never expires  |
-| Admin Test   | `admin.test`   | LabAdmins   | Privileged User  | For GPO & escalation    |
 
 ## 9️⃣ Windows Client Setup & Domain Join
 
