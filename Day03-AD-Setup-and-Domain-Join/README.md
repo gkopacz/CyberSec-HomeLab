@@ -434,30 +434,77 @@ To begin, I downloaded the Windows 10 Enterprise ISO directly from Microsoft’s
 
 From the main page, I selected **Windows 10 Enterprise** from dropdown. After filling out the required information form, I chose the **64-bit version** and selected my preferred **language** which is **English**. 
 
-### 💻 VM Configuration
+### 💻 Windows 10 VM Configuration
 
-I spun up two Hyper-V virtual machines with the following settings:
+I spun up the Hyper-V virtual machine with the following settings:
 
 | **Setting**  | **Value**                      |
 |--------------|--------------------------------|
-| Name         | Win10-Client, Win11-Client     |
+| Name         | Win10-Client                   |
 | Generation   | Gen 2                          |
 | CPU          | 2 vCPU                         |
 | Memory       | 4 GB (Dynamic)                 |
 | Disk         | 50 GB                          |
 | Network      | Internal Switch (AD subnet)    |
 
+### 💿 Install Windows 10 on the VM
+
+On the initial setup screen, I selected the default **language**, **time and currency format**, and **keyboard layout**, then clicked **Next** followed by **Install now**.
+
+After accepting the license terms, I selected **Custom: Install Windows only (advanced)** as the installation method. I created a new partition, allocated the full disk size, confirmed the prompt, and proceeded with the installation.
+
+Once the OS finished installing, I selected the regional and keyboard settings again. When prompted to add a second keyboard layout, I chose **Skip**.
+
+On the network screen, I selected **I don’t have internet** to bypass online account creation. Then, I clicked **Continue with limited setup** to proceed with a local account.
+
+For the local account, I entered a username of my choice and answered all three security questions. In the privacy settings section, I disabled all options to minimize telemetry and selected **Accept**. 
+
+When asked about Cortana, I chose **Not now** to avoid installing additional services and bloatware.
+
+### 🌐 IP Address Assignment
+
+I confirmed the client received:
+- An IP address from the AD DHCP scope  
+- The correct gateway and DNS server settings (`10.0.3.9`)
+
+```powershell
+ipconfig /all
+```
+
+img here
+
+### 🏷️ Rename the Client 
+
+To maintain a clean and consistent naming convention in the lab, I renamed the virtual machine immediately after setup.
+
+From the Windows 10 desktop, I pressed `Win + X` and selected **System**. Then I clicked **Rename this PC**, entered the new hostname as `WIN10-CLIENT01`, and confirmed the prompt. After a system reboot, the updated name took effect and the machine was ready to be joined to the domain.
+
+### 🧑‍💼 Domain Join Process
+
+Once the system was renamed and rebooted, I logged in using the local account that was created during the initial Windows 10 setup.
+
+To begin the domain join, I opened **Settings** and navigated to **Accounts > Access work or school**. From there, I clicked **Connect** and selected the option to **Join this device to a local Active Directory domain**. When prompted, I entered the domain name as `adlab` and clicked **Next**.
+
+The system requested administrative credentials to authorize the domain join. I entered the **Domain Admin username and password** from the Windows Server 2019 Domain Controller. After successful authentication, I was asked to specify the user account that would log in next. I entered the following:
+
+- **User Account:** `alice.smith`
+- **Account Type:** `Standard User`
+
+Once confirmed, the machine processed the join request and prompted for a restart. After rebooting, I was presented with the option to log in as **Other user**. I signed in using the domain credentials.
+
+To validate the domain join, I launched **PowerShell** and ran the following commands:
+
+```powershell
+whoami
+ipconfig /all
+```
 
 
-## ✅ Validation
 
-- `ipconfig /all` shows DNS = DC IP
-- `ping dc.adlab.local` resolves successfully
-- Logged in with domain credentials
-- Accessed `Active Directory Users & Computers`
-- Created test user & OU structure
+
+
 
 ## 🔜 Next Step
 
-On Day 04, I’ll configure Splunk and begin sending Windows logs from the DC and clients. This will kick off the **detection engineering** and centralized monitoring phase of the HomeLab.
+On [Day 04](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/Day04-Splunk-Logging-and-Monitoring), I’ll configure Splunk and begin sending Windows logs from the DC and clients. This will kick off the **detection engineering** and centralized monitoring phase of the HomeLab.
 
