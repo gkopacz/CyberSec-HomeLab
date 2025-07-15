@@ -66,7 +66,7 @@ During setup, I was prompted to select the OS edition. I went with: `Windows Ser
 
 ![Choose Edition](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-OS-version.png)
 
-Why Datacenter?
+Why Datacenter❓
 
 - It's better optimized for **Hyper-V environments**.
 - It includes advanced features like **Shielded VMs**, **Storage Spaces Direct**, and **Software-Defined Networking**, which may come in handy in future lab phases.
@@ -370,11 +370,11 @@ With the domain controller, DNS and DHCP configured, I moved on to creating a fe
 
 These accounts will later help me validate **domain joins**, **authentication flows**, **GPO enforcement**, and even simulate attacks or detection rules.
 
-Why Create Dummy Users?
+Why Create Dummy Users❓
 
 In enterprise environments, user accounts form the core of identity-based security. Even in a lab, having realistic users allows me to test authentication logging, group policies, privilege escalation paths, and more.
 
-Why Not Use Default Containers?
+Why Not Use Default Containers❓
 
 By default, Active Directory provides built-in **containers** like `Users` and `Computers`. However, these aren’t actual OUs and **don’t support GPO linking or delegation**.
 
@@ -393,7 +393,7 @@ This structure gives me control and flexibility as the lab grows.
 3. Enter name (e.g., `LabUsers`)
 4. Repeat for each desired category
 
-
+![AD_OU](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-ad-ou.png)
 
 ### 👤 Creating Test Accounts
 
@@ -407,17 +407,17 @@ You can either move them manually after creation, or create them directly inside
 4. Uncheck: `User must change password at next logon`
 5. Check: `Password never expires`
 
+![AD_User](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-ad-newuser.png)
+
 > 🔐 I may enforce password complexity and expiration later using Group Policy. For now, I'm disabling expiration to keep testing consistent and simple.
 
 ### 🧪 Sample Accounts
 
 | Name         | Username       | OU          | Role             | Notes                   |
 |--------------|----------------|-------------|------------------|-------------------------|
-| Alice Smith  | `alice.adlab`  | LabUsers    | Standard User    | Password never expires  |
-| Bob Johnson  | `bob.adlab`    | LabUsers    | Standard User    | Password never expires  |
+| Alice Smith  | `alice.smith`  | LabUsers    | Standard User    | Password never expires  |
+| Bob Johnson  | `bob.johnson`  | LabUsers    | Standard User    | Password never expires  |
 | Admin Test   | `admin.test`   | LabAdmins   | Privileged User  | For GPO & escalation    |
-
-
 
 ## 9️⃣ Windows Client Setup & Domain Join
 
