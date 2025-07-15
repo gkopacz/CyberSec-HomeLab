@@ -417,7 +417,7 @@ You can either move them manually after creation, or create them directly inside
 
 > 🔐 I may enforce password complexity and expiration later using Group Policy. For now, I'm disabling expiration to keep testing consistent and simple.
 
-## 9️⃣ Windows Client Setup & Domain Join
+## 9️⃣ Windows Clients Setup & Domain Join
 
 With the domain controller, DNS, and DHCP services now fully configured, I moved on to provisioning two Windows client machines, one **Windows 10** and one **Windows 11** — and joining them to the `adlab.local` domain.
 
