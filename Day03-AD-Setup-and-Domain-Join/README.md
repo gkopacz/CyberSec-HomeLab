@@ -491,40 +491,37 @@ In the privacy settings section, I disabled all options to minimize telemetry an
 
 To maintain a clean and consistent naming convention in the lab, I renamed the virtual machine immediately after setup.
 
-From the Windows 10 desktop, I pressed `Win + X` and selected **System**. Then I clicked **Rename this PC**, entered the new hostname as `WIN10-CLIENT01`, and confirmed the prompt. After a system reboot, the updated name took effect and the machine was ready to be joined to the domain.
+From the Windows 10 desktop, I pressed `Win + X` and selected **System**. Then I clicked **Rename this PC**, entered the new hostname as `WIN10-CLIENT01`, and confirmed the prompt. 
+
+After a system reboot, the updated name took effect and the machine was ready to be joined to the domain.
+
+![Win10_rename](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-win10-rename-host.png)
 
 ### 🧑‍💼 Domain Join Process
 
 Once the system was renamed and rebooted, I logged in using the local account that was created during the initial Windows 10 setup.
 
-To begin the domain join, I opened **Settings** and navigated to **Accounts > Access work or school**. From there, I clicked **Connect** and selected the option to **Join this device to a local Active Directory domain**. When prompted, I entered the domain name as `adlab` and clicked **Next**.
+Instead of using Settings, I used the legacy **System Properties** method to join the Windows 10 VM to the `adlab` domain.
 
-The system requested administrative credentials to authorize the domain join. I entered the **Domain Admin username and password** from the Windows Server 2019 Domain Controller. After successful authentication, I was asked to specify the user account that would log in next. I entered the following:
+To begin the domain join, I opened the **System** window, click **Change settings**, then hit **Change...** under **Computer Name**. In the domain field, I entered `adlab` and when prompted, I authenticated with the domain admin credentials.
 
-- **User Account:** `alice.smith`
-- **Account Type:** `Standard User`
+![Win10_domain_join](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-win10-domain-join.png)
 
-Once confirmed, the machine processed the join request and prompted for a restart. After rebooting, I was presented with the option to log in as **Other user**. I signed in using the domain credentials.
+Once confirmed, the machine processed the join request and prompted for a restart. 
 
-To validate the domain join, I launched **PowerShell** and ran the following commands:
+After rebooting, I was presented with the option to log in as **Other user**. I signed in using the one of the non-admin domain credentials created earlier.
 
-```powershell
-whoami
-ipconfig /all
-```
+![Win10_domain_join](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-win10-domain-signin.png)
 
-### 🌐 IP Address Assignment
+After logging in with domain credentials, I opened **Command Prompt** to validate domain join and network settings.
 
-I confirmed the client received:
-- An IP address from the AD DHCP scope  
-- The correct gateway and DNS server settings (`10.0.3.9`)
+I ran the following commands:
 
 ```powershell
 ipconfig /all
 ```
 
-img here
-
+![Win10_d](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-win10-finalcheck.png)
 
 
 
