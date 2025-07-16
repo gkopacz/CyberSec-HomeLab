@@ -430,7 +430,7 @@ These endpoints simulate real-world users in a corporate network and allow testi
 
 ### 📥 Download Windows 10 Enterprise ISO
 
-To begin, I downloaded the Windows 10 Enterprise ISO directly from Microsoft’s official Evaluation Center: 🔗 [Download Windows 10 Enterprise](https://www.microsoft.com/en-us/evalcenter/)
+To begin, I downloaded the Windows 10 Enterprise ISO directly from Microsoft’s official Evaluation Center: 🔗 [Download Windows 10](https://www.microsoft.com/en-us/evalcenter/)
 
 From the main page, I selected **Windows 10 Enterprise** from dropdown. After filling out the required information form, I chose the **64-bit version** and selected my preferred **language** which is **English**. 
 
@@ -451,27 +451,35 @@ I spun up the Hyper-V virtual machine with the following settings:
 
 On the initial setup screen, I selected the default **language**, **time and currency format**, and **keyboard layout**, then clicked **Next** followed by **Install now**.
 
-After accepting the license terms, I selected **Custom: Install Windows only (advanced)** as the installation method. I created a new partition, allocated the full disk size, confirmed the prompt, and proceeded with the installation.
+![Win10_language](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-win10-lang.png)
 
-Once the OS finished installing, I selected the regional and keyboard settings again. When prompted to add a second keyboard layout, I chose **Skip**.
+When asked for a license key, I clicked **I don’t have a product key** to proceed without activation.
 
-On the network screen, I selected **I don’t have internet** to bypass online account creation. Then, I clicked **Continue with limited setup** to proceed with a local account.
+![Win10_license](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-win10-license.png)
+
+I was then presented with a list of Windows editions. I selected **Windows 10 Pro (x64)** and clicked **Next**.
+
+![Win10_version](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-win10-version.png)
+
+After accepting the license terms, I selected **Custom: Install Windows only (advanced)** as the installation method. 
+
+I created a new partition, allocated the full disk size, confirmed the prompt, and proceeded with the installation.
+
+Once the OS installation completed, the system rebooted and began the Out-of-Box Experience (OOBE) setup.
+
+I was asked how I wanted to set up the device — I selected **Set up for an organization** and clicked **Next**.
+
+![Win10_join_org](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-win10-org.png)
+
+On the Microsoft sign-in screen, I clicked **Domain join instead** in the bottom-left corner to skip Microsoft account integration.
+
+![Win10_domainjoin](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-win10-domainjoin.png)
 
 For the local account, I entered a username of my choice and answered all three security questions. In the privacy settings section, I disabled all options to minimize telemetry and selected **Accept**. 
 
 When asked about Cortana, I chose **Not now** to avoid installing additional services and bloatware.
 
-### 🌐 IP Address Assignment
 
-I confirmed the client received:
-- An IP address from the AD DHCP scope  
-- The correct gateway and DNS server settings (`10.0.3.9`)
-
-```powershell
-ipconfig /all
-```
-
-img here
 
 ### 🏷️ Rename the Client 
 
@@ -499,7 +507,17 @@ whoami
 ipconfig /all
 ```
 
+### 🌐 IP Address Assignment
 
+I confirmed the client received:
+- An IP address from the AD DHCP scope  
+- The correct gateway and DNS server settings (`10.0.3.9`)
+
+```powershell
+ipconfig /all
+```
+
+img here
 
 
 
