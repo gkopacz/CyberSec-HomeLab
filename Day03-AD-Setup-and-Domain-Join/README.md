@@ -434,7 +434,7 @@ To begin, I downloaded the Windows 10 and 11 ISO directly from Microsoft’s off
 
 For each OS, I selected the appropriate **Enterprise edition** from the dropdown menu, filled out the required form, and downloaded the **64-bit version** in **English**.
 
-### 💻 Windows 10 VM Configuration
+### 💻 Windows VM Configuration
 
 I spun up two Hyper-V virtual machines with the following settings:
 
