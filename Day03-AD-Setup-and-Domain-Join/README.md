@@ -463,7 +463,11 @@ I was then presented with a list of Windows editions. I selected **Windows 10 Pr
 
 After accepting the license terms, I selected **Custom: Install Windows only (advanced)** as the installation method. 
 
+![Win10_custom](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-win10-custom.png)
+
 I created a new partition, allocated the full disk size, confirmed the prompt, and proceeded with the installation.
+
+![Win10_partition](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-win10-partition.png)
 
 Once the OS installation completed, the system rebooted and began the Out-of-Box Experience (OOBE) setup.
 
@@ -475,11 +479,13 @@ On the Microsoft sign-in screen, I clicked **Domain join instead** in the bottom
 
 ![Win10_domainjoin](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-win10-domainjoin.png)
 
-For the local account, I entered a username of my choice and answered all three security questions. In the privacy settings section, I disabled all options to minimize telemetry and selected **Accept**. 
+For the local account, I entered a username such as `local.admin` and clicked **Next**.
 
-When asked about Cortana, I chose **Not now** to avoid installing additional services and bloatware.
+![Win10_localadmin](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-win10-localadmin.png)
 
+In the privacy settings section, I disabled all options to minimize telemetry and selected **Accept**. 
 
+![Win10_privacy](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-win10-privacy.png)
 
 ### 🏷️ Rename the Client 
 
