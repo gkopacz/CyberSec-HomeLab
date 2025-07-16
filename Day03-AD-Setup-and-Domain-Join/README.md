@@ -518,10 +518,11 @@ After logging in with domain credentials, I opened **Command Prompt** to validat
 I ran the following commands:
 
 ```powershell
+whoami
 ipconfig /all
 ```
 
-![Win10_d](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-win10-finalcheck.png)
+![Win10_finalcheck](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-win10-finalcheck.png)
 
 
 
