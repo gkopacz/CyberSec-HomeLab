@@ -428,26 +428,26 @@ These endpoints simulate real-world users in a corporate network and allow testi
 - 🔁 **DHCP scope delivery**
 - 🔐 **Account & policy enforcement**
 
-### 📥 Download Windows 10 Enterprise ISO
+### 📥 Download Windows official ISO
 
-To begin, I downloaded the Windows 10 Enterprise ISO directly from Microsoft’s official Evaluation Center: 🔗 [Download Windows 10](https://www.microsoft.com/en-us/evalcenter/)
+To begin, I downloaded the Windows 10 and 11 ISO directly from Microsoft’s official Evaluation Center: 🔗 [Download Windows 10](https://www.microsoft.com/en-us/evalcenter/)
 
-From the main page, I selected **Windows 10 Enterprise** from dropdown. After filling out the required information form, I chose the **64-bit version** and selected my preferred **language** which is **English**. 
+For each OS, I selected the appropriate **Enterprise edition** from the dropdown menu, filled out the required form, and downloaded the **64-bit version** in **English**.
 
 ### 💻 Windows 10 VM Configuration
 
-I spun up the Hyper-V virtual machine with the following settings:
+I spun up two Hyper-V virtual machines with the following settings:
 
 | **Setting**  | **Value**                      |
 |--------------|--------------------------------|
-| Name         | Win10-Client                   |
+| Name         | Win10-Client, Win11-Client     |
 | Generation   | Gen 2                          |
 | CPU          | 2 vCPU                         |
 | Memory       | 4 GB (Dynamic)                 |
 | Disk         | 50 GB                          |
 | Network      | Internal Switch (AD subnet)    |
 
-### 💿 Install Windows 10 on the VM
+### 💿 Install Windows on the VMs
 
 On the initial setup screen, I selected the default **language**, **time and currency format**, and **keyboard layout**, then clicked **Next** followed by **Install now**.
 
@@ -524,7 +524,28 @@ ipconfig /all
 
 ![Win10_finalcheck](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-win10-finalcheck.png)
 
+The process documented for `WIN10-CLIENT01` was later repeated for `WIN11-CLIENT02`, with all steps mirrored — from OS installation and local setup to domain join and post-login validation.
 
+## 🔁 Day 03 Recap — Active Directory Foundation & Domain Join
+
+This was a pivotal day in the lab’s architecture. I spined up the full Active Directory backbone, integrated critical network services, and validated identity management by joining client endpoints to the domain. 
+
+### 🧱 Core Accomplishments
+
+- ✅ Deployed a Windows Server 2019 VM (Gen 2) to act as the **Domain Controller**
+- ✅ Installed and configured **Active Directory Domain Services (AD DS)**
+- ✅ Promoted the server to **`adlab.local`** domain controller with DNS and DHCP roles
+- ✅ Assigned a static IP to the DC and configured **DNS forwarders** to pfSense
+- ✅ Deployed and configured **DHCP scope** for the AD subnet (`10.0.3.100–200`)
+- ✅ Installed and configured **Active Directory Certificate Services** (Enterprise Root CA)
+
+### 🖥️ Client Integration
+
+- 🧩 Created two client VMs: `WIN10-CLIENT01` and `WIN11-CLIENT01`
+- 🖥️ Installed Windows 10 and 11 using ISOs from Microsoft’s Evaluation Center
+- 🔐 Joined both machines to the domain via classic **System Properties** interface
+- 🆔 Logged in using standard domain users (`alice.smith`, `bob.johnston`)
+- 📡 Validated successful domain join using `whoami` and `ipconfig /all`
 
 ## 🔜 Next Step
 
