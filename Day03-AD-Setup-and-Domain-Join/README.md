@@ -503,7 +503,7 @@ Once the system was renamed and rebooted, I logged in using the local account th
 
 Instead of using Settings, I used the legacy **System Properties** method to join the Windows 10 VM to the `adlab` domain.
 
-To begin the domain join, I opened the **System** window, click **Change settings**, then hit **Change...** under **Computer Name**. In the domain field, I entered `adlab` and when prompted, I authenticated with the domain admin credentials.
+To begin the domain join, I opened the **System** window, click **Change settings**, then hit **Change...** under **Computer Name**. In the domain field, I entered `adlab.local` and when prompted, I authenticated with the domain admin credentials.
 
 ![Win10_domain_join](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-win10-domain-join.png)
 
