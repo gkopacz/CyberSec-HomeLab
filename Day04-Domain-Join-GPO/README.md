@@ -1,3 +1,27 @@
+# 🖥️ Day 04 — Windows Clients Domain Join & GPOs
+
+![Platform](https://img.shields.io/badge/platform-HyperV-blue?logo=windows)
+![OS](https://img.shields.io/badge/Windows%20Server-2019-lightgrey?logo=windows)
+![Client1](https://img.shields.io/badge/Windows%2010-blue?logo=windows)
+![Client2](https://img.shields.io/badge/Windows%2011-blueviolet?logo=windows)
+![Status](https://img.shields.io/badge/status-done-green)
+
+## 🎯 Objective
+
+Join Windows 10 and 11 endpoints to the adlab.local domain, validate centralized authentication, and deploy foundational Group Policy Objects (GPOs) to enforce password policies, remote access settings, and audit logging. This strengthens domain-based access control and prepares the environment for future log monitoring and detection engineering.
+
+## 🧠 Skills Demonstrated
+
+- Domain join of Windows 10 and 11 clients to Active Directory (`adlab.local`)  
+- Verification of domain-based authentication using test accounts  
+- Group Policy Object (GPO) creation, linking, and scope targeting  
+- Configuration of user rights for Remote Desktop access via GPO  
+- Enforcement of password expiration and complexity policies  
+- Deployment of advanced audit policies for authentication and directory access  
+- Organizational Unit (OU) targeting for granular policy control  
+- Structured testing of login behavior and GPO impact across clients
+
+
 ## 9️⃣ Windows Clients Setup & Domain Join
 
 With the domain controller, DNS, and DHCP services now fully configured, I moved on to provisioning two Windows client machines, one **Windows 10** and one **Windows 11** — and joining them to the `adlab.local` domain.
@@ -107,20 +131,7 @@ ipconfig /all
 
 > 🚩 The process documented for `WIN10-CLIENT01` was later repeated for `WIN11-CLIENT02`, with all steps mirrored — from OS installation and local setup to domain join and post-login validation.
 
-## 🔁 Day 03 Recap — Active Directory Foundation & Domain Join
-
-This was a pivotal day in the lab’s architecture. I spined up the full Active Directory backbone, integrated critical network services, and validated identity management by joining client endpoints to the domain. 
-
-### 🧱 Core Accomplishments
-
-- ✅ Deployed a Windows Server 2019 VM (Gen 2) to act as the **Domain Controller**
-- ✅ Installed and configured **Active Directory Domain Services (AD DS)**
-- ✅ Promoted the server to **`adlab.local`** domain controller with DNS and DHCP roles
-- ✅ Assigned a static IP to the DC and configured **DNS forwarders** to pfSense
-- ✅ Deployed and configured **DHCP scope** for the AD subnet (`10.0.3.100–200`)
-- ✅ Installed and configured **Active Directory Certificate Services** (Enterprise Root CA)
-
-### 🖥️ Client Integration
+## ✅ Day 04 Recap 
 
 - 🧩 Created two client VMs: `WIN10-CLIENT01` and `WIN11-CLIENT01`
 - 🖥️ Installed Windows 10 and 11 using ISOs from Microsoft’s Evaluation Center
@@ -130,6 +141,6 @@ This was a pivotal day in the lab’s architecture. I spined up the full Active 
 
 ## 🔜 Next Step
 
-On [Day 04](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/Day04-Splunk-Logging-and-Monitoring), I’ll configure Splunk and begin sending Windows logs from the DC and clients. This will kick off the **detection engineering** and centralized monitoring phase of the HomeLab.
+On [Day 05](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/Day05-Splunk-Logging-and-Monitoring/README.md), I’ll configure Splunk and begin sending Windows logs from the DC and clients. This will kick off the **detection engineering** and centralized monitoring phase of the HomeLab.
 
 
