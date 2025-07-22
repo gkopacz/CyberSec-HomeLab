@@ -132,15 +132,25 @@ ipconfig /all
 
 > 🚩 The process documented for `WIN10-CLIENT01` was later repeated for `WIN11-CLIENT02`, with all steps mirrored — from OS installation and local setup to domain join and post-login validation.
 
-## 4️⃣ Fix: Enable Enhanced Session Mode capabilities via GPO (lesson learned)
+## 4️⃣ Fix: Enable Enhanced Session Mode capabilities via GPO
 
-During testing, I discovered that domain-joined Windows clients lost Enhanced Session Mode support in Hyper-V — preventing features like clipboard sharing, dynamic resolution, and drive redirection from working.
+After joining the Windows clients to the domain, I encountered an issue where Enhanced Session Mode stopped working in Hyper-V. Instead of loading into the desktop, the client VMs displayed an RDP-related error at login:
+
+> "To sign in remotely, you need the right to sign in through Remote Desktop Services. By default, members of the Remote Desktop Users group have this right..."
+
+This indicated the session was being treated as a Remote Desktop login, and the domain user lacked the necessary privileges to sign in.
+
+![Win10_error](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-win10-login-error.png)
 
 ### 🧩 Root Cause
 
-This issue stems from **Remote Desktop Services group policy restrictions** applied after the domain join. By default, these policies can limit session features for security reasons.
+Domain Group Policy had overridden local Remote Desktop permissions. The new domain users were not members of the **Remote Desktop Users** group, and the “Allow log on through Remote Desktop Services” policy had not been updated.
 
-To re-enable Enhanced Session capabilities, I created a custom GPO targeting my lab client OUs and applied the necessary RDP settings.
+> 🧠 Lesson Learned: Even in a lab, GPOs can silently break usability features. Always test core functionality after a domain join and document necessary fixes.
+
+### 🛠️ Resolution via Group Policy
+
+I created a dedicated GPO to restore Enhanced Session Mode behavior by explicitly allowing domain users to log on via RDP and re-enabling redirected session features.
 
 ### 📋 Steps:
 
