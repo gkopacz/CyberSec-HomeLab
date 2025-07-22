@@ -163,8 +163,6 @@ I created a dedicated GPO to restore Enhanced Session Mode behavior by explicitl
 
 ![Win10_gpo_edit](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-fix-gpo.png)
 
----
-   
 8. Then go to:  
    `Computer Configuration` → `Administrative Templates` → `Windows Components` → `Remote Desktop Services` → `Remote Desktop Session Host` → `Device and Resource Redirection`
 9. Enable the following settings:
@@ -174,8 +172,6 @@ I created a dedicated GPO to restore Enhanced Session Mode behavior by explicitl
 
 ![Win10_gpo_edit](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-fix-gpo-final.png)
 
----
-     
 10. Force a Group Policy update on the clients:
    ```powershell
    gpupdate /force
