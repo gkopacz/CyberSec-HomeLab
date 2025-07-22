@@ -163,7 +163,7 @@ The environment is now fully segmented and ready for traffic inspection, firewal
 
 ## 🔜 Next Step
 
-Next, I’ll move on to [Day 02 — Kali Linux VM Setup & pfSense Firewall Rules](https://github.com/gkopacz/CyberSec-HomeLab/tree/main/Day02-Kali-Linux-VM-Setup-and-pfSense-Configuration),  
+Next, I’ll move on to [Day 02 — Kali Linux VM Setup & pfSense Firewall Rules](https://github.com/gkopacz/CyberSec-HomeLab/tree/main/Day02-Kali-Linux-VM-Setup-and-pfSense-Configuration/README.md),  
 where I’ll spin up the *Kali Linux* VM, access the pfSense web GUI from the internal network, and start building the initial firewall rulebase.
 
 
