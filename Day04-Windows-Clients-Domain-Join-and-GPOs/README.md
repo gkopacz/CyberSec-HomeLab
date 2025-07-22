@@ -132,7 +132,33 @@ ipconfig /all
 
 > 🚩 The process documented for `WIN10-CLIENT01` was later repeated for `WIN11-CLIENT02`, with all steps mirrored — from OS installation and local setup to domain join and post-login validation.
 
-## 4️⃣ Lesson learned enhanced mode fix GPO
+## 4️⃣ Fix: Enable Enhanced Session Mode capabilities via GPO (lesson learned)
+
+During testing, I discovered that domain-joined Windows clients lost Enhanced Session Mode support in Hyper-V — preventing features like clipboard sharing, dynamic resolution, and drive redirection from working.
+
+### 🧩 Root Cause
+
+This issue stems from **Remote Desktop Services group policy restrictions** applied after the domain join. By default, these policies can limit session features for security reasons.
+
+To re-enable Enhanced Session capabilities, I created a custom GPO targeting my lab client OUs and applied the necessary RDP settings.
+
+### 📋 Steps:
+
+1. On `DC01`, launch **Group Policy Management**
+2. Right-click the target OU (e.g., `LabComputers`) → **Create a GPO in this domain, and Link it here…**
+3. Name the policy: `Enhanced Session Fix`
+4. Right-click the new GPO → **Edit**
+5. Navigate to:  
+   `Computer Configuration` → `Administrative Templates` → `Windows Components` → `Remote Desktop Services` → `Remote Desktop Session Host` → `Device and Resource Redirection`
+6. Enable the following settings:
+   - **Do not allow clipboard redirection** → `Disabled`
+   - **Do not allow drive redirection** → `Disabled`
+   - **Do not allow COM port redirection** → `Disabled`
+   - **Do not allow printer redirection** → `Disabled`
+
+7. Force a Group Policy update on the clients:
+   ```powershell
+   gpupdate /force
 
 ## 5️⃣ other GPOs
 
