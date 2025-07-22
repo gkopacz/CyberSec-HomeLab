@@ -344,7 +344,7 @@ After Day 02:
 
 ## 🔜 Next Step
 
-[Day 03](https://github.com/gkopacz/CyberSec-HomeLab/tree/main/Day03-AD-Setup-and-Domain-Join) I will focus on provisioning the Active Directory (AD) zone:
+[Day 03](https://github.com/gkopacz/CyberSec-HomeLab/tree/main/Day03-Active-Directory-Core-Deployment/README.md) I will focus on provisioning the Active Directory (AD) zone:
 
 - Deploying a Windows Server VM on the AD virtual switch
 - Promoting it to a domain controller
