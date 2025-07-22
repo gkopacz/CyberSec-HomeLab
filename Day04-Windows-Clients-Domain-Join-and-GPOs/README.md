@@ -162,20 +162,24 @@ I created a dedicated GPO to restore Enhanced Session Mode behavior by explicitl
 7. Click **Add User or Group** → enter: `Domain Users`
 
 ![Win10_gpo_edit](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-fix-gpo.png)
+
+---
    
-8. Save and Apply before adding the following policy
-9. Navigate to:  
+8. Then go to:  
    `Computer Configuration` → `Administrative Templates` → `Windows Components` → `Remote Desktop Services` → `Remote Desktop Session Host` → `Device and Resource Redirection`
-10. Enable the following settings:
+9. Enable the following settings:
    - **Do not allow clipboard redirection** → `Disabled`
    - **Do not allow drive redirection** → `Disabled`
    - **Do not allow COM port redirection** → `Disabled`
-11. Force a Group Policy update on the clients:
+
+![Win10_gpo_edit](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-fix-gpo-final.png)
+
+---
+     
+10. Force a Group Policy update on the clients:
    ```powershell
    gpupdate /force
    ```
-
-![Win10_gpo_edit](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-fix-gpo-final.png)
 
 > 🧠 Lesson Learned: Even in a lab, GPOs can silently break usability features. Always test core functionality after a domain join and document necessary fixes.
 
