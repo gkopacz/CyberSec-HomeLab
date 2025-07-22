@@ -21,10 +21,11 @@ Join Windows 10 and 11 endpoints to the adlab.local domain, validate centralized
 - Organizational Unit (OU) targeting for granular policy control  
 - Structured testing of login behavior and GPO impact across clients
 
+# 🛠️ Setup Walkthrough
 
-## 9️⃣ Windows Clients Setup & Domain Join
+AWith the domain controller, DNS, and DHCP services now fully configured, I moved on to provisioning two Windows client machines, one **Windows 10** and one **Windows 11** - and joining them to the `adlab.local` domain. This included renaming them to match lab conventions, and verifying domain authentication using the test user accounts created earlier.
 
-With the domain controller, DNS, and DHCP services now fully configured, I moved on to provisioning two Windows client machines, one **Windows 10** and one **Windows 11** — and joining them to the `adlab.local` domain.
+## 1️⃣ Windows Clients VM Setup
 
 These endpoints simulate real-world users in a corporate network and allow testing of:
 
@@ -52,7 +53,7 @@ I spun up two Hyper-V virtual machines with the following settings:
 | Disk         | 50 GB                          |
 | Network      | Internal Switch (AD subnet)    |
 
-### 💿 Install Windows on the VMs
+## 2️⃣ Install Windows on the VMs
 
 On the initial setup screen, I selected the default **language**, **time and currency format**, and **keyboard layout**, then clicked **Next** followed by **Install now**.
 
@@ -102,7 +103,7 @@ After a system reboot, the updated name took effect and the machine was ready to
 
 ![Win10_rename](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-win10-rename-host.png)
 
-### 🧑‍💼 Domain Join Process
+## 3️⃣ Domain Join Process
 
 Once the system was renamed and rebooted, I logged in using the local account that was created during the initial Windows 10 setup.
 
@@ -130,6 +131,10 @@ ipconfig /all
 ![Win10_finalcheck](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-win10-finalcheck.png)
 
 > 🚩 The process documented for `WIN10-CLIENT01` was later repeated for `WIN11-CLIENT02`, with all steps mirrored — from OS installation and local setup to domain join and post-login validation.
+
+## 4️⃣ Lesson learned enhanced mode fix GPO
+
+## 5️⃣ other GPOs
 
 ## ✅ Day 04 Recap 
 
