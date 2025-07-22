@@ -2,9 +2,8 @@
 
 ![Platform](https://img.shields.io/badge/platform-HyperV-blue?logo=windows)
 ![OS](https://img.shields.io/badge/Windows%20Server-2019-lightgrey?logo=windows)
-![Client1](https://img.shields.io/badge/Windows%2010-blue?logo=windows)
-![Client2](https://img.shields.io/badge/Windows%2011-blueviolet?logo=windows)
-![Status](https://img.shields.io/badge/status-in--progress-yellow)
+![AD Features](https://img.shields.io/badge/AD-features-DNS--DHCP--CA--GPO-lightgrey?logo=microsoft)
+![Status](https://img.shields.io/badge/status-done-green)
 
 ## 🎯 Objective
 
