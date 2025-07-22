@@ -2,13 +2,11 @@
 
 ![Platform](https://img.shields.io/badge/platform-HyperV-blue?logo=windows)
 ![OS](https://img.shields.io/badge/Windows%20Server-2019-lightgrey?logo=windows)
-![Client1](https://img.shields.io/badge/Windows%2010-blue?logo=windows)
-![Client2](https://img.shields.io/badge/Windows%2011-blueviolet?logo=windows)
 ![Status](https://img.shields.io/badge/status-done-green)
 
 ## 🎯 Objective
 
-Deploy a **Windows Server 2019** VM in the `AD` subnet and promote it to a **Domain Controller**. Set up **Active Directory**, configure **DNS**, and enable **DHCP** for the subnet. Join Windows clients to the new domain to validate identity management and directory-based authentication. This lays the foundation for centralized access control, Group Policy testing, and future detection engineering scenarios.
+Deploy a **Windows Server 2019** VM in the `AD` subnet and promote it to a **Domain Controller**. Set up **Active Directory**, configure **DNS**, enable **DHCP** for the subnet and deploy AD Certificate Authority. This lays the foundation for centralized access control, Group Policy testing, and future detection engineering scenarios.
 
 
 ## 🧠 Skills Demonstrated
@@ -18,8 +16,9 @@ Deploy a **Windows Server 2019** VM in the `AD` subnet and promote it to a **Dom
 - Configuration of **DNS Server** for internal name resolution  
 - Setup of **DHCP Server** for automated IP assignment in the AD zone  
 - Creation of an **Active Directory forest and domain** (e.g., `adlab.local`)  
-- Domain join of Windows 10 and 11 clients and login validation  
-- Basic troubleshooting of domain-related connectivity and authentication issues
+- Installation and configuration of Active Directory Certificate Services (AD CS) with a Root Enterprise CA
+- Configuration of custom Organizational Units (OUs) and dummy user accounts
+- Foundation laid for Group Policy and domain-based access control in upcoming lab stages
 
 # 🛠️ Setup Walkthrough
 
@@ -416,3 +415,18 @@ You can either move them manually after creation, or create them directly inside
 ![AD_User](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-ad-newuser.png)
 
 > 🔐 I will enforce password expiration and other authentication policies via Group Policy in Day 04. For now, I'm disabling expiration to keep testing consistent and simple.
+
+## ✅ Day 03 Recap
+
+- Deployed a Windows Server 2019 VM (Gen 2) to act as the **Domain Controller**
+- Installed and configured **Active Directory Domain Services (AD DS)**
+- Promoted the server to **`adlab.local`** domain controller with DNS and DHCP roles
+- Assigned a static IP to the DC and configured **DNS forwarders** to pfSense
+- Deployed and configured **DHCP scope** for the AD subnet (`10.0.3.100–200`)
+- Installed and configured **Active Directory Certificate Services** (Enterprise Root CA)
+
+## 🔜 Next Step
+
+On [Day 04](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/Day04-Domain-Join-GPO), I’ll finalize the domain join process for Windows clients and implement core Group Policy Objects (GPOs) to enforce authentication policies and prepare the environment for centralized log collection and detection engineering.
+
+
