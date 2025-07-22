@@ -146,8 +146,6 @@ This indicated the session was being treated as a Remote Desktop login, and the 
 
 Domain Group Policy had overridden local Remote Desktop permissions. The new domain users were not members of the **Remote Desktop Users** group, and the “Allow log on through Remote Desktop Services” policy had not been updated.
 
-> 🧠 Lesson Learned: Even in a lab, GPOs can silently break usability features. Always test core functionality after a domain join and document necessary fixes.
-
 ### 🛠️ Resolution via Group Policy
 
 I created a dedicated GPO to restore Enhanced Session Mode behavior by explicitly allowing domain users to log on via RDP and re-enabling redirected session features.
@@ -159,16 +157,27 @@ I created a dedicated GPO to restore Enhanced Session Mode behavior by explicitl
 3. Name the policy: `Enhanced Session Fix`
 4. Right-click the new GPO → **Edit**
 5. Navigate to:  
+   `Computer Configuration` → `Windows Settings` → `Security Settings` → `Local Policies` → `User Rights Assignment`
+6. Double-click: **Allow log on through Remote Desktop Services**
+7. Click **Add User or Group** → enter: `Domain Users`
+
+![Win10_gpo_edit](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-fix-gpo.png)
+   
+8. Save and Apply before adding the following policy
+9. Navigate to:  
    `Computer Configuration` → `Administrative Templates` → `Windows Components` → `Remote Desktop Services` → `Remote Desktop Session Host` → `Device and Resource Redirection`
-6. Enable the following settings:
+10. Enable the following settings:
    - **Do not allow clipboard redirection** → `Disabled`
    - **Do not allow drive redirection** → `Disabled`
    - **Do not allow COM port redirection** → `Disabled`
-   - **Do not allow printer redirection** → `Disabled`
-
-7. Force a Group Policy update on the clients:
+11. Force a Group Policy update on the clients:
    ```powershell
    gpupdate /force
+   ```
+
+![Win10_gpo_edit](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-fix-gpo-final.png)
+
+> 🧠 Lesson Learned: Even in a lab, GPOs can silently break usability features. Always test core functionality after a domain join and document necessary fixes.
 
 ## 5️⃣ other GPOs
 
