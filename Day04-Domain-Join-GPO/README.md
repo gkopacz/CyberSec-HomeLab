@@ -106,3 +106,30 @@ ipconfig /all
 ![Win10_finalcheck](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-win10-finalcheck.png)
 
 > 🚩 The process documented for `WIN10-CLIENT01` was later repeated for `WIN11-CLIENT02`, with all steps mirrored — from OS installation and local setup to domain join and post-login validation.
+
+## 🔁 Day 03 Recap — Active Directory Foundation & Domain Join
+
+This was a pivotal day in the lab’s architecture. I spined up the full Active Directory backbone, integrated critical network services, and validated identity management by joining client endpoints to the domain. 
+
+### 🧱 Core Accomplishments
+
+- ✅ Deployed a Windows Server 2019 VM (Gen 2) to act as the **Domain Controller**
+- ✅ Installed and configured **Active Directory Domain Services (AD DS)**
+- ✅ Promoted the server to **`adlab.local`** domain controller with DNS and DHCP roles
+- ✅ Assigned a static IP to the DC and configured **DNS forwarders** to pfSense
+- ✅ Deployed and configured **DHCP scope** for the AD subnet (`10.0.3.100–200`)
+- ✅ Installed and configured **Active Directory Certificate Services** (Enterprise Root CA)
+
+### 🖥️ Client Integration
+
+- 🧩 Created two client VMs: `WIN10-CLIENT01` and `WIN11-CLIENT01`
+- 🖥️ Installed Windows 10 and 11 using ISOs from Microsoft’s Evaluation Center
+- 🔐 Joined both machines to the domain via classic **System Properties** interface
+- 🆔 Logged in using standard domain users (`alice.smith`, `bob.johnston`)
+- 📡 Validated successful domain join using `whoami` and `ipconfig /all`
+
+## 🔜 Next Step
+
+On [Day 04](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/Day04-Splunk-Logging-and-Monitoring), I’ll configure Splunk and begin sending Windows logs from the DC and clients. This will kick off the **detection engineering** and centralized monitoring phase of the HomeLab.
+
+
