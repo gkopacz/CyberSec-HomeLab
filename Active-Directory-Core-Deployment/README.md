@@ -363,3 +363,56 @@ I proceeded through the remaining pages using the default settings:
 - Completed the wizard and let the system configure the CA
 
 ![Cert_conf](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-cert-config.png)
+
+## 8️⃣ Populate Active Directory: Create Dummy Users & Organizational Units
+
+With the domain controller, DNS and DHCP configured, I moved on to creating a few Organisational Units and test users to simulate a real-world Active Directory environment.
+
+Why Not Use Default Containers❓
+
+By default, Active Directory provides built-in **containers** like `Users` and `Computers`. However, these aren’t actual OUs and **don’t support GPO linking or delegation**.
+
+To follow best practices, I created custom OUs:
+
+- `OU=LabUsers,DC=adlab,DC=local`
+- `OU=LabAdmins,DC=adlab,DC=local`
+- `OU=LabComputers,DC=adlab,DC=local`
+
+This structure gives me control and flexibility as the lab grows.
+
+### 👥 Creating Organisational Units (OU)
+
+1. Open **Active Directory Users and Computers**
+2. Right-click the domain (`adlab.local`) → **New** → **Organizational Unit**
+3. Enter name (e.g., `LabUsers`)
+4. Repeat for each desired category
+
+![AD_OU](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-ad-ou.png)
+
+Why Create Dummy Users❓
+
+In enterprise environments, user accounts form the core of identity-based security. Even in a lab, having realistic users allows me to test authentication logging, group policies, privilege escalation paths, and more.
+
+### 🧪 Sample Accounts
+
+| Name         | Username       | OU          | Role             | Notes                   |
+|--------------|----------------|-------------|------------------|-------------------------|
+| Alice Smith  | `alice.smith`  | LabUsers    | Standard User    | Password never expires  |
+| Bob Johnson  | `bob.johnson`  | LabUsers    | Standard User    | Password never expires  |
+| Admin Test   | `admin.test`   | LabAdmins   | Privileged User  | For GPO & escalation    |
+
+### 👤 Creating Test Accounts
+
+By default, any new user account is placed in the `Users` container (`CN=Users`), which is a **container object**, *not* an Organizational Unit (OU).
+
+You can either move them manually after creation, or create them directly inside a specific OU:
+
+1. Navigate to `LabUsers` OU → Right-click → **New** → **User**
+2. Provide full name and username
+3. Assign a strong password
+4. Uncheck: `User must change password at next logon`
+5. Check: `Password never expires`
+
+![AD_User](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-ad-newuser.png)
+
+> 🔐 I will enforce password expiration and other authentication policies via Group Policy in Day 04. For now, I'm disabling expiration to keep testing consistent and simple.
