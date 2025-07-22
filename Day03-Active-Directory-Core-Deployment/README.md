@@ -427,6 +427,6 @@ You can either move them manually after creation, or create them directly inside
 
 ## 🔜 Next Step
 
-On [Day 04](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/Day04-Domain-Join-GPO), I’ll finalize the domain join process for Windows clients and implement core Group Policy Objects (GPOs) to enforce authentication policies and prepare the environment for centralized log collection and detection engineering.
+On [Day 04](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/Day04-Windows-Clients-Domain-Join-and-GPOs/README.md), I’ll finalize the domain join process for Windows clients and implement core Group Policy Objects (GPOs) to enforce authentication policies and prepare the environment for centralized log collection and detection engineering.
 
 
