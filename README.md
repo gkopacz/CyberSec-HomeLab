@@ -60,12 +60,12 @@ Design and implement a **cybersecurity homelab** tailored for learning, testing,
 
 | Day | Title                                              | Link                                                                                         | Status          |
 |-----|----------------------------------------------------|----------------------------------------------------------------------------------------------|-----------------|
-| 01  | Core Network & pfSense Setup                       | [Go to Day 01](https://github.com/gkopacz/CyberSec-HomeLab/tree/main/Day01-Core-Network-and-pfSense-Setup) | ✅ Done         |
-| 02  | Kali Linux VM Setup & pfSense Firewall Rules       | [Go to Day 02](https://github.com/gkopacz/CyberSec-HomeLab/tree/main/Day02-Kali-Linux-VM-Setup-and-pfSense-Configuration) | ✅ Done |
-| 03  | Active Directory Core Deployment                   | [Go to Day 03](https://github.com/gkopacz/CyberSec-HomeLab/tree/main/Day03-AD-InfraSetup)   | ✅ Done         |
-| 04  | Domain Join & GPO Configuration                    | [Go to Day 04](https://github.com/gkopacz/CyberSec-HomeLab/tree/main/Day04-DomainJoin-And-GPO) | 🛠️ In Progress  |
-| 05  | Splunk Logging & Monitoring                        | [Go to Day 05](https://github.com/gkopacz/CyberSec-HomeLab/tree/main/Day05-Splunk-Logging-and-Monitoring) | ⏳ Pending      |
-| 06  | Deploy Vulnerable Machines                         | [Go to Day 06](https://github.com/gkopacz/CyberSec-HomeLab/tree/main/Day06-Deploy-Vulnerable-Machines) | ⏳ Pending      |
+| 01  | Core Network & pfSense Setup                       | [Go to Day 01](https://github.com/gkopacz/CyberSec-HomeLab/tree/main/Day01-Core-Network-and-pfSense-Setup/README.md) | ✅ Done         |
+| 02  | Kali Linux VM Setup & pfSense Firewall Rules       | [Go to Day 02](https://github.com/gkopacz/CyberSec-HomeLab/tree/main/Day02-Kali-Linux-VM-Setup-and-pfSense-Configuration/README.md) | ✅ Done |
+| 03  | Active Directory Core Deployment                   | [Go to Day 03](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/Day03-Active-Directory-Core-Deployment/README.md)   | ✅ Done         |
+| 04  | Domain Join & GPO Configuration                    | [Go to Day 04](https://github.com/gkopacz/CyberSec-HomeLab/tree/main/Day04-DomainJoin-And-GPO/README.md) | 🛠️ In Progress  |
+| 05  | Splunk Logging & Monitoring                        | [Go to Day 05](https://github.com/gkopacz/CyberSec-HomeLab/tree/main/Day05-Splunk-Logging-and-Monitoring/README.md) | ⏳ Pending      |
+| 06  | Deploy Vulnerable Machines                         | [Go to Day 06](https://github.com/gkopacz/CyberSec-HomeLab/tree/main/Day06-Deploy-Vulnerable-Machines/README.md) | ⏳ Pending      |
 
 
 ## 🏗️ Project Overview
@@ -104,4 +104,4 @@ I've created the following network diagram to have a better understanding of the
 
 ### ✅ Next Step
 
-The lab begins with [Day 01](https://github.com/gkopacz/CyberSec-HomeLab/tree/main/Day01-Core-Network-and-pfSense-Setup), where I configured the virtual switches and set up pfSense as the core firewall.
+The lab begins with [Day 01](https://github.com/gkopacz/CyberSec-HomeLab/tree/main/Day01-Core-Network-and-pfSense-Setup/README.md), where I configured the virtual switches and set up pfSense as the core firewall.
