@@ -158,14 +158,14 @@ Domain Group Policy had overridden local Remote Desktop permissions. The new dom
 - **Assumed** this would reflect in the local group on each client — it didn’t  
 - Local `Remote Desktop Users` group remained empty
 
+> 🔍 GPOs can assign permissions to domain groups, but local groups must be explicitly populated via **Group Policy Preferences (GPP)** or scripts.
+
 ### 🛠️ Resolution via Group Policy
 
 To restore Enhanced Session Mode functionality, I created a dedicated GPO with two components:
 
 1. **Grants RDP logon rights** directly to `ADLAB\Domain Users`  
 2. *(Optional)* Populates the local `Remote Desktop Users` group using GPP
-
-> 🔍 GPOs can assign permissions to domain groups, but local groups must be explicitly populated via **Group Policy Preferences (GPP)** or scripts.
 
 ### ✅ Method 1: Direct Assignment (Best for Labs)
 
