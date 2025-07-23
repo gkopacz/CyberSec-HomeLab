@@ -186,7 +186,7 @@ To restore Enhanced Session Mode functionality, I created a dedicated GPO with t
 
 This method keeps logon permissions tied to the **local** `Remote Desktop Users` group (as in enterprise setups), and uses GPP to control **who is a member** of that group.
 
-> 📌 **Important:** If using this method, go back to the previous step and configure **Allow log on through Remote Desktop Services** to grant access to **Remote Desktop Users (local)** — _not_ directly to `ADLAB\Domain Users`.
+> 📢 **Important:** If using this method, go back to the previous step and configure **Allow log on through Remote Desktop Services** to grant access to **Remote Desktop Users (local)** — _not_ directly to `ADLAB\Domain Users`.
 
 1. In the same GPO, navigate to:  
    `Computer Configuration → Preferences → Control Panel Settings → Local Users and Groups`
@@ -197,6 +197,8 @@ This method keeps logon permissions tied to the **local** `Remote Desktop Users`
    - **Group name:** Remote Desktop Users  
    - **Description:** Add domain users for RDP  
    - **Members:** `ADLAB\Domain Users`
+
+![Win10_gpp](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-fix-gpp.png)
 
 > 💡 This method mimics enterprise behavior, RDP permission stays tied to the local group, while GPP handles group membership.
 
@@ -220,9 +222,11 @@ This method keeps logon permissions tied to the **local** `Remote Desktop Users`
    ```
 2. Check if Enhanced Session Fix GPO is being applied:
    ```cmd
-   gpresult /H report.html
-   start report.html
+   gpresult /scope:computer /h c:\gpo_report.html
+   start c:\gpo_report.html
    ```
+
+![Win10_gpresult](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-fix-gpresult.png)
 
 ### 📚 Best Practice Breakdown
 
