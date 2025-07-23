@@ -388,6 +388,10 @@ This structure gives me control and flexibility as the lab grows.
 
 ![AD_OU](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-ad-ou.png)
 
+> 🏷️ Note: The LabAdmins Organizational Unit is used for clean separation of administrative accounts in Active Directory.
+> 🔐 To actually control admin privileges, a separate security group (LabAdmins_Group) was created, and users from the LabAdmins OU were added to it.
+> This group is used later in Day04 - GPO #4: Local Admin Group Enforcement via Restricted Groups to define local admin access on clients.
+
 Why Create Dummy Users❓
 
 In enterprise environments, user accounts form the core of identity-based security. Even in a lab, having realistic users allows me to test authentication logging, group policies, privilege escalation paths, and more.
