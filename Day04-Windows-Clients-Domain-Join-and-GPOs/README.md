@@ -171,7 +171,7 @@ To restore Enhanced Session Mode functionality, I created a dedicated GPO with t
 
 1. On `DC01`, launch **Group Policy Management**
 2. Right-click the target OU (e.g., `LabComputers`) → **Create a GPO in this domain, and Link it here…**
-3. Name the policy: `Enhanced Session Fix`
+3. Name the policy: `Enhanced Session Fix for Endpoints`
 4. Right-click the new GPO → **Edit**
 5. Navigate to:  
    `Computer Configuration` → `Windows Settings` → `Security Settings` → `Local Policies` → `User Rights Assignment`
