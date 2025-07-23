@@ -321,6 +321,23 @@ To strengthen detection capabilities and enforce least-privilege principles, I a
 
 > 🧠 These settings log every executed PowerShell block, module activity, and full console input/output to both **Event Viewer** and **plain-text files**, making it easier to detect post-exploitation and tool misuse.
 
+### 🔎 PowerShell Logging Verification
+
+Verified:
+- PowerShell transcripts saved to: `C:\Transcripts`  
+- Script Block events under: `Event Viewer → Applications and Services Logs → Microsoft → Windows → PowerShell → Operational`
+
+![Win10_pwr_ops](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-powershell-operational.png)
+
+> 🧠 These logs are crucial for **incident detection, lateral movement analysis**, and **script-based attack visibility**, forming the telemetry backbone ahead of Splunk integration.
+
+| Event ID | Description                             | Purpose                                   |
+|----------|-----------------------------------------|-------------------------------------------|
+| **4103** | PowerShell Module Logging               | Captures loaded modules and cmdlets       |
+| **4104** | Script Block Logging                    | Logs full content of executed scripts     |
+| **4105** | Provider “Start” Event                  | Shows when a PowerShell provider starts   |
+| **4106** | Provider “Stop” Event                   | Indicates when a provider is stopped      |
+
 ### 📌 GPO 4: Disable Local Administrator Account
 
 **GPO Name:** `Disable Local Administrator`  
@@ -344,23 +361,6 @@ To strengthen detection capabilities and enforce least-privilege principles, I a
 ![Win10_local_admins_policy](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-local-admins-policy.png)
 
 > 🚫 This removes any unintended users or groups (e.g. `Domain Users`) from the local Administrators group on all client machines, a critical step for enforcing **least privilege** and preventing lateral movement.
-
-### 🔎 PowerShell Logging Verification
-
-Verified:
-- PowerShell transcripts saved to: `C:\Transcripts`  
-- Script Block events under: `Event Viewer → Applications and Services Logs → Microsoft → Windows → PowerShell → Operational`
-
-![Win10_pwr_ops](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-powershell-operational.png)
-
-> 🧠 These logs are crucial for **incident detection, lateral movement analysis**, and **script-based attack visibility**, forming the telemetry backbone ahead of Splunk integration.
-
-| Event ID | Description                             | Purpose                                   |
-|----------|-----------------------------------------|-------------------------------------------|
-| **4103** | PowerShell Module Logging               | Captures loaded modules and cmdlets       |
-| **4104** | Script Block Logging                    | Logs full content of executed scripts     |
-| **4105** | Provider “Start” Event                  | Shows when a PowerShell provider starts   |
-| **4106** | Provider “Stop” Event                   | Indicates when a provider is stopped      |
 
 ### 🧩 Local Administrator Group Verification
 
