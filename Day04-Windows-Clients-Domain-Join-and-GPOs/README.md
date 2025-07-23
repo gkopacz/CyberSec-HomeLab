@@ -184,6 +184,10 @@ To restore Enhanced Session Mode functionality, I created a dedicated GPO with t
 
 ### 🔄 Method 2: Enterprise Approach via Group Policy Preferences (Optional)
 
+This method keeps logon permissions tied to the **local** `Remote Desktop Users` group (as in enterprise setups), and uses GPP to control **who is a member** of that group.
+
+> 📌 **Important:** If using this method, go back to the previous step and configure **Allow log on through Remote Desktop Services** to grant access to **Remote Desktop Users (local)** — _not_ directly to `ADLAB\Domain Users`.
+
 1. In the same GPO, navigate to:  
    `Computer Configuration → Preferences → Control Panel Settings → Local Users and Groups`
 2. Right-click → **New** → **Local Group**
