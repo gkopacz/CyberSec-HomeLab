@@ -326,8 +326,7 @@ To strengthen detection capabilities and enforce least-privilege principles, I a
 ### 📌 GPO 4: Disable Local Administrator Account
 
 **GPO Name:** `Disable Local Administrator`  
-**Path:**  
-`Computer Configuration` → `Policies` → `Windows Settings` → `Security Settings` → `Local Policies` → `Security Options`
+**Path:** `Computer Configuration` → `Policies` → `Windows Settings` → `Security Settings` → `Local Policies` → `Security Options`
 
 **Configuration:**
 
@@ -352,13 +351,11 @@ To strengthen detection capabilities and enforce least-privilege principles, I a
 
 > 🚫 This removes any unintended users or groups (e.g. `Domain Users`) from the local Administrators group on all client machines, a critical step for enforcing **least privilege** and preventing lateral movement.
 
-### 🔎 PowerShell Logging & Local Group Verification
+### 🔎 PowerShell Logging Verification
 
 Verified:
 - PowerShell transcripts saved to: `C:\Transcripts`  
 - Script Block events under: `Event Viewer → Applications and Services Logs → Microsoft → Windows → PowerShell → Operational`
-
-![Win10_pwr_ops](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-powershell-operational.png)
 
 | Event ID | Description                             | Purpose                                   |
 |----------|-----------------------------------------|-------------------------------------------|
@@ -367,7 +364,11 @@ Verified:
 | **4105** | Provider “Start” Event                  | Shows when a PowerShell provider starts   |
 | **4106** | Provider “Stop” Event                   | Indicates when a provider is stopped      |
 
+![Win10_pwr_ops](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-powershell-operational.png)
+
 > 🧠 These logs are crucial for **incident detection, lateral movement analysis**, and **script-based attack visibility**, forming the telemetry backbone ahead of Splunk integration.
+
+### 🧩 Local Administrator Group Verification
 
 Confirmed local administrator group membership on each client:
 
