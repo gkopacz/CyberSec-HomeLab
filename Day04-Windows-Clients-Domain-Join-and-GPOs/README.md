@@ -23,7 +23,7 @@ Join Windows 10 and 11 endpoints to the adlab.local domain, validate centralized
 
 # 🛠️ Setup Walkthrough
 
-AWith the domain controller, DNS, and DHCP services now fully configured, I moved on to provisioning two Windows client machines, one **Windows 10** and one **Windows 11** - and joining them to the `adlab.local` domain. This included renaming them to match lab conventions, and verifying domain authentication using the test user accounts created earlier.
+With the domain controller, DNS, and DHCP services now fully configured, I moved on to provisioning two Windows client machines, one **Windows 10** and one **Windows 11** - and joining them to the `adlab.local` domain. This included renaming them to match lab conventions, and verifying domain authentication using the test user accounts created earlier.
 
 ## 1️⃣ Windows Clients VM Setup
 
@@ -142,13 +142,32 @@ This indicated the session was being treated as a Remote Desktop login, and the 
 
 ![Win10_error](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-win10-login-error.png)
 
-### 🧩 Root Cause
+### 🧪 Symptoms Observed
+
+- Cannot initiate Enhanced Session Mode from Hyper-V Manager  
+- Clipboard, drive redirection, and display scaling unavailable  
+- Attempting RDP-style session results in: **"The requested session access is denied."**  
+- Clients were reachable, but remote login was silently blocked by policy
+
+### 🕵️ Root Cause
 
 Domain Group Policy had overridden local Remote Desktop permissions. The new domain users were not members of the **Remote Desktop Users** group, and the “Allow log on through Remote Desktop Services” policy had not been updated.
 
+- Initially granted **Remote Desktop Users** group logon rights via GPO  
+- Verified that `ADLAB\Domain Users` were members of the domain-level **Remote Desktop Users**  
+- **Assumed** this would reflect in the local group on each client — it didn’t  
+- Local `Remote Desktop Users` group remained empty
+
+> 🔍 GPOs can assign permissions to domain groups, but local groups must be explicitly populated via **Group Policy Preferences (GPP)** or scripts.
+
 ### 🛠️ Resolution via Group Policy
 
-I created a dedicated GPO to restore Enhanced Session Mode behavior by explicitly allowing domain users to log on via RDP and re-enabling redirected session features.
+To restore Enhanced Session Mode functionality, I created a dedicated GPO with two components:
+
+1. **Grants RDP logon rights** directly to `ADLAB\Domain Users`  
+2. *(Optional)* Populates the local `Remote Desktop Users` group using GPP
+
+## ✅ Method 1: Direct Assignment (Best for Labs)
 
 ### 📋 Steps:
 
@@ -163,13 +182,16 @@ I created a dedicated GPO to restore Enhanced Session Mode behavior by explicitl
 
 ![Win10_gpo_edit](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-fix-gpo.png)
 
-8. Then go to:  
+> 📌 This grants RDP logon rights directly, bypassing group nesting issues
+
+### 📋 Configure Session Redirection Policies
+
+8. In the same GPO, go to:  
    `Computer Configuration` → `Administrative Templates` → `Windows Components` → `Remote Desktop Services` → `Remote Desktop Session Host` → `Device and Resource Redirection`
 9. Enable the following settings:
    - **Do not allow clipboard redirection** → `Disabled`
    - **Do not allow drive redirection** → `Disabled`
-   - **Do not allow COM port redirection** → `Disabled`
-
+   
 ![Win10_gpo_edit](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-fix-gpo-final.png)
 
 10. Force a Group Policy update on the clients:
@@ -178,6 +200,20 @@ I created a dedicated GPO to restore Enhanced Session Mode behavior by explicitl
    ```
 
 > 🧠 Lesson Learned: Even in a lab, GPOs can silently break usability features. Always test core functionality after a domain join and document necessary fixes.
+
+## 🔄 Method 2: Enterprise Approach via Group Policy Preferences
+
+1. In the same GPO, navigate to:  
+   `Computer Configuration → Preferences → Control Panel Settings → Local Users and Groups`
+2. Right-click → **New** → **Local Group**
+3. Configure the following:
+
+   - **Action:** Update  
+   - **Group name:** Remote Desktop Users  
+   - **Description:** Add domain users for RDP  
+   - **Members:** `ADLAB\Domain Users`
+
+> 💡 This method mimics enterprise behavior — RDP permission stays tied to the local group, while GPP handles group membership.
 
 ## 5️⃣ other GPOs
 
