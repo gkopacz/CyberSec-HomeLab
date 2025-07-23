@@ -173,8 +173,7 @@ To restore Enhanced Session Mode functionality, I created a dedicated GPO with t
 2. Right-click the target OU (e.g., `LabComputers`) → **Create a GPO in this domain, and Link it here…**
 3. Name the policy: `Enhanced Session Fix for Endpoints`
 4. Right-click the new GPO → **Edit**
-5. Navigate to:  
-   `Computer Configuration` → `Windows Settings` → `Security Settings` → `Local Policies` → `User Rights Assignment`
+5. Navigate to: `Computer Configuration` → `Windows Settings` → `Security Settings` → `Local Policies` → `User Rights Assignment`
 6. Double-click: **Allow log on through Remote Desktop Services**
 7. Click **Add User or Group** → enter: `Domain Users`
 
@@ -188,8 +187,7 @@ This method keeps logon permissions tied to the **local** `Remote Desktop Users`
 
 > 📢 **Important:** If using this method, go back to the previous step and configure **Allow log on through Remote Desktop Services** to grant access to **Remote Desktop Users (local)** — _not_ directly to `ADLAB\Domain Users`.
 
-1. In the same GPO, navigate to:  
-   `Computer Configuration → Preferences → Control Panel Settings → Local Users and Groups`
+1. In the same GPO, navigate to: `Computer Configuration → Preferences → Control Panel Settings → Local Users and Groups`
 2. Right-click → **New** → **Local Group**
 3. Configure the following:
 
@@ -252,8 +250,7 @@ With domain join complete, I moved forward with applying baseline security contr
 This policy requires linking the Default Domain Policy at the domain level (if not already linked), and then editing it directly to enforce domain-wide password and lockout settings.
 
 **GPO Name:** `Default Domain Policy`  
-**Path:**  
-`Computer Configuration` → `Policies` → `Windows Settings` → `Security Settings` → `Account Policies`
+**Path:** `Computer Configuration` → `Policies` → `Windows Settings` → `Security Settings` → `Account Policies`
 
 **Settings Applied:**
 
@@ -280,8 +277,7 @@ This policy requires linking the Default Domain Policy at the domain level (if n
 ### 📌 GPO 2: Advanced Audit Policy Configuration
 
 **GPO Name:** `Audit Logging Baseline`  
-**Path:**  
-`Computer Configuration` → `Policies` → `Windows Settings` → `Security Settings` → `Advanced Audit Policy Configuration`
+**Path:** `Computer Configuration` → `Policies` → `Windows Settings` → `Security Settings` → `Advanced Audit Policy Configuration`
 
 **Audit Categories Enabled:**
 
@@ -322,10 +318,26 @@ To strengthen detection capabilities and enforce least-privilege principles, I a
 - **Turn on Module Logging:** Enabled  
 - **Turn on PowerShell Transcription:** Enabled  
   - Transcript Output Directory: `C:\Transcripts`
+ 
+![Win10_powershell_logging](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-powershell.png)
 
 > 🧠 These settings log every executed PowerShell block, module activity, and full console input/output to both **Event Viewer** and **plain-text files**, making it easier to detect post-exploitation and tool misuse.
 
-### 📌 GPO 4: Local Admin Group Enforcement
+### 📌 GPO 4: Disable Local Administrator Account
+
+**GPO Name:** `Disable Local Administrator`  
+**Path:**  
+`Computer Configuration` → `Policies` → `Windows Settings` → `Security Settings` → `Local Policies` → `Security Options`
+
+**Configuration:**
+
+| Setting                                  | Value    |
+|------------------------------------------|----------|
+| Accounts: Administrator account status   | Disabled |
+
+> 🚫 This disables the built-in local Administrator account on all targeted machines, reducing lateral movement risk. All administrative access should be handled through domain-based groups like `ADLAB\LabAdmins_group`.
+
+### 📌 GPO 5: Local Admin Group Enforcement
 
 **GPO Name:** `Local Admin Restriction`  
 **Path:** `Computer Configuration` → `Policies` → `Windows Settings` → `Security Settings` → `Restricted Groups`
@@ -334,7 +346,9 @@ To strengthen detection capabilities and enforce least-privilege principles, I a
 - Group Name: `Administrators`  
 - Members:
   - `ADLAB\Administrator`
-  - `ADLAB\LabAdmins` 
+  - `ADLAB\LabAdmins_group`
+ 
+![Win10_local_admins_policy](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-local-admins-policy.png)
 
 > 🚫 This removes any unintended users or groups (e.g. `Domain Users`) from the local Administrators group on all client machines, a critical step for enforcing **least privilege** and preventing lateral movement.
 
@@ -342,8 +356,18 @@ To strengthen detection capabilities and enforce least-privilege principles, I a
 
 Verified:
 - PowerShell transcripts saved to: `C:\Transcripts`  
-- Script Block events under:  
-  `Event Viewer → Applications and Services Logs → Microsoft-Windows-PowerShell/Operational`
+- Script Block events under: `Event Viewer → Applications and Services Logs → Microsoft → Windows → PowerShell → Operational`
+
+![Win10_pwr_ops](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-powershell-operational.png)
+
+| Event ID | Description                             | Purpose                                   |
+|----------|-----------------------------------------|-------------------------------------------|
+| **4103** | PowerShell Module Logging               | Captures loaded modules and cmdlets       |
+| **4104** | Script Block Logging                    | Logs full content of executed scripts     |
+| **4105** | Provider “Start” Event                  | Shows when a PowerShell provider starts   |
+| **4106** | Provider “Stop” Event                   | Indicates when a provider is stopped      |
+
+> 🧠 These logs are crucial for **incident detection, lateral movement analysis**, and **script-based attack visibility**, forming the telemetry backbone ahead of Splunk integration.
 
 Confirmed local administrator group membership on each client:
 
@@ -351,7 +375,9 @@ Confirmed local administrator group membership on each client:
 net localgroup Administrators
 ```
 
-> ✅ These controls further harden the client machines and improve log signal quality ahead of full Splunk integration.
+![Win10_pwr_admins](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-powershell-admins.png)
+
+> 🔒 Disabling the Administrator account prevents usage, but does not remove its group presence. This is normal and aligns with secure baseline behavior. Administrative access should instead flow through controlled domain groups.
 
 ## ✅ Day 04 Recap 
 
