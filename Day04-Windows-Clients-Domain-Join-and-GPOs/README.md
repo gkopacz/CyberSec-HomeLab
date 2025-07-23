@@ -158,7 +158,7 @@ Domain Group Policy had overridden local Remote Desktop permissions. The new dom
 - **Assumed** this would reflect in the local group on each client — it didn’t  
 - Local `Remote Desktop Users` group remained empty
 
-> 🔍 GPOs can assign permissions to domain groups, but local groups must be explicitly populated via **Group Policy Preferences (GPP)** or scripts.
+> 🔍 GPOs can assign permissions to domain groups, but local groups must be explicitly populated via **Group Policy Preferences (GPP)**.
 
 ### 🛠️ Resolution via Group Policy
 
