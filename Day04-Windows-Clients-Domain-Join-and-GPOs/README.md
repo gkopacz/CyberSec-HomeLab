@@ -123,7 +123,7 @@ After logging in with domain credentials, I opened **Command Prompt** to validat
 
 I ran the following commands:
 
-```powershell
+```cmd
 whoami
 ipconfig /all
 ```
@@ -158,8 +158,6 @@ Domain Group Policy had overridden local Remote Desktop permissions. The new dom
 - **Assumed** this would reflect in the local group on each client — it didn’t  
 - Local `Remote Desktop Users` group remained empty
 
-> 🔍 GPOs can assign permissions to domain groups, but local groups must be explicitly populated via **Group Policy Preferences (GPP)** or scripts.
-
 ### 🛠️ Resolution via Group Policy
 
 To restore Enhanced Session Mode functionality, I created a dedicated GPO with two components:
@@ -167,9 +165,9 @@ To restore Enhanced Session Mode functionality, I created a dedicated GPO with t
 1. **Grants RDP logon rights** directly to `ADLAB\Domain Users`  
 2. *(Optional)* Populates the local `Remote Desktop Users` group using GPP
 
-## ✅ Method 1: Direct Assignment (Best for Labs)
+> 🔍 GPOs can assign permissions to domain groups, but local groups must be explicitly populated via **Group Policy Preferences (GPP)** or scripts.
 
-### 📋 Steps:
+### ✅ Method 1: Direct Assignment (Best for Labs)
 
 1. On `DC01`, launch **Group Policy Management**
 2. Right-click the target OU (e.g., `LabComputers`) → **Create a GPO in this domain, and Link it here…**
@@ -182,26 +180,9 @@ To restore Enhanced Session Mode functionality, I created a dedicated GPO with t
 
 ![Win10_gpo_edit](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-fix-gpo.png)
 
-> 📌 This grants RDP logon rights directly, bypassing group nesting issues
+> 📌 This grants RDP logon rights directly, bypassing group nesting issues.
 
-### 📋 Configure Session Redirection Policies
-
-8. In the same GPO, go to:  
-   `Computer Configuration` → `Administrative Templates` → `Windows Components` → `Remote Desktop Services` → `Remote Desktop Session Host` → `Device and Resource Redirection`
-9. Enable the following settings:
-   - **Do not allow clipboard redirection** → `Disabled`
-   - **Do not allow drive redirection** → `Disabled`
-   
-![Win10_gpo_edit](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-fix-gpo-final.png)
-
-10. Force a Group Policy update on the clients:
-   ```powershell
-   gpupdate /force
-   ```
-
-> 🧠 Lesson Learned: Even in a lab, GPOs can silently break usability features. Always test core functionality after a domain join and document necessary fixes.
-
-## 🔄 Method 2: Enterprise Approach via Group Policy Preferences
+### 🔄 Method 2: Enterprise Approach via Group Policy Preferences (Optional)
 
 1. In the same GPO, navigate to:  
    `Computer Configuration → Preferences → Control Panel Settings → Local Users and Groups`
@@ -214,6 +195,42 @@ To restore Enhanced Session Mode functionality, I created a dedicated GPO with t
    - **Members:** `ADLAB\Domain Users`
 
 > 💡 This method mimics enterprise behavior — RDP permission stays tied to the local group, while GPP handles group membership.
+
+### 📋 Configure Session Redirection Policies
+
+1. In the same GPO, go to:  
+   `Computer Configuration` → `Administrative Templates` → `Windows Components` → `Remote Desktop Services` → `Remote Desktop Session Host` → `Device and Resource Redirection`
+2. Enable the following settings:
+   - **Do not allow clipboard redirection** → `Disabled`
+   - **Do not allow drive redirection** → `Disabled`
+   
+![Win10_gpo_edit](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-fix-gpo-final.png)
+
+### 🔃 Apply & Test
+
+1. Force a Group Policy update on the clients:
+   ```cmd
+   gpupdate /force
+   ```
+2. 
+   ```cmd
+   gpresult /scope:computer /h c:\gpo_report.html
+   ```
+
+### 📚 Best Practice Breakdown
+
+| Approach                     | Pros                             | Cons                | Best Use                      |
+|------------------------------|----------------------------------|---------------------|-------------------------------|
+| Direct to Domain Users       | Simple, fast, works immediately  | Less modular        | Homelabs, small AD setups     |
+| GPP + Local Group assignment | Scalable, enterprise-aligned     | Slightly more complex | Enterprise labs or prod envs |
+
+### 🧠 Lesson Learned
+
+- Don’t assume domain groups auto-populate local ones  
+- Always test user login workflows after domain joins  
+- GPO + GPP gives tight control — only if scope and evaluation are understood  
+
+> ✅ With this fix applied, Enhanced Session Mode now works across all clients. Domain users can RDP into lab machines, and Hyper-V usability is fully restored.
 
 ## 5️⃣ other GPOs
 
