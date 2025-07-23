@@ -249,20 +249,31 @@ With domain join complete, I moved forward with applying baseline security contr
 
 ### 📌 GPO 1: Password & Lockout Policy
 
+This policy requires linking the Default Domain Policy at the domain level (if not already linked), and then editing it directly to enforce domain-wide password and lockout settings.
+
 **GPO Name:** `Default Domain Policy`  
 **Path:**  
 `Computer Configuration` → `Policies` → `Windows Settings` → `Security Settings` → `Account Policies`
 
 **Settings Applied:**
 
+### 🔐 Password Policy
+
 - Minimum password length: `12 characters`
 - Password must meet complexity requirements: `Enabled`
 - Maximum password age: `30 days`
 - Minimum password age: `1 day`
 - Enforce password history: `24 passwords remembered`
+
+![Win10_pwd_policy](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-pwd-policy.png)
+
+### 🚫 Account Lockout Policy
+  
 - Account lockout threshold: `5 failed attempts`
 - Lockout duration: `15 minutes`
 - Reset account lockout counter after: `15 minutes`
+
+![Win10_pwd_lockout](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-pwd-lockout.png)
 
 > 🛡️ These settings apply to all domain users by default and establish a secure baseline.
 
@@ -281,6 +292,8 @@ With domain join complete, I moved forward with applying baseline security contr
 - **Privilege Use:** Sensitive Privilege Use  
 - **System:** System Integrity
 
+![Win10_audit_logs](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-audit-logs.png)
+
 > 📊 These logs are critical for tracking authentication activity, policy enforcement, and privileged actions. They’ll be forwarded to Splunk in Day 05.
 
 ### 🧪 Policy Validation Testing
@@ -290,6 +303,8 @@ Logged in with domain test users to trigger:
 - Password complexity prompts  
 - Lockout behavior  
 - Authentication events in **Security logs**
+
+![Win10_events](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-audit-events.png)
 
 > 🔍 Validated event generation in **Event Viewer → Windows Logs → Security**
 
