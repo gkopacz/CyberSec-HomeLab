@@ -130,7 +130,7 @@ ipconfig /all
 
 ![Win10_finalcheck](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-win10-finalcheck.png)
 
-> 🚩 The process documented for `WIN10-CLIENT01` was later repeated for `WIN11-CLIENT02`, with all steps mirrored — from OS installation and local setup to domain join and post-login validation.
+> 🚩 The process documented for `WIN10-CLIENT01` was later repeated for `WIN11-CLIENT02`, with all steps mirrored, from OS installation and local setup to domain join and post-login validation.
 
 ## 4️⃣ Fix: Enable Enhanced Session Mode capabilities via GPO
 
@@ -194,7 +194,7 @@ To restore Enhanced Session Mode functionality, I created a dedicated GPO with t
    - **Description:** Add domain users for RDP  
    - **Members:** `ADLAB\Domain Users`
 
-> 💡 This method mimics enterprise behavior — RDP permission stays tied to the local group, while GPP handles group membership.
+> 💡 This method mimics enterprise behavior, RDP permission stays tied to the local group, while GPP handles group membership.
 
 ### 📋 Configure Session Redirection Policies
 
@@ -206,15 +206,18 @@ To restore Enhanced Session Mode functionality, I created a dedicated GPO with t
    
 ![Win10_gpo_edit](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-fix-gpo-final.png)
 
+> ⚠️ *Do not allow COM port redirection* is unnecessary unless legacy hardware is involved.
+
 ### 🔃 Apply & Test
 
 1. Force a Group Policy update on the clients:
    ```cmd
    gpupdate /force
    ```
-2. 
+2. Check if Enhanced Session Fix GPO is being applied:
    ```cmd
-   gpresult /scope:computer /h c:\gpo_report.html
+   gpresult /H report.html
+   start report.html
    ```
 
 ### 📚 Best Practice Breakdown
@@ -228,11 +231,104 @@ To restore Enhanced Session Mode functionality, I created a dedicated GPO with t
 
 - Don’t assume domain groups auto-populate local ones  
 - Always test user login workflows after domain joins  
-- GPO + GPP gives tight control — only if scope and evaluation are understood  
+- GPO + GPP gives tight control, only if scope and evaluation are understood  
 
 > ✅ With this fix applied, Enhanced Session Mode now works across all clients. Domain users can RDP into lab machines, and Hyper-V usability is fully restored.
 
-## 5️⃣ other GPOs
+## 5️⃣ Deploy Baseline GPOs: Password Policy & Audit Logging
+
+With domain join complete, I moved forward with applying baseline security controls via Group Policy. These initial GPOs enforce strong password practices and enable auditing of critical events, ensuring the domain is secure and log-ready for Splunk integration.
+
+### 📌 GPO 1: Password & Lockout Policy
+
+**GPO Name:** `Default Domain Policy`  
+**Path:**  
+`Computer Configuration` → `Policies` → `Windows Settings` → `Security Settings` → `Account Policies`
+
+**Settings Applied:**
+
+- Minimum password length: `12 characters`
+- Password must meet complexity requirements: `Enabled`
+- Maximum password age: `30 days`
+- Minimum password age: `1 day`
+- Enforce password history: `24 passwords remembered`
+- Account lockout threshold: `5 failed attempts`
+- Lockout duration: `15 minutes`
+- Reset account lockout counter after: `15 minutes`
+
+> 🛡️ These settings apply to all domain users by default and establish a secure baseline.
+
+### 📌 GPO 2: Advanced Audit Policy Configuration
+
+**GPO Name:** `Audit Logging Baseline`  
+**Path:**  
+`Computer Configuration` → `Policies` → `Windows Settings` → `Security Settings` → `Advanced Audit Policy Configuration`
+
+**Audit Categories Enabled:**
+
+- **Logon/Logoff:** Logon, Logoff, Account Lockout  
+- **Account Logon:** Credential Validation  
+- **Object Access:** File Share, File System  
+- **Policy Change:** Audit Policy Change  
+- **Privilege Use:** Sensitive Privilege Use  
+- **System:** System Integrity
+
+> 📊 These logs are critical for tracking authentication activity, policy enforcement, and privileged actions. They’ll be forwarded to Splunk in Day 05.
+
+### 🧪 Policy Validation Testing
+
+Logged in with domain test users to trigger:
+
+- Password complexity prompts  
+- Lockout behavior  
+- Authentication events in **Security logs**
+
+> 🔍 Validated event generation in **Event Viewer → Windows Logs → Security**
+
+## 6️⃣ Harden Endpoint Behavior: PowerShell Logging & Local Admin Restriction
+
+To strengthen detection capabilities and enforce least-privilege principles, I applied two additional GPOs: one to increase PowerShell visibility and one to tightly control local administrator access on lab endpoints.
+
+### 📌 GPO 3: PowerShell Logging
+
+**GPO Name:** `PowerShell Monitoring Baseline`  
+**Path:** `Computer Configuration` → `Policies` → `Administrative Templates` → `Windows Components` → `Windows PowerShell`
+
+**Settings Enabled:**
+- **Turn on PowerShell Script Block Logging:** Enabled  
+- **Turn on Module Logging:** Enabled  
+- **Turn on PowerShell Transcription:** Enabled  
+  - Transcript Output Directory: `C:\Transcripts`
+
+> 🧠 These settings log every executed PowerShell block, module activity, and full console input/output to both **Event Viewer** and **plain-text files**, making it easier to detect post-exploitation and tool misuse.
+
+### 📌 GPO 4: Local Admin Group Enforcement
+
+**GPO Name:** `Local Admin Restriction`  
+**Path:** `Computer Configuration` → `Policies` → `Windows Settings` → `Security Settings` → `Restricted Groups`
+
+**Configuration:**
+- Group Name: `Administrators`  
+- Members:
+  - `ADLAB\Administrator`
+  - `ADLAB\LabAdmins` 
+
+> 🚫 This removes any unintended users or groups (e.g. `Domain Users`) from the local Administrators group on all client machines, a critical step for enforcing **least privilege** and preventing lateral movement.
+
+### 🔎 PowerShell Logging & Local Group Verification
+
+Verified:
+- PowerShell transcripts saved to: `C:\Transcripts`  
+- Script Block events under:  
+  `Event Viewer → Applications and Services Logs → Microsoft-Windows-PowerShell/Operational`
+
+Confirmed local administrator group membership on each client:
+
+```cmd
+net localgroup Administrators
+```
+
+> ✅ These controls further harden the client machines and improve log signal quality ahead of full Splunk integration.
 
 ## ✅ Day 04 Recap 
 
@@ -241,6 +337,14 @@ To restore Enhanced Session Mode functionality, I created a dedicated GPO with t
 - 🔐 Joined both machines to the domain via classic **System Properties** interface
 - 🆔 Logged in using standard domain users (`alice.smith`, `bob.johnston`)
 - 📡 Validated successful domain join using `whoami` and `ipconfig /all`
+- 🔧 Resolved Enhanced Session Mode issues via custom GPO  
+  - Assigned `ADLAB\Domain Users` logon rights  
+  - Configured device redirection policies  
+- 🛡️ Implemented security and auditing GPOs  
+  - Enforced password policies and account lockouts  
+  - Enabled PowerShell logging and transcript storage  
+  - Verified event generation in **Event Viewer**  
+- 👥 Confirmed local admin group memberships via `net localgroup Administrators`
 
 ## 🔜 Next Step
 
