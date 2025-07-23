@@ -326,11 +326,7 @@ To strengthen detection capabilities and enforce least-privilege principles, I a
 **GPO Name:** `Disable Local Administrator`  
 **Path:** `Computer Configuration` → `Policies` → `Windows Settings` → `Security Settings` → `Local Policies` → `Security Options`
 
-**Configuration:**
-
-| Setting                                  | Value    |
-|------------------------------------------|----------|
-| Accounts: Administrator account status   | Disabled |
+**Configuration:** Accounts: Administrator account status → **Disabled**
 
 > 🚫 This disables the built-in local Administrator account on all targeted machines, reducing lateral movement risk. All administrative access should be handled through domain-based groups like `ADLAB\LabAdmins_group`.
 
@@ -355,16 +351,16 @@ Verified:
 - PowerShell transcripts saved to: `C:\Transcripts`  
 - Script Block events under: `Event Viewer → Applications and Services Logs → Microsoft → Windows → PowerShell → Operational`
 
+![Win10_pwr_ops](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-powershell-operational.png)
+
+> 🧠 These logs are crucial for **incident detection, lateral movement analysis**, and **script-based attack visibility**, forming the telemetry backbone ahead of Splunk integration.
+
 | Event ID | Description                             | Purpose                                   |
 |----------|-----------------------------------------|-------------------------------------------|
 | **4103** | PowerShell Module Logging               | Captures loaded modules and cmdlets       |
 | **4104** | Script Block Logging                    | Logs full content of executed scripts     |
 | **4105** | Provider “Start” Event                  | Shows when a PowerShell provider starts   |
 | **4106** | Provider “Stop” Event                   | Indicates when a provider is stopped      |
-
-![Win10_pwr_ops](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-powershell-operational.png)
-
-> 🧠 These logs are crucial for **incident detection, lateral movement analysis**, and **script-based attack visibility**, forming the telemetry backbone ahead of Splunk integration.
 
 ### 🧩 Local Administrator Group Verification
 
