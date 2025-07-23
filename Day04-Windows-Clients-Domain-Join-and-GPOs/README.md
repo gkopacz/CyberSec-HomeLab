@@ -210,7 +210,18 @@ This method keeps logon permissions tied to the **local** `Remote Desktop Users`
    
 ![Win10_gpo_edit](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-fix-gpo-final.png)
 
-> ⚠️ *Do not allow COM port redirection* is unnecessary unless legacy hardware is involved.
+### 📚 Best Practice Breakdown
+
+| Approach                     | Pros                             | Cons                | Best Use                      |
+|------------------------------|----------------------------------|---------------------|-------------------------------|
+| Direct to Domain Users       | Simple, fast, works immediately  | Less modular        | Homelabs, small AD setups     |
+| GPP + Local Group assignment | Scalable, enterprise-aligned     | Slightly more complex | Enterprise labs or prod envs |
+
+### 🧠 Lesson Learned
+
+- Don’t assume domain groups auto-populate local ones  
+- Always test user login workflows after domain joins  
+- GPO + GPP gives tight control, only if scope and evaluation are understood  
 
 ### 🔃 Apply & Test
 
@@ -225,19 +236,6 @@ This method keeps logon permissions tied to the **local** `Remote Desktop Users`
    ```
 
 ![Win10_gpresult](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/AD-VM/WinSrv-fix-gpresult.png)
-
-### 📚 Best Practice Breakdown
-
-| Approach                     | Pros                             | Cons                | Best Use                      |
-|------------------------------|----------------------------------|---------------------|-------------------------------|
-| Direct to Domain Users       | Simple, fast, works immediately  | Less modular        | Homelabs, small AD setups     |
-| GPP + Local Group assignment | Scalable, enterprise-aligned     | Slightly more complex | Enterprise labs or prod envs |
-
-### 🧠 Lesson Learned
-
-- Don’t assume domain groups auto-populate local ones  
-- Always test user login workflows after domain joins  
-- GPO + GPP gives tight control, only if scope and evaluation are understood  
 
 > ✅ With this fix applied, Enhanced Session Mode now works across all clients. Domain users can RDP into lab machines, and Hyper-V usability is fully restored.
 
