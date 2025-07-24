@@ -392,6 +392,6 @@ net localgroup Administrators
 
 ## 🔜 Next Step
 
-On [Day 05](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/Day05-Splunk-Logging-and-Monitoring/README.md), I’ll configure Splunk and begin sending Windows logs from the DC and clients. This will kick off the **detection engineering** and centralized monitoring phase of the HomeLab.
+On [Day 05](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/Day05-Setup-Splunk-Logging-and-Monitoring/README.md), I’ll configure Splunk and begin sending Windows logs from the DC and clients. This will kick off the **detection engineering** and centralized monitoring phase of the HomeLab.
 
 
