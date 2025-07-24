@@ -64,7 +64,7 @@ Design and implement a **cybersecurity homelab** tailored for learning, testing,
 | 02  | Kali Linux VM Setup & pfSense Firewall Rules       | [Go to Day 02](https://github.com/gkopacz/CyberSec-HomeLab/tree/main/Day02-Kali-Linux-VM-Setup-and-pfSense-Configuration/README.md) | ✅ Done |
 | 03  | Active Directory Core Deployment                   | [Go to Day 03](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/Day03-Active-Directory-Core-Deployment/README.md)   | ✅ Done         |
 | 04  | Windows Clients Domain Join & GPOs                 | [Go to Day 04](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/Day04-Windows-Clients-Domain-Join-and-GPOs/README.md) | ✅ Done   |
-| 05  | Splunk Logging & Monitoring                        | [Go to Day 05](https://github.com/gkopacz/CyberSec-HomeLab/tree/main/Day05-Splunk-Logging-and-Monitoring/README.md) | 🛠️ In Progress      |
+| 05  | Splunk Logging & Monitoring                        | [Go to Day 05](https://github.com/gkopacz/CyberSec-HomeLab/tree/main/Day05-Setup-Splunk-Logging-and-Monitoring/README.md) | 🛠️ In Progress      |
 | 06  | Deploy Vulnerable Machines                         | [Go to Day 06](https://github.com/gkopacz/CyberSec-HomeLab/tree/main/Day06-Deploy-Vulnerable-Machines/README.md) | ⏳ Pending      |
 
 
