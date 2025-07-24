@@ -2,7 +2,6 @@
 
 ![Platform](https://img.shields.io/badge/platform-HyperV-blue?logo=windows)
 ![Firewall](https://img.shields.io/badge/firewall-pfSense-red?logo=pfsense) 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 ![Status](https://img.shields.io/badge/status-done-green)
 
 
