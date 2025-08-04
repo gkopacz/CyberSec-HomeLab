@@ -74,7 +74,7 @@ I updated all packages and installed basic dependencies using:
 
 ```bash
 sudo apt update && sudo apt upgrade -y
-sudo apt install wget curl gnupg2 net-tools -y
+sudo apt install wget curl net-tools -y
 ```
 
 > 🧠 net-tools includes ifconfig, which is useful for quick IP checks.
