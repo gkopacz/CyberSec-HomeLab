@@ -5,15 +5,24 @@
 ![SIEM](https://img.shields.io/badge/Splunk%20Enterprise-9.4.3-darkgreen?logo=splunk)
 ![Status](https://img.shields.io/badge/status-done-green)
 
-
-
 ## 🎯 Objective
+
+With the domain infrastructure and endpoints deployed, the next core component is **centralized log visibility**. This phase focuses on provisioning a clean Ubuntu 24.04.2 LTS virtual machine in the **Monitoring subnet**, preparing it with essential tools, and laying the foundation for deploying **Splunk Enterprise 9.4.3** as the lab’s primary SIEM. This system will collect logs from domain controllers, clients, and network devices, enabling full-stack monitoring and future detection engineering.
 
 ## 🧠 Skills Demonstrated
 
+- Provisioned and installed Ubuntu 24.04.2 LTS as a dedicated SIEM host
+- Installed and configured **Splunk Enterprise 9.4.3** on Linux
+- Deployed **Splunk Universal Forwarders** on Windows endpoints (DC + clients)
+- Enabled forwarding of Security, System, and PowerShell logs to Splunk
+- Installed and configured **Sysmon** for enriched endpoint telemetry
+- Ingested and verified firewall logs from **pfSense** via remote syslog
+- Validated log flows using **SPL queries** and Splunk dashboards
+- Hardened visibility pipeline for future detection engineering use
+
 # 🛠️ Setup Walkthrough
 
-With the domain infrastructure and endpoints deployed, the next core component is **centralized log visibility**. This phase focuses on provisioning a clean Ubuntu 24.04.2 LTS virtual machine in the **Monitoring subnet**, preparing it with essential tools, and laying the foundation for deploying **Splunk Enterprise 9.4.3** as the lab’s primary SIEM. This system will collect logs from domain controllers, clients, and network devices, enabling full-stack monitoring and future detection engineering.
+Provisioned a dedicated VM using Ubuntu 24.04.3 LTS and installed **Splunk Enterprise 9.4.3** to act as the lab’s centralized SIEM. Deployed the **Splunk Universal Forwarder** to the Domain Controller and Windows clients, then successfully ingested event logs into Splunk. Also configured **pfSense firewall log forwarding** to capture network-level telemetry alongside endpoint events.
 
 ## 1️⃣ Ubuntu Host VM Setup
 
