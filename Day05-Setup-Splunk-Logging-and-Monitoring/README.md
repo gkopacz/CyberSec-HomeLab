@@ -42,8 +42,6 @@ I downloaded the latest **Ubuntu 24.04.3 LTS** desktop ISO directly from Canonic
 
 Once the VM was created and the ISO mounted, I proceeded with the installation of Ubuntu. From the GRUB boot menu, I selected **Try or Install Ubuntu**.
 
-![Ubuntu_GNU](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/GNU_Boot.png)
-
 ### 🌍 Language, Accessibility & Keyboard
 
 I selected the following from the guided interactive installer.
