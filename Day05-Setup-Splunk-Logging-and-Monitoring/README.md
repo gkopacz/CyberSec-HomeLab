@@ -17,20 +17,22 @@ With the domain infrastructure and endpoints deployed, the next core component i
 
 ## 1️⃣ Ubuntu Host VM Setup
 
-To serve as the **centralized monitoring node**, I spun up an Ubuntu 24.04.2 LTS virtual machine within the Monitoring subnet using Hyper-V.
+To serve as the **centralized monitoring node**, I spun up an Ubuntu 24.04.3 LTS virtual machine within the Monitoring subnet using Hyper-V.
 
 | **Setting**  | **Value**                     |
 |--------------|-------------------------------|
-| Name         | MON-SPLUNK01                  |
+| Name         | SPLUNK                        |
 | Generation   | Gen 2                         |
 | CPU          | 2 vCPU                        |
 | Memory       | 4 GB (Dynamic)                |
-| Disk         | 100 GB                        |
+| Disk         | 80 GB (Dynamically Expanding) |
 | Network      | Internal Switch (Monitoring)  |
 
 ### 🐧 Download Ubuntu ISO
 
 I downloaded the latest **Ubuntu 24.04.2 LTS** desktop ISO directly from Canonical’s website: 🔗 [Download Ubuntu](https://ubuntu.com/download)
+
+![Ubuntu_LTS](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Ubuntu_LTS.png)
 
 > 💡 LTS = Long Term Support → 5 years of updates (2024–2029)
 
