@@ -38,31 +38,41 @@ I downloaded the latest **Ubuntu 24.04.2 LTS** desktop ISO directly from Canonic
 
 ## 2️⃣ Install Ubuntu on the VM
 
-From the GRUB boot menu, I selected **Try or Install Ubuntu**.
+Once the VM was created and the ISO mounted, I proceeded with the installation of Ubuntu. From the GRUB boot menu, I selected **Try or Install Ubuntu**.
 
-### 🌐 Language, Keyboard & Network
+### 🌍 Language, Accessibility & Keyboard
 
 I selected the following from the guided interactive installer.
 
-- Language: **English**  
-- Keyboard: **English (US)**  
-- Internet: **Wired connection (recommended)**
+- Selected **English** as the system language.
+- Skipped accessibility options.
+- Set keyboard layout to **English (US)** for both layout and variant.
 
-### ⚙️ Installation Type
+### 🌐 Network Settings
 
-Chose **Interactive installation** for full control.
+Selected **wired connection** to ensure full update and driver access during install.
 
+![Ubuntu_Network](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Network.png)
 
-Selected **Default application set** (essentials only) and checked the box for third-party drivers.
+### 💿 Install Type & Mode
+
+Chose to **Install Ubuntu** (not “Try Ubuntu”), followed by **Interactive installation** for manual control over packages and disk config.
+
+![Ubuntu_Install](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Interactive.png)
 
 ### 💽 Disk Configuration
 
-Opted for automatic partitioning: **Erase disk and install Ubuntu**.
+Opted for **Erase disk and install Ubuntu**, perfect for a dedicated lab VM. No encryption was configured.
 
+This automatically set up `/boot/efi` and `/` partitions using fat32 and EXT4.
 
-On the review screen, I confirmed the layout with `/boot/efi` and `/` partitions.
+![Ubuntu_Disk](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Review_Install.png)
 
-### 🌍 Timezone & Region
+### 👤 User & Host Setup
+
+Created the user `g0bl1n` and named the machine `VM-Splunk`. Ensured password was required at login.
+
+![Ubuntu_user](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Account.png)
 
 > ✅ After installation, I clicked **Restart Now** and booted into the new system.
 
