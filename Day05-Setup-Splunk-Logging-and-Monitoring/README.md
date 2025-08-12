@@ -28,9 +28,11 @@ To serve as the **centralized monitoring node**, I spun up an Ubuntu 24.04.3 LTS
 | Disk         | 80 GB (Dynamically Expanding) |
 | Network      | Internal Switch (Monitoring)  |
 
+> 🧠 Disabled **Secure Boot** because Ubuntu won’t boot with it enabled on most hypervisors. Flip it off or get stuck at a black screen.
+
 ### 🐧 Download Ubuntu ISO
 
-I downloaded the latest **Ubuntu 24.04.2 LTS** desktop ISO directly from Canonical’s website: 🔗 [Download Ubuntu](https://ubuntu.com/download)
+I downloaded the latest **Ubuntu 24.04.3 LTS** desktop ISO directly from Canonical’s website: 🔗 [Download Ubuntu](https://ubuntu.com/download)
 
 ![Ubuntu_LTS](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Ubuntu_LTS.png)
 
