@@ -50,8 +50,6 @@ I selected the following from the guided interactive installer.
 - Skipped accessibility options.
 - Set keyboard layout to **English (US)** for both layout and variant.
 
-![Ubuntu_Keyboard](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Keyboard.png)
-
 ### 🌐 Network Settings
 
 Selected **wired connection** to ensure full update and driver access during install.
