@@ -83,8 +83,6 @@ This automatically set up `/boot/efi` and `/` partitions using fat32 and EXT4.
 
 ![Ubuntu_Disk](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Review_Install.png)
 
-> ✅ After installation, I clicked **Restart Now** and booted into the new system.
-
 ## 3️⃣ Post-Install Prep for Splunk
 
 After rebooting into the newly installed Ubuntu system, I logged in and performed essential prep steps to ready the box for **Splunk Enterprise** installation.
@@ -97,7 +95,5 @@ I updated all packages and installed basic dependencies using:
 sudo apt update && sudo apt upgrade -y
 sudo apt install wget curl net-tools -y
 ```
-
-> 🧠 net-tools includes ifconfig, which is useful for quick IP checks.
 
 
