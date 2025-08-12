@@ -40,6 +40,8 @@ I downloaded the latest **Ubuntu 24.04.2 LTS** desktop ISO directly from Canonic
 
 Once the VM was created and the ISO mounted, I proceeded with the installation of Ubuntu. From the GRUB boot menu, I selected **Try or Install Ubuntu**.
 
+![Ubuntu_LTS](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/GNU_Boot.png)
+
 ### 🌍 Language, Accessibility & Keyboard
 
 I selected the following from the guided interactive installer.
@@ -60,6 +62,12 @@ Chose to **Install Ubuntu** (not “Try Ubuntu”), followed by **Interactive in
 
 ![Ubuntu_Install](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Interactive.png)
 
+### 👤 User & Host Setup
+
+Created the user `g0bl1n` and named the machine `VM-Splunk`. Ensured password was required at login.
+
+![Ubuntu_user](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Account.png)
+
 ### 💽 Disk Configuration
 
 Opted for **Erase disk and install Ubuntu**, perfect for a dedicated lab VM. No encryption was configured.
@@ -67,12 +75,6 @@ Opted for **Erase disk and install Ubuntu**, perfect for a dedicated lab VM. No 
 This automatically set up `/boot/efi` and `/` partitions using fat32 and EXT4.
 
 ![Ubuntu_Disk](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Review_Install.png)
-
-### 👤 User & Host Setup
-
-Created the user `g0bl1n` and named the machine `VM-Splunk`. Ensured password was required at login.
-
-![Ubuntu_user](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Account.png)
 
 > ✅ After installation, I clicked **Restart Now** and booted into the new system.
 
