@@ -2,17 +2,17 @@
 
 ![Platform](https://img.shields.io/badge/platform-HyperV-blue?logo=windows)
 ![OS](https://img.shields.io/badge/Ubuntu-24.04.2%20LTS-orange?logo=ubuntu)
-![SIEM](https://img.shields.io/badge/Splunk%20Enterprise-9.4.3-darkgreen?logo=splunk)
+![SIEM](https://img.shields.io/badge/Splunk%20Enterprise-darkgreen?logo=splunk)
 ![Status](https://img.shields.io/badge/status-done-green)
 
 ## 🎯 Objective
 
-With the domain infrastructure and endpoints deployed, the next core component is **centralized log visibility**. This phase focuses on provisioning a clean Ubuntu 24.04.2 LTS virtual machine in the **Monitoring subnet**, preparing it with essential tools, and laying the foundation for deploying **Splunk Enterprise 9.4.3** as the lab’s primary SIEM. This system will collect logs from domain controllers, clients, and network devices, enabling full-stack monitoring and future detection engineering.
+With the domain infrastructure and endpoints deployed, the next core component is **centralized log visibility**. This phase focuses on provisioning a clean Ubuntu 24.04.2 LTS virtual machine in the **Monitoring subnet**, preparing it with essential tools, and laying the foundation for deploying **Splunk Enterprise** as the lab’s primary SIEM. This system will collect logs from domain controllers, clients, and network devices, enabling full-stack monitoring and future detection engineering.
 
 ## 🧠 Skills Demonstrated
 
 - Provisioned and installed Ubuntu 24.04.2 LTS as a dedicated SIEM host
-- Installed and configured **Splunk Enterprise 9.4.3** on Linux
+- Installed and configured **Splunk Enterprise** on Linux
 - Deployed **Splunk Universal Forwarders** on Windows endpoints (DC + clients)
 - Enabled forwarding of Security, System, and PowerShell logs to Splunk
 - Installed and configured **Sysmon** for enriched endpoint telemetry
@@ -95,5 +95,26 @@ I updated all packages and installed basic dependencies using:
 sudo apt update && sudo apt upgrade -y
 sudo apt install wget curl net-tools -y
 ```
+
+![Ubuntu_apt](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/apt_update.png)
+
+### 📡 IP Address Management
+
+Instead of setting a static IP manually on the Ubuntu host, I configured a **static DHCP lease** in **pfSense** to ensure the VM always receives the same IP address based on its MAC.
+
+![Ubuntu_ifconfig](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/ip_ifconfig.png)
+
+> 🧠 This keeps IP management centralized and avoids local misconfigurations on the VM.
+
+## 4️⃣ Install Splunk Enterprise
+
+With the Ubuntu VM fully configured and network-ready, I proceeded to install **Splunk Enterprise**.
+
+I navigated to the [Splunk Enterprise](https://www.splunk.com/en_us/download/splunk-enterprise.html) web interface on my Ubuntu VM. 
+
+I filled in the details, accepted the license agreement, and clicked **Create Account** to complete the setup.
+
+
+
 
 
