@@ -45,8 +45,6 @@ To serve as the **centralized monitoring node**, I spun up an Ubuntu 24.04.3 LTS
 | Disk         | 80 GB (Dynamically Expanding) |
 | Network      | Internal Switch (Monitoring)  |
 
-> 🧠 I Disabled **Secure Boot** because Ubuntu won’t boot with it enabled on most hypervisors. Flip it off or get stuck at a black screen.
-
 ## 2️⃣ Install Ubuntu on the VM
 
 Once the VM was created and the ISO mounted, I proceeded with the installation of Ubuntu. From the GRUB boot menu, I selected **Try or Install Ubuntu**.
