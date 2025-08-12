@@ -26,6 +26,16 @@ Provisioned a dedicated VM using Ubuntu 24.04.3 LTS and installed **Splunk Enter
 
 ## 1️⃣ Ubuntu Host VM Setup
 
+### 🐧 Download Ubuntu ISO
+
+I downloaded the latest **Ubuntu 24.04.3 LTS** desktop ISO directly from Canonical’s website: 🔗 [Download Ubuntu](https://ubuntu.com/download)
+
+![Ubuntu_LTS](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Ubuntu_LTS.png)
+
+> 💡 LTS = Long Term Support → 5 years of updates (2024–2029)
+
+💻 Ubuntu VM Configuration
+
 To serve as the **centralized monitoring node**, I spun up an Ubuntu 24.04.3 LTS virtual machine within the Monitoring subnet using Hyper-V.
 
 | **Setting**  | **Value**                     |
@@ -38,14 +48,6 @@ To serve as the **centralized monitoring node**, I spun up an Ubuntu 24.04.3 LTS
 | Network      | Internal Switch (Monitoring)  |
 
 > 🧠 I Disabled **Secure Boot** because Ubuntu won’t boot with it enabled on most hypervisors. Flip it off or get stuck at a black screen.
-
-### 🐧 Download Ubuntu ISO
-
-I downloaded the latest **Ubuntu 24.04.3 LTS** desktop ISO directly from Canonical’s website: 🔗 [Download Ubuntu](https://ubuntu.com/download)
-
-![Ubuntu_LTS](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Ubuntu_LTS.png)
-
-> 💡 LTS = Long Term Support → 5 years of updates (2024–2029)
 
 ## 2️⃣ Install Ubuntu on the VM
 
