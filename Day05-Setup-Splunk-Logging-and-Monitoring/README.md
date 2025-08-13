@@ -104,7 +104,7 @@ Instead of setting a static IP manually on the Ubuntu host, I configured a **sta
 
 ![Ubuntu_ifconfig](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/ip_ifconfig.png)
 
-## 4️⃣ Install Splunk Enterprise
+## 4️⃣ Install Splunk Enterprise on VM
 
 With the Ubuntu VM fully configured and network-ready, I proceeded to install **Splunk Enterprise**.
 
@@ -113,6 +113,103 @@ I navigated to the [Splunk Enterprise](https://www.splunk.com/en_us/download/spl
 I filled in the details, accepted the license agreement, and clicked **Create Account** to complete the setup.
 
 ![Splunk_details](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Splunk_details.png)
+
+### 💾 Download Splunk Enterprise
+
+After receiving the verification email, I confirmed my account to unlock the Splunk Enterprise download link. 
+
+Next, I selected the Linux `.deb` package for 64-bit systems and copied the `wget` link.
+
+![Splunk_download](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/splunk_download_deb.png)
+
+I pasted the `wget` command into the terminal, which downloaded the `.deb` installer directly to my home directory:
+
+```bash
+sudo apt update && sudo apt upgrade -y
+sudo apt install wget curl net-tools -y
+```
+
+![Splunk_wget](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/splunk_wget.png)
+
+### 📦 Install Splunk Enterprise
+
+Then I ran the following command to install Splunk:
+
+```bash
+sudo dpkg -i splunk-10.0.0-e8eb0c4654f8-linux-amd64.deb
+```
+
+![Splunk_dpkg](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/splunk_dpkg_install.png)
+
+### 🔌 Start Splunk Enterprise
+
+Once installed, I navigated to the Splunk bin directory and started it with license acceptance:
+
+```bash
+cd /opt/splunk/bin
+sudo ./splunk start --accept-license --accept-yes
+```
+![Splunk_start](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/splunk_set_admin.png)
+
+On first run it prompted me to create an admin user, but after completing the setup I encountered an issue where the web interface on port `8000` was unreachable.
+
+![Splunk_error](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/splunk_error.png)
+
+So I started troubleshooting.
+
+### ❌ Symptoms
+
+- Splunk CLI showed: `"web interface does not seem to be available!"`
+- `curl http://127.0.0.1:8000` failed
+- No response when accessing `http://<hostname>:8000` from the browser
+
+### ✅ Fix 
+
+Restarted Splunk.
+
+```bash
+cd /opt/splunk/bin
+sudo ./splunk restart
+```
+
+### 🛠️ Configure Splunk to Start at Boot
+
+After Splunk restarted successfully, I configured it to start automatically at boot.
+
+```bash
+cd /opt/splunk/bin
+sudo ./splunk enable boot-start
+```
+
+![Splunk_boot](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/splunk_start@boot.png)
+
+### 🌐 Enable Receiving Data on Port 9997
+
+I logged into the Splunk web interface using the admin credentials I created earlier:
+
+![Splunk_login](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/splunk_login.png)
+
+From the top menu, I navigated to: `Settings → Forwarding and receiving`
+
+![Splunk_set_fwd](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/splunk_set_fwd.png)
+
+On the `Forwarding and receiving` page, under the `Receive data` section, I clicked `+ Add new` to configure this Splunk instance to accept logs from forwarders.
+
+![Splunk_receive_data](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/splunk_receive_data.png)
+
+I configured the listener to use TCP port `9997` and clicked **Save**.
+
+![Splunk_receive_port](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/splunk_receive_port.png)
+
+## 5️⃣ Install Splunk Universal Forwarder on the Domain Controller
+
+
+
+
+
+
+
+
 
 
 
