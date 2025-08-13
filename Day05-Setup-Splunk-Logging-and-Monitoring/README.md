@@ -160,7 +160,7 @@ So I started troubleshooting.
 
 ### ✅ Fix 
 
-Restarted Splunk.
+I decided to restart Splunk. I had a hunch it will fix the issue.
 
 ```bash
 cd /opt/splunk/bin
