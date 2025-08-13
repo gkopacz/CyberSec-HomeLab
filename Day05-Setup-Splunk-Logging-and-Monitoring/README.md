@@ -122,12 +122,7 @@ Next, I selected the Linux `.deb` package for 64-bit systems and copied the `wge
 
 ![Splunk_download](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/splunk_download_deb.png)
 
-I pasted the `wget` command into the terminal, which downloaded the `.deb` installer directly to my home directory:
-
-```bash
-sudo apt update && sudo apt upgrade -y
-sudo apt install wget curl net-tools -y
-```
+I pasted the `wget` command into the terminal, which downloaded the `.deb` installer directly to my home directory.
 
 ![Splunk_wget](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/splunk_wget.png)
 
