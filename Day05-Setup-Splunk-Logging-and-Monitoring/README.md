@@ -1,7 +1,7 @@
 # 🔍 Day 05 — Setup Splunk Logging & Monitoring
 
 ![Platform](https://img.shields.io/badge/platform-HyperV-blue?logo=windows)
-![OS](https://img.shields.io/badge/Ubuntu-24.04.2%20LTS-orange?logo=ubuntu)
+![OS](https://img.shields.io/badge/Ubuntu-24.04.3%20LTS-orange?logo=ubuntu)
 ![SIEM](https://img.shields.io/badge/Splunk%20Enterprise-darkgreen?logo=splunk)
 ![Status](https://img.shields.io/badge/status-done-green)
 
@@ -104,8 +104,6 @@ Instead of setting a static IP manually on the Ubuntu host, I configured a **sta
 
 ![Ubuntu_ifconfig](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/ip_ifconfig.png)
 
-> 🧠 This keeps IP management centralized and avoids local misconfigurations on the VM.
-
 ## 4️⃣ Install Splunk Enterprise
 
 With the Ubuntu VM fully configured and network-ready, I proceeded to install **Splunk Enterprise**.
@@ -114,6 +112,7 @@ I navigated to the [Splunk Enterprise](https://www.splunk.com/en_us/download/spl
 
 I filled in the details, accepted the license agreement, and clicked **Create Account** to complete the setup.
 
+![Splunk_details](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Splunk_details.png)
 
 
 
