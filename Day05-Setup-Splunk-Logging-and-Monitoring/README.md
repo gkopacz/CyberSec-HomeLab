@@ -198,8 +198,33 @@ I configured the listener to use TCP port `9997` and clicked **Save**.
 
 ## 5️⃣ Install Splunk Universal Forwarder on the Domain Controller
 
+To ship security logs from the Domain Controller to the central SIEM (Splunk Enterprise), I installed and configured the Splunk Universal Forwarder (UF) on the DC. This lightweight agent forwards event logs and other telemetry without adding bloat to the system.
 
+### 📦 Download the UF MSI Installer
 
+I downloaded the latest Universal Forwarder for Windows (64-bit) directly from Splunk’s official site: 🔗 [Download UF](https://www.splunk.com/en_us/download/universal-forwarder.html)
+
+I selected the .msi installer for ease of deployment via GUI or PowerShell.
+
+![UF_download](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/uf_download.png)
+
+### 🖥️ Install Splunk Universal Forwarder
+
+I accepted the license agreement and selected the on-premises deployment mode.
+
+![UF_license](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/uf_license.png)
+
+I created a dedicated admin account for the forwarder and set a secure password.
+
+![UF_admin](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/uf_admin.png)
+
+Next, I pointed the forwarder to my Deployment Server, using the IP of my Splunk instance and the default port number.
+
+![UF_deployment_srv](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/uf_deployment_srv.png)
+
+Finally, to actually send logs to Splunk, I configured the Receiving Indexer using the IP of my Splunk instance and the default port number.
+
+![UF_receiver](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/uf_receiver.png)
 
 
 
