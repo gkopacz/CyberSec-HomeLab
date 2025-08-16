@@ -226,6 +226,13 @@ Finally, to actually send logs to Splunk, I configured the Receiving Indexer usi
 
 ![UF_receiver](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/uf_receiver.png)
 
+Once this was done, I completed the rest of the installer and let it finish setup.
+
+## 6️⃣ Adding Windows Event Log Data Source from DC via Splunk Forwarder
+
+In this step, I configured the Universal Forwarder on my Windows Domain Controller (DC) to send event logs to my Splunk Enterprise instance via the Deployment Server.
+
+
 
 
 
