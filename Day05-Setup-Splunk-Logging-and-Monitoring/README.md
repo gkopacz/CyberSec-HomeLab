@@ -298,7 +298,11 @@ A few moments later, I opened the Search app and ran a basic query: `index="wind
 
 I could see logs with details like EventCode 4634 and the computer name DC01.adlab.local, confirming that the pipeline from forwarder to indexer was fully functional. Everything was flowing as intended.
 
+## 7️⃣ Install Sysmon with Custom Config on the Domain Controller
 
+To enrich my log telemetry with deep system-level visibility, I installed Sysmon on the Domain Controller and configured it with SwiftOnSecurity’s hardened ruleset. Sysmon provides granular monitoring of process creation, network connections, and registry modifications.
 
+### 📥 Download Sysmon and Config Files
 
+First, I grabbed both the latest Sysinternals Sysmon binary and the custom configuration from SwiftOnSecurity’s public GitHub repo.
 
