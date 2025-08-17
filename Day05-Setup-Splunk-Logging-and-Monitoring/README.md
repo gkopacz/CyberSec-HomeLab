@@ -146,6 +146,8 @@ sudo ./splunk start --accept-license --accept-yes
 ```
 ![Splunk_start](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/splunk_set_admin.png)
 
+### 🚑 Troubleshooting Web Interface Access
+
 On first run it prompted me to create an admin user, but after completing the setup I encountered an issue where the web interface on port `8000` was unreachable. So I started troubleshooting.
 
 ![Splunk_error](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/splunk_error.png)
@@ -246,15 +248,15 @@ Below that, I created a new server class by entering Forwarder_DC in the New Ser
 
 ![Splunk_fwd_add](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Splunk_fwd_add.png)
 
-### 🧨 Local Event Logs Didn't Show (How to fix)
+### 💥 Local Event Logs Didn't Show (How to fix)
 
 After assigning the forwarder, I expected to see the "Local Event Logs" option while configuring the data input but it simply wasn’t there.
 
 So I did some digging and found the solution on Splunk’s community forum: 🔗 [Splunk Answer - Local Event Logs not showing](https://community.splunk.com/t5/Getting-Data-In/Can-t-find-quot-local-event-logs-quot-option-in-splunk/m-p/690303)
 
-![Splunk_fwd_error_fix](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Splunk_fwd_error_fix.png)
-
 > ⚠️ "Kindly repeat the step again "select the forwarders" then when it comes to selecting the server class dont create a new one just select "existing" and select the previous one you created and the "local events logs" will appear."
+
+![Splunk_fwd_error_fix](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Splunk_fwd_error_fix.png)
 
 ### 🧾 Select Local Event Logs
 
