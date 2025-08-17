@@ -232,8 +232,57 @@ Once this was done, I completed the rest of the installer and let it finish setu
 
 In this step, I configured the Universal Forwarder on my Windows Domain Controller (DC) to send event logs to my Splunk Enterprise instance via the Deployment Server.
 
+From the Splunk Web UI, I navigated to: `Settings → Add Data`.
 
+![Splunk_add_data](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Splunk_add_data.png)
 
+Then clicked on the Forward option because I was expecting data from a Universal Forwarder. 
+
+![Splunk_fwd](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Splunk_fwd.png)
+
+Since I already had a forwarder (DC01) installed and registered, it automatically showed up under Available hosts. I selected it and moved it to the Selected hosts column. 
+
+Below that, I created a new server class by entering Forwarder_DC in the New Server Class Name field, then proceeded by clicking Next.
+
+![Splunk_fwd_add](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Splunk_fwd_add.png)
+
+After assigning the forwarder, I expected to see the "Local Event Logs" option while configuring the data input but it simply wasn’t there.
+
+So I did some digging and found the solution on Splunk’s community forum: 🔗 [Splunk Answer - Local Event Logs not showing](https://community.splunk.com/t5/Getting-Data-In/Can-t-find-quot-local-event-logs-quot-option-in-splunk/m-p/690303)
+
+> ⚠️ "Kindly repeat the step again "select the forwarders" then when it comes to selecting the server class dont create a new one just select "existing" and select the previous one you created and the "local events logs" will appear."
+
+![Splunk_fwd_error_fix](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Splunk_fwd_error_fix.png)
+
+Next, I clicked on Local Event Logs to collect core Windows logs like: `Application, ForwardedEvents, Security, Setup, System`.
+
+I clicked on `Add All` to bring them all in. These are essential logs for visibility and detection coverage.
+
+![Splunk_fwd_error_fix2](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Splunk_fwd_error_fix2.png)
+
+At the Input Settings step during the Add Data process, I chose to create a new index rather than use the default.
+
+![Splunk_new_index](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Splunk_new_index.png)
+
+I named it `Windows_DC`, kept the default settings untouched, and made sure the index was set to handle event-based data.
+
+![Splunk_index_name](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Splunk_index_name.png)
+
+Once saved, this index became the destination for the event log data coming in from my Windows DC forwarder.
+
+![Splunk_select_index](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Splunk_select_index.png)
+
+When I reached the final review step, I confirmed that everything looked correct.
+
+I submitted the configuration, which triggered Splunk’s deployment process to push the settings down to the Universal Forwarder on DC01.
+
+![Splunk_fwd_review](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Splunk_fwd_review.png)
+
+A few moments later, I opened the Search app and ran a basic query: `index="windows_dc"`
+
+Sure enough, events started pouring in. I could see logs with details like EventCode 4634 and the computer name DC01.adlab.local, confirming that the pipeline from forwarder to indexer was fully functional. Everything was flowing as intended.
+
+![Splunk_search](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Splunk_search.png)
 
 
 
