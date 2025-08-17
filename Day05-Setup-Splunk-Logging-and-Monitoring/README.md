@@ -152,13 +152,13 @@ On first run it prompted me to create an admin user, but after completing the se
 
 So I started troubleshooting.
 
-### ❌ Symptoms
+#### ❌ Symptoms
 
 - Splunk CLI showed: `"web interface does not seem to be available!"`
 - `curl http://127.0.0.1:8000` failed
 - No response when accessing `http://<hostname>:8000` from the browser
 
-### ✅ Fix 
+#### ✅ Fix 
 
 I decided to restart Splunk. I had a hunch it will fix the issue.
 
@@ -232,6 +232,8 @@ Once this was done, I completed the rest of the installer and let it finish setu
 
 In this step, I configured the Universal Forwarder on my Windows Domain Controller (DC) to send event logs to my Splunk Enterprise instance via the Deployment Server.
 
+
+
 From the Splunk Web UI, I navigated to: `Settings → Add Data`.
 
 ![Splunk_add_data](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Splunk_add_data.png)
@@ -278,13 +280,11 @@ I submitted the configuration, which triggered Splunk’s deployment process to 
 
 ![Splunk_fwd_review](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Splunk_fwd_review.png)
 
-A few moments later, I opened the Search app and ran a basic query: `index="windows_dc"`
-
-Sure enough, events started pouring in. I could see logs with details like EventCode 4634 and the computer name DC01.adlab.local, confirming that the pipeline from forwarder to indexer was fully functional. Everything was flowing as intended.
+A few moments later, I opened the Search app and ran a basic query: `index="windows_dc"`. Sure enough, events started pouring in. 
 
 ![Splunk_search](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Splunk_search.png)
 
-
+I could see logs with details like EventCode 4634 and the computer name DC01.adlab.local, confirming that the pipeline from forwarder to indexer was fully functional. Everything was flowing as intended.
 
 
 
