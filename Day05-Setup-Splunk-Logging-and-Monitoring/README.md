@@ -262,7 +262,7 @@ So I did some digging and found the solution on Splunk’s community forum: 🔗
 
 Next, I clicked on Local Event Logs to collect core Windows logs like: `Application, ForwardedEvents, Security, Setup, System`.
 
-I clicked on `Add All` to bring them all in. These are essential logs for visibility and detection coverage.
+I clicked on `add all` to bring them all in. These are essential logs for visibility and detection coverage.
 
 ![Splunk_fwd_error_fix2](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Splunk_fwd_error_fix2.png)
 
