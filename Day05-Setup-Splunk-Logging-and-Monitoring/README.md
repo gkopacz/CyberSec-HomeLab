@@ -146,11 +146,9 @@ sudo ./splunk start --accept-license --accept-yes
 ```
 ![Splunk_start](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/splunk_set_admin.png)
 
-On first run it prompted me to create an admin user, but after completing the setup I encountered an issue where the web interface on port `8000` was unreachable.
+On first run it prompted me to create an admin user, but after completing the setup I encountered an issue where the web interface on port `8000` was unreachable. So I started troubleshooting.
 
 ![Splunk_error](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/splunk_error.png)
-
-So I started troubleshooting.
 
 #### ❌ Symptoms
 
@@ -232,7 +230,7 @@ Once this was done, I completed the rest of the installer and let it finish setu
 
 In this step, I configured the Universal Forwarder on my Windows Domain Controller (DC) to send event logs to my Splunk Enterprise instance via the Deployment Server.
 
-
+### 🛰️ Connect Data Source via Forwarder
 
 From the Splunk Web UI, I navigated to: `Settings → Add Data`.
 
@@ -248,19 +246,29 @@ Below that, I created a new server class by entering Forwarder_DC in the New Ser
 
 ![Splunk_fwd_add](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Splunk_fwd_add.png)
 
+### 🧨 Local Event Logs Didn't Show (How to fix)
+
 After assigning the forwarder, I expected to see the "Local Event Logs" option while configuring the data input but it simply wasn’t there.
 
 So I did some digging and found the solution on Splunk’s community forum: 🔗 [Splunk Answer - Local Event Logs not showing](https://community.splunk.com/t5/Getting-Data-In/Can-t-find-quot-local-event-logs-quot-option-in-splunk/m-p/690303)
 
+![Splunk_fwd_error_fix](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Splunk_fwd_error_fix.png)
+
 > ⚠️ "Kindly repeat the step again "select the forwarders" then when it comes to selecting the server class dont create a new one just select "existing" and select the previous one you created and the "local events logs" will appear."
 
-![Splunk_fwd_error_fix](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Splunk_fwd_error_fix.png)
+### 🧾 Select Local Event Logs
 
 Next, I clicked on Local Event Logs to collect core Windows logs like: `Application, ForwardedEvents, Security, Setup, System`.
 
 I clicked on `Add All` to bring them all in. These are essential logs for visibility and detection coverage.
 
 ![Splunk_fwd_error_fix2](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Splunk_fwd_error_fix2.png)
+
+### 🗂️ Create a Dedicated Index
+
+Instead of sending the Windows event logs into the default `main` index, I decided to create a dedicated index called `windows_dc`. 
+
+The goal was to keep things clean and organized by separating log sources, which will make querying and long-term management easier, especially once I start ingesting logs from other sources like Sysmon or additional endpoints.
 
 At the Input Settings step during the Add Data process, I chose to create a new index rather than use the default.
 
@@ -273,6 +281,8 @@ I named it `Windows_DC`, kept the default settings untouched, and made sure the 
 Once saved, this index became the destination for the event log data coming in from my Windows DC forwarder.
 
 ![Splunk_select_index](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Splunk_select_index.png)
+
+### 🔍 Review & Verify Log Ingestion
 
 When I reached the final review step, I confirmed that everything looked correct.
 
