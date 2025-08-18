@@ -311,4 +311,23 @@ First, I grabbed both the latest Sysinternals Sysmon binary and the custom confi
 
 ### ⚙️ Install Sysmon and SwiftOnSecurity Config File
 
+I started by creating a new folder on the system drive called `C:\Sysmon`, then extracted both the Sysmon.zip executable and the sysmonconfig-export.xml config file from the SwiftOnSecurity GitHub repo into it.
 
+![Sysmon_folder](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Sysmon_folder.png)
+
+Next, I launched **PowerShell as Administrator**, navigated to the Sysmon directory, and installed it using this command:
+
+```powershell
+cd C:\Sysmon
+.\Sysmon.exe -accepteula -i C:\Sysmon\sysmonconfig-export.xml
+```
+
+![Sysmon_cmd](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Sysmon_cmd.png)
+
+> 🧠 This command registers Sysmon as a Windows service and immediately starts collecting system telemetry based on the rules defined in the config file.
+
+To confirm, I opened Event Viewer and navigated to: `Applications and Services Logs → Microsoft → Windows → Sysmon → Operational`
+
+I verified that events like Event ID 1 (Process Creation) and Event ID 16 (Configuration Loaded) were being generated, confirming that Sysmon was running with the custom configuration.
+
+![Sysmon_event](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Sysmon_eventid16.png)
