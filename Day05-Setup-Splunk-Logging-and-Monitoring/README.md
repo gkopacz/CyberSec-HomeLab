@@ -322,12 +322,12 @@ cd C:\Sysmon
 .\Sysmon.exe -accepteula -i C:\Sysmon\sysmonconfig-export.xml
 ```
 
-![Sysmon_cmd](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Sysmon_cmd.png)
-
 > 🧠 This command registers Sysmon as a Windows service and immediately starts collecting system telemetry based on the rules defined in the config file.
+
+![Sysmon_cmd](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Sysmon_cmd.png)
 
 To confirm, I opened Event Viewer and navigated to: `Applications and Services Logs → Microsoft → Windows → Sysmon → Operational`
 
-I verified that events like Event ID 1 (Process Creation) and Event ID 16 (Configuration Loaded) were being generated, confirming that Sysmon was running with the custom configuration.
-
 ![Sysmon_event](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Sysmon_eventid16.png)
+
+I verified that events like Event ID 1 (Process Creation) and Event ID 16 (Configuration Loaded) were being generated, confirming that Sysmon was running with the custom configuration.
