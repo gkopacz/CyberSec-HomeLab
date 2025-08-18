@@ -302,7 +302,13 @@ I could see logs with details like EventCode 4634 and the computer name DC01.adl
 
 To enrich my log telemetry with deep system-level visibility, I installed Sysmon on the Domain Controller and configured it with SwiftOnSecurity’s hardened ruleset. Sysmon provides granular monitoring of process creation, network connections, and registry modifications.
 
-### 📥 Download Sysmon and Config Files
+### 📥 Download Sysmon and Config File
 
 First, I grabbed both the latest Sysinternals Sysmon binary and the custom configuration from SwiftOnSecurity’s public GitHub repo.
+
+- 🔗 [Download Sysmon](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon)
+- 🔗 [Download SwiftOnSecurity Sysmon Config](https://github.com/SwiftOnSecurity/sysmon-config)
+
+### ⚙️ Install Sysmon and SwiftOnSecurity Config File
+
 
