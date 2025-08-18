@@ -298,7 +298,7 @@ A few moments later, I opened the Search app and ran a basic query: `index="wind
 
 I could see logs with details like EventCode 4634 and the computer name DC01.adlab.local, confirming that the pipeline from forwarder to indexer was fully functional. Everything was flowing as intended.
 
-## 7️⃣ Install Sysmon with Custom Config on the Domain Controller
+## 7️⃣ Deploy Sysmon with Custom Config on the Domain Controller
 
 To enrich my log telemetry with deep system-level visibility, I installed Sysmon on the Domain Controller and configured it with SwiftOnSecurity’s hardened ruleset. Sysmon provides granular monitoring of process creation, network connections, and registry modifications.
 
@@ -331,3 +331,38 @@ To confirm, I opened Event Viewer and navigated to: `Applications and Services L
 ![Sysmon_event](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Sysmon_eventid16.png)
 
 I verified that events like Event ID 1 (Process Creation) and Event ID 16 (Configuration Loaded) were being generated, confirming that Sysmon was running with the custom configuration.
+
+### 📡 Forward Sysmon Logs to Splunk
+
+Sysmon logs are not enabled by default in Universal Forwarder, so I added them manually.
+
+I navigated to: `C:\Program Files\SplunkUniversalForwarder\etc\system\local` and created a file called `inputs.conf`.
+
+Inside inputs.conf, I added the following configuration:
+
+```ruby
+[WinEventLog://Microsoft-Windows-Sysmon/Operational]
+disabled = 0
+index = sysmon_dc
+```
+
+> 🧠 This block enables collection from the Sysmon Operational log channel and tells the forwarder to send the logs to a dedicated Splunk index named sysmon_dc.
+
+![Sysmon_inputs](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Sysmon_uf_inputs_conf.png)
+
+After saving the file, I restarted the forwarder service to apply the changes:
+
+```powershell
+Restart-Service splunkforwarder
+Get-Service -Name splunkforwarder
+```
+
+> 🧠 This ensured that the new input config was loaded, and Sysmon logs began flowing into Splunk under the specified index.
+
+![Sysmon_service](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Sysmon_uf_service.png)
+
+### 🗂️ Create Sysmon Index in Splunk
+
+
+
+### 🔍 Verify Sysmon Logs Incoming
