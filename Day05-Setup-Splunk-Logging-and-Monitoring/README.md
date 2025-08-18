@@ -363,6 +363,28 @@ Get-Service -Name splunkforwarder
 
 ### 🗂️ Create Sysmon Index in Splunk
 
+Before any logs could land in Splunk, I needed to make sure there was a dedicated index waiting for them. I didn’t want Sysmon data cluttering the same index I used for Windows Event Logs, so I chose to separate it cleanly.
 
+From the Splunk Web UI, I navigated to: `Settings → Indexes`
+
+![Sysmon_indexes](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Sysmon_indexes.png)
+
+I clicked `New Index` and entered the name `sysmon_dc`. I left the other settings at their defaults.
+
+![Sysmon_new_index](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Sysmon_new_index.png)
+
+Once saved, the new index was listed among the rest, ready to receive logs from the forwarder.
+
+![Sysmon_index_name](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Sysmon_index_name.png)
 
 ### 🔍 Verify Sysmon Logs Incoming
+
+To confirm that inputs.conf was properly pointing to the new index, I opened the Search & Reporting app in Splunk and queried: `index="sysmon_dc"`
+
+![Sysmon_search1](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Sysmon_search1.png)
+
+Immediately, I saw logs rolling in. The first entries were classic Sysmon events: EventCode 1 (Process Create), EventType 4, and the source log path confirmed everything.
+
+![Sysmon_search](https://github.com/gkopacz/CyberSec-HomeLab/blob/main/images/Splunk/Sysmon_search.png)
+
+That was the green light I needed. Sysmon was actively monitoring and forwarding logs from my Domain Controller into Splunk, and they were landing exactly where I wanted them.
